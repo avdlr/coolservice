@@ -1,0 +1,38 @@
+# Compiled class files
+*.class
+
+# Package distributions
+*.jar
+*.war
+*.ear
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.out
+
+# Node modules and dist builds
+node_modules/
+dist/
+
+# IDE specific files
+.idea/
+*.iml
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Build directories
+build/
+target/
+
+# Misc
+*.swp
