@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.*" %>
+<link rel="stylesheet" href="../../assets/css/checklist.css">
 
 <div>
   <h2 class="text-lg font-bold text-white bg-[#005c9b] py-2 px-4 rounded-t-md">
