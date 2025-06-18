@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+   Remove this if you use the .htaccess -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="initial-scale=1.0, target-densitydpi=device-dpi" /><!-- this is for mobile (Android) Chrome -->
+<meta name="viewport" content="initial-scale=1.0, width=device-height"><!--  mobile Safari, FireFox, Opera Mobile  -->
+<script src="../libs/modernizr.js"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="../libs/flashcanvas.js"></script>
+<![endif]-->
+<style type="text/css">
+
+	div {
+		margin-top:1em;
+		margin-bottom:1em;
+	}
+	input {
+		padding: .5em;
+		margin: .5em;
+	}
+	select {
+		padding: .5em;
+		margin: .5em;
+	}
+	
+	#signatureparent {
+		color:black;
+		background-color:white;
+		/*max-width:600px;*/
+		padding:20px;
+	}
+	
+	/*This is the div within which the signature canvas is fitted*/
+	#signature {
+		border: 2px dotted black;
+		background-color:white;
+	}
+
+	/* Drawing the 'gripper' for touch-enabled devices */ 
+	html.touch #content {
+		float:left;
+		width:auto;
+	}
+	html.touch #scrollgrabber {
+		float:right;
+		width:4%;
+		margin-right:2%;
+		background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAFCAAAAACh79lDAAAAAXNSR0IArs4c6QAAABJJREFUCB1jmMmQxjCT4T/DfwAPLgOXlrt3IwAAAABJRU5ErkJggg==)
+	}
+	html.borderradius #scrollgrabber {
+		border-radius: 1em;
+	}
+	 
+</style>
+</head>
+<body>
+<div><textarea id="cadena" style="width:100%;height:7em;display:none;"></textarea></div>
+<div>
+<div id="content">
+	<div id="signatureparent">
+		<div id="signature"></div></div>
+	<div id="tools"></div>
+</div>
+<div id="scrollgrabber"></div>
+</div>
+<!-- <script src="../libs/jquery.js"></script> -->
+<script type="text/javascript">
+jQuery.noConflict()
+</script>
+<script>
+(function($) {
+	var topics = {};
+	$.publish = function(topic, args) {
+	    if (topics[topic]) {
+	        var currentTopic = topics[topic],
+	        args = args || {};
+	
+	        for (var i = 0, j = currentTopic.length; i < j; i++) {
+	            currentTopic[i].call($, args);
+	        }
+	    }
+	};
+	$.subscribe = function(topic, callback) {
+	    if (!topics[topic]) {
+	        topics[topic] = [];
+	    }
+	    topics[topic].push(callback);
+	    return {
+	        "topic": topic,
+	        "callback": callback
+	    };
+	};
+	$.unsubscribe = function(handle) {
+	    var topic = handle.topic;
+	    if (topics[topic]) {
+	        var currentTopic = topics[topic];
+	
+	        for (var i = 0, j = currentTopic.length; i < j; i++) {
+	            if (currentTopic[i] === handle.callback) {
+	                currentTopic.splice(i, 1);
+	            }
+	        }
+	    }
+	};
+})(jQuery);
+
+</script>
+<script src="../libs/jSignature.min.noconflict.js"></script>
+<script>
+(function($){
+
+$(document).ready(function() {
+	
+	// This is the part where jSignature is initialized.
+	var $sigdiv = $("#signature").jSignature({'UndoButton':false})
+	
+	// All the code below is just code driving the demo. 
+	, $tools = $('#tools')
+	, $extraarea = $('#displayarea')
+	, pubsubprefix = 'jSignature.demo.'
+
+	$('<input type="button" value="Aceptar">').bind('click', function(e){
+		if (e.target.value !== ''){
+			var data = $sigdiv.jSignature('getData', 'image/svg+xml;base64')
+			$.publish(pubsubprefix + 'formatchanged')
+
+			$.publish(pubsubprefix + data[0], data);
+			
+			alert(data.join(','));
+		
+			$("#cadena").val(data);
+		}
+	}).appendTo($tools)
+	
+	$('<input type="button" value="Reset">').bind('click', function(e){
+		$sigdiv.jSignature('reset')
+	}).appendTo($tools)
+
+	if (Modernizr.touch){
+		$('#scrollgrabber').height($('#content').height())		
+	}
+	
+})
+
+})(jQuery)
+
+</script>
+</body>
+</html>

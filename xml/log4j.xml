@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="CONSOLA" class="org.apache.log4j.ConsoleAppender">
+		<param name="target" value="System.err"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="log_CS_Admin.MS%p_%l_%p : %m%n" />
+		</layout>
+	</appender>
+
+    <root>
+		<!--Los posibles valoresde priority son : DEBUG, INFO, WARN, ERROR, FATAL-->
+		<priority value="INFO" /> 
+		<appender-ref ref="CONSOLA"/>
+	</root>
+
+</log4j:configuration>

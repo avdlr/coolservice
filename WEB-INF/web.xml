@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name>CoolService_Security_WEB</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<servlet>
+		<description>Log4JInit</description>
+		<display-name>Log4JInit</display-name>
+		<servlet-name>Log4JInit</servlet-name>
+		<servlet-class>servlet.Log4JInit</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<description>
+	  	</description>
+		<display-name>GestionaTarea</display-name>
+		<servlet-name>GestionaTarea</servlet-name>
+		<servlet-class>servlet.GestionaTarea</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GestionaTarea</servlet-name>
+		<url-pattern>/GestionaTarea</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+	  	</description>
+		<display-name>ExcelReportes</display-name>
+		<servlet-name>ExcelReportes</servlet-name>
+		<servlet-class>servlet.ExcelReportes</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ExcelReportes</servlet-name>
+		<url-pattern>/ExcelReportes</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<description>
+	  	</description>
+		<display-name>tareasExcel</display-name>
+		<servlet-name>tareasExcel</servlet-name>
+		<servlet-class>servlet.tareasExcel</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>tareasExcel</servlet-name>
+		<url-pattern>/tareasExcel</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>
+	  	</description>
+		<display-name>validaLogin</display-name>
+		<servlet-name>validaLogin</servlet-name>
+		<servlet-class>servlet.validaLogin</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>validaLogin</servlet-name>
+		<url-pattern>/validaLogin</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>Usuarios_ObtieneRegistros</display-name>
+		<servlet-name>Usuarios_ObtieneRegistros</servlet-name>
+		<servlet-class>servlet.Usuarios_ObtieneRegistros</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>Usuarios_GestionRegistros</display-name>
+		<servlet-name>Usuarios_GestionRegistros</servlet-name>
+		<servlet-class>servlet.Usuarios_GestionRegistros</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Usuarios_ObtieneRegistros</servlet-name>
+		<url-pattern>/Usuarios_ObtieneRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Usuarios_GestionRegistros</servlet-name>
+		<url-pattern>/Usuarios_GestionRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>Empresas_ObtieneRegistros</display-name>
+		<servlet-name>Empresas_ObtieneRegistros</servlet-name>
+		<servlet-class>servlet.Empresas_ObtieneRegistros</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>Empresas_GestionRegistros</display-name>
+		<servlet-name>Empresas_GestionRegistros</servlet-name>
+		<servlet-class>servlet.Empresas_GestionRegistros</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Empresas_ObtieneRegistros</servlet-name>
+		<url-pattern>/Empresas_ObtieneRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Empresas_GestionRegistros</servlet-name>
+		<url-pattern>/Empresas_GestionRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>Zonas_ObtieneRegistros</display-name>
+		<servlet-name>Zonas_ObtieneRegistros</servlet-name>
+		<servlet-class>servlet.Zonas_ObtieneRegistros</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>Zonas_GestionRegistros</display-name>
+		<servlet-name>Zonas_GestionRegistros</servlet-name>
+		<servlet-class>servlet.Zonas_GestionRegistros</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Zonas_ObtieneRegistros</servlet-name>
+		<url-pattern>/Zonas_ObtieneRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Zonas_GestionRegistros</servlet-name>
+		<url-pattern>/Zonas_GestionRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>DetZonas_ObtieneRegistros</display-name>
+		<servlet-name>DetZonas_ObtieneRegistros</servlet-name>
+		<servlet-class>servlet.DetZonas_ObtieneRegistros</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>DetZonas_GestionRegistros</display-name>
+		<servlet-name>DetZonas_GestionRegistros</servlet-name>
+		<servlet-class>servlet.DetZonas_GestionRegistros</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DetZonas_ObtieneRegistros</servlet-name>
+		<url-pattern>/DetZonas_ObtieneRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>DetZonas_GestionRegistros</servlet-name>
+		<url-pattern>/DetZonas_GestionRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>Proveedores_ObtieneRegistros</display-name>
+		<servlet-name>Proveedores_ObtieneRegistros</servlet-name>
+		<servlet-class>servlet.Proveedores_ObtieneRegistros</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>Proveedores_GestionRegistros</display-name>
+		<servlet-name>Proveedores_GestionRegistros</servlet-name>
+		<servlet-class>servlet.Proveedores_GestionRegistros</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Proveedores_ObtieneRegistros</servlet-name>
+		<url-pattern>/Proveedores_ObtieneRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Proveedores_GestionRegistros</servlet-name>
+		<url-pattern>/Proveedores_GestionRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>RazonServ_ObtieneRegistros</display-name>
+		<servlet-name>RazonServ_ObtieneRegistros</servlet-name>
+		<servlet-class>servlet.RazonServ_ObtieneRegistros</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>RazonServ_GestionRegistros</display-name>
+		<servlet-name>RazonServ_GestionRegistros</servlet-name>
+		<servlet-class>servlet.RazonServ_GestionRegistros</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RazonServ_ObtieneRegistros</servlet-name>
+		<url-pattern>/RazonServ_ObtieneRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>RazonServ_GestionRegistros</servlet-name>
+		<url-pattern>/RazonServ_GestionRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>ServicioRealizado_ObtieneRegistros</display-name>
+		<servlet-name>ServicioRealizado_ObtieneRegistros</servlet-name>
+		<servlet-class>servlet.ServicioRealizado_ObtieneRegistros</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>ServicioRealizado_GestionRegistros</display-name>
+		<servlet-name>ServicioRealizado_GestionRegistros</servlet-name>
+		<servlet-class>servlet.ServicioRealizado_GestionRegistros</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ServicioRealizado_ObtieneRegistros</servlet-name>
+		<url-pattern>/ServicioRealizado_ObtieneRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ServicioRealizado_GestionRegistros</servlet-name>
+		<url-pattern>/ServicioRealizado_GestionRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>Sucursal_ObtieneRegistros</display-name>
+		<servlet-name>Sucursal_ObtieneRegistros</servlet-name>
+		<servlet-class>servlet.Sucursal_ObtieneRegistros</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>Sucursal_GestionRegistros</display-name>
+		<servlet-name>Sucursal_GestionRegistros</servlet-name>
+		<servlet-class>servlet.Sucursal_GestionRegistros</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Sucursal_ObtieneRegistros</servlet-name>
+		<url-pattern>/Sucursal_ObtieneRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Sucursal_GestionRegistros</servlet-name>
+		<url-pattern>/Sucursal_GestionRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>Equipo_ObtieneRegistros</display-name>
+		<servlet-name>Equipo_ObtieneRegistros</servlet-name>
+		<servlet-class>servlet.Equipo_ObtieneRegistros</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>Equipo_GestionRegistros</display-name>
+		<servlet-name>Equipo_GestionRegistros</servlet-name>
+		<servlet-class>servlet.Equipo_GestionRegistros</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Equipo_ObtieneRegistros</servlet-name>
+		<url-pattern>/Equipo_ObtieneRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Equipo_GestionRegistros</servlet-name>
+		<url-pattern>/Equipo_GestionRegistros</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+    	</description>
+		<display-name>GeneraImpreso</display-name>
+		<servlet-name>GeneraImpreso</servlet-name>
+		<servlet-class>servlet.GeneraImpreso</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GeneraImpreso</servlet-name>
+		<url-pattern>/GeneraImpreso</url-pattern>
+	</servlet-mapping>
+
+	<security-constraint>
+		<display-name>Example Security Constraint - part 1</display-name>
+		<web-resource-collection>
+			<web-resource-name>Protected Area - Allow methods</web-resource-name>
+			<!-- Define the context-relative URL(s) to be protected -->
+			<url-pattern>/jsp/*</url-pattern>
+			<!-- If you list http methods, only those methods are protected so -->
+			<!-- the constraint below ensures all other methods are denied -->
+			<http-method>DELETE</http-method>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<!-- Anyone with one of the listed roles may access this area -->
+			<role-name>tomcat</role-name>
+			<role-name>role1</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<!-- <security-constraint> -->
+	<!-- <display-name>Example Security Constraint - part 2</display-name> -->
+	<!-- <web-resource-collection> -->
+	<!-- <web-resource-name>Protected Area - Deny methods</web-resource-name> -->
+	<!-- Define the context-relative URL(s) to be protected -->
+	<!-- <url-pattern>/jsp/security/protected/*</url-pattern> -->
+	<!-- <http-method-omission>DELETE</http-method-omission> -->
+	<!-- <http-method-omission>GET</http-method-omission> -->
+	<!-- <http-method-omission>POST</http-method-omission> -->
+	<!-- <http-method-omission>PUT</http-method-omission> -->
+	<!-- </web-resource-collection> -->
+	<!-- An empty auth constraint denies access -->
+	<!-- <auth-constraint /> -->
+	<!-- </security-constraint> -->
+
+	<!-- Default login configuration uses form-based authentication -->
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>Example Form-Based Authentication Area</realm-name>
+		<form-login-config>
+			<form-login-page>/jsp/login.jsp</form-login-page>
+			<form-error-page>/jsp/error.jsp</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<!-- Security roles referenced by this web application -->
+	<security-role>
+		<role-name>role1</role-name>
+	</security-role>
+	<security-role>
+		<role-name>tomcat</role-name>
+	</security-role>
+
+</web-app>
