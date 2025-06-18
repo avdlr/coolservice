@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="clases.Activity"%>
-<%@ page import="clases.Section"%>
+<%@ page import="zntclases.Activity"%>
+<%@ page import="zntclases.Section"%>
 <%@ page import="servlet.MaintenanceFormServlet"%>
 
 <html>
