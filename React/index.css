@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input, select, textarea {
+  @apply border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 rounded-md shadow-sm;
+}
+
+/* Print styles */
+@media print {
+  body {
+    padding: 0;
+    margin: 0;
+  }
+  
+  button {
+    display: none;
+  }
+  
+  input, select, textarea {
+    border: 1px solid #ccc;
+  }
+  
+  @page {
+    size: auto;
+    margin: 10mm;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+input:focus, select:focus, textarea:focus {
+  @apply transition-all duration-200;
+}
+
+button {
+  @apply transition-all duration-200;
+}
