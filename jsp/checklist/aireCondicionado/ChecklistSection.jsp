@@ -4,7 +4,7 @@
 
 <div class="mb-8">
   <h2 class="text-lg font-bold text-white bg-[#005c9b] py-2 px-4 rounded-t-md">
-    ${param.title}
+    ${sectionTitle}
   </h2>
 
   <div class="overflow-x-auto">
@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody>
-        <c:forEach var="activity" items="${param.activities}" varStatus="status">
+        <c:forEach var="activity" items="${activities}" varStatus="status">
           <tr class="${status.index % 2 == 0 ? 'bg-white' : 'bg-gray-50'}">
             <td class="py-2 px-4 border-b border-r border-gray-300 text-sm text-gray-800">
               ${activity.name}
@@ -29,11 +29,11 @@
               <td class="py-2 px-2 border-b border-r border-gray-300 text-center">
                 <div class="flex justify-center space-x-4">
                   <label class="inline-flex items-center">
-                    <input type="radio" name="status-${param.title}-${status.index}-${zone}" class="form-radio h-4 w-4 text-[#005c9b]" />
+                    <input type="radio" name="status-${sectionTitle}-${status.index}-${zone}" class="form-radio h-4 w-4 text-[#005c9b]" />
                     <span class="ml-1 text-sm text-gray-700">B</span>
                   </label>
                   <label class="inline-flex items-center">
-                    <input type="radio" name="status-${param.title}-${status.index}-${zone}" class="form-radio h-4 w-4 text-red-600" />
+                    <input type="radio" name="status-${sectionTitle}-${status.index}-${zone}" class="form-radio h-4 w-4 text-red-600" />
                     <span class="ml-1 text-sm text-gray-700">M</span>
                   </label>
                 </div>
