@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="zntclases.Activity"%>
 <%@ page import="zntclases.Section"%>
-<%@ page import="servlet.MaintenanceFormServlet"%>
+<%@ page import="zntservlet.MaintenanceFormServlet"%>
 
 <html>
 <head>
@@ -26,10 +26,9 @@
 
     <%-- Dynamic checklist sections --%>
     <c:forEach var="section" items="${sections}">
-        <jsp:include page="checklist/aireCondicionado/ChecklistSection.jsp">
-            <jsp:param name="title" value="${section.title}" />
-            <jsp:param name="activities" value="${section.activities}" />
-        </jsp:include>
+        <c:set var="sectionTitle" value="${section.title}" scope="request" />
+        <c:set var="activities" value="${section.activities}" scope="request" />
+        <jsp:include page="checklist/aireCondicionado/ChecklistSection.jsp" />
     </c:forEach>
 
     <%-- Static footer sections --%>
@@ -41,3 +40,4 @@
 
 </body>
 </html>
+
