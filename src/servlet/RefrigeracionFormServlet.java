@@ -1,7 +1,5 @@
-package zntservlet;
+package servlet;
 
-import zntclases.Activity;
-import zntclases.Section;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,9 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import clases.Activity;
+import clases.Section;
+
 /**
  * Servlet that prepares checklist data for the refrigeration maintenance form.
  */
+@SuppressWarnings("serial")
 @WebServlet("/refrigeracion-form")
 public class RefrigeracionFormServlet extends HttpServlet {
    @Override

@@ -1,4 +1,4 @@
-package zntclases;
+package clases;
 
 /**
  * Simple representation of a checklist activity.

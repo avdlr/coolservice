@@ -1,4 +1,4 @@
-package zntclases;
+package clases;
 
 import java.util.List;
 

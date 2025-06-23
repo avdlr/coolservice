@@ -1,7 +1,5 @@
-package zntservlet;
+package servlet;
 
-import zntclases.Activity;
-import zntclases.Section;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import clases.Activity;
+import clases.Section;
+
+@SuppressWarnings("serial")
 @WebServlet("/maintenance-form")
 public class MaintenanceFormServlet extends HttpServlet {
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

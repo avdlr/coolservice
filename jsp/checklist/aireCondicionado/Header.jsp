@@ -5,8 +5,8 @@
 <div class="mb-8">
   <div class="flex justify-between items-center mb-6">
 
-    <h1 class="text-2xl font-bold text-[#005c9b]">
-      COOL SERVICE
+    <h1 class="text-2xl font-bold text-[#005c9b]">      
+      <img src="../assets/img/cool_service_logox2.jpeg" alt="Cool Service Logo" style="height: 48px; display: inline-block; vertical-align: middle; margin-left: 16px;">
     </h1>
 
     <div class="text-sm font-semibold text-center">
