@@ -12,7 +12,7 @@
           Medición de presión (colocar valor psi) ALTA
         </td>
         <td class="py-2 px-2 border-b border-gray-300">
-          <input type="number" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
+          <input type="number" name="${param.prefix}-alta" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
         </td>
       </tr>
       <tr class="bg-gray-50">
@@ -20,7 +20,7 @@
           Medición de presión (colocar valor psi) BAJA
         </td>
         <td class="py-2 px-2 border-b border-gray-300">
-          <input type="number" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
+          <input type="number" name="${param.prefix}-baja" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
         </td>
       </tr>
     </tbody>

@@ -15,6 +15,7 @@
 </head>
 <body>
 
+<form method="post" action="maintenance-form/save">
 <div class="container mx-auto">
     <%-- Static header --%>
     <jsp:include page="checklist/aireCondicionado/Header.jsp" />
@@ -30,8 +31,13 @@
     <jsp:include page="checklist/aireCondicionado/OperationReadings.jsp" />
     <jsp:include page="checklist/aireCondicionado/ServicesSection.jsp" />
     <jsp:include page="checklist/aireCondicionado/SignatureSection.jsp" />
-    
+
+    <div class="my-4 text-center">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+
 </div>
+</form>
 
 </body>
 </html>

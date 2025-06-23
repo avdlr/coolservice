@@ -11,25 +11,25 @@
       <tr>
         <td class="py-2 px-4 border-b border-r border-gray-300 text-sm font-medium text-gray-700">Voltage</td>
         <td class="py-2 px-2 border-b border-r border-gray-300">
-          <input type="number" placeholder="AB" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
+          <input type="number" name="${param.prefix}-voltage-ab" placeholder="AB" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
         </td>
         <td class="py-2 px-2 border-b border-r border-gray-300">
-          <input type="number" placeholder="BC" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
+          <input type="number" name="${param.prefix}-voltage-bc" placeholder="BC" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
         </td>
         <td class="py-2 px-2 border-b border-gray-300">
-          <input type="number" placeholder="CA" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
+          <input type="number" name="${param.prefix}-voltage-ca" placeholder="CA" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
         </td>
       </tr>
       <tr class="bg-gray-50">
         <td class="py-2 px-4 border-b border-r border-gray-300 text-sm font-medium text-gray-700">Amperage</td>
         <td class="py-2 px-2 border-b border-r border-gray-300">
-          <input type="number" placeholder="A" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
+          <input type="number" name="${param.prefix}-amp-a" placeholder="A" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
         </td>
         <td class="py-2 px-2 border-b border-r border-gray-300">
-          <input type="number" placeholder="B" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
+          <input type="number" name="${param.prefix}-amp-b" placeholder="B" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
         </td>
         <td class="py-2 px-2 border-b border-gray-300">
-          <input type="number" placeholder="C" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
+          <input type="number" name="${param.prefix}-amp-c" placeholder="C" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500"/>
         </td>
       </tr>
     </tbody>
