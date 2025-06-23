@@ -15,6 +15,7 @@
 </head>
 <body>
 
+<form method="post" action="refrigeracion-form/save">
 <div class="container mx-auto">
     <%-- Static header --%>
     <jsp:include page="checklist/refrigeracion/Header.jsp" />
@@ -31,7 +32,12 @@
     <jsp:include page="checklist/refrigeracion/ServicesSection.jsp" />
     <jsp:include page="checklist/refrigeracion/SignatureSection.jsp" />
 
+    <div class="my-4 text-center">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+
 </div>
+</form>
 
 </body>
 </html>
