@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/checklist.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/checklist.css">
 
 <div class="mb-8">
   <h2 class="text-lg font-bold text-white bg-[#005c9b] py-2 px-4 rounded-t-md">

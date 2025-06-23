@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/checklist.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/checklist.css">
 
 <div class="mb-8">
   <div class="flex justify-between items-center mb-6">
 
     <h1 class="text-2xl font-bold text-[#005c9b]">
-      <img src="../assets/img/cool_service_logox2.jpeg" alt="Cool Service Logo" style="height: 48px; display: inline-block; vertical-align: middle; margin-left: 16px;">
+      <img src="<%= request.getContextPath() %>/assets/img/cool_service_logox2.jpeg" alt="Cool Service Logo" style="height: 48px; display: inline-block; vertical-align: middle; margin-left: 16px;">
     </h1>
 
     <div class="text-sm font-semibold text-center">
