@@ -21,6 +21,7 @@
     <jsp:include page="checklist/refrigeracion/Header.jsp" />
 
     <%-- Dynamic checklist sections --%>
+       
     <c:forEach var="section" items="${sections}">
         <c:set var="sectionTitle" value="${section.title}" scope="request" />
         <c:set var="activities" value="${section.activities}" scope="request" />

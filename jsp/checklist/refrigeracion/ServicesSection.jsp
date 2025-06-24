@@ -27,13 +27,13 @@
       <tbody id="servicesBody">
         <tr>
           <td class="py-2 px-2 border-b border-r border-gray-300">
-            <input type="text" name="cantidad-0" class="w-full text-center border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
+            <input type="text" class="w-full text-center border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
           </td>
           <td class="py-2 px-2 border-b border-r border-gray-300">
-            <input type="text" name="refaccion-0" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
+            <input type="text" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
           </td>
           <td class="py-2 px-2 border-b border-r border-gray-300">
-            <input type="text" name="descripcion-0" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
+            <input type="text" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
           </td>
           <td class="py-2 px-2 border-b border-gray-300 text-center">
             <button class="text-red-500 hover:text-red-700 transition-colors" onclick="removeRow(this)">
@@ -57,20 +57,18 @@
 </div>
 
 <script>
-  let serviceRowCount = 1;
   function addNewRow() {
     const tbody = document.getElementById('servicesBody');
-    const rowIndex = serviceRowCount++;
     const newRow = document.createElement('tr');
     newRow.innerHTML = `
       <td class="py-2 px-2 border-b border-r border-gray-300">
-        <input type="text" name="cantidad-${rowIndex}" class="w-full text-center border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
+        <input type="text" class="w-full text-center border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
       </td>
       <td class="py-2 px-2 border-b border-r border-gray-300">
-        <input type="text" name="refaccion-${rowIndex}" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
+        <input type="text" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
       </td>
       <td class="py-2 px-2 border-b border-r border-gray-300">
-        <input type="text" name="descripcion-${rowIndex}" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
+        <input type="text" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
       </td>
       <td class="py-2 px-2 border-b border-gray-300 text-center">
         <button class="text-red-500 hover:text-red-700 transition-colors" onclick="removeRow(this)">✖</button>

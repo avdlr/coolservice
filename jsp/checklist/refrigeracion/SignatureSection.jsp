@@ -9,7 +9,7 @@
 
     <div class="mb-4">
       <label class="block text-sm font-medium text-gray-700 mb-1">Nombre completo:</label>
-      <input type="text" name="nombreTecnico" class="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500" />
+      <input type="text" class="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500" />
     </div>
 
     <div>
@@ -23,7 +23,6 @@
       <div class="border-2 border-dashed border-gray-300 rounded-md h-32 bg-gray-50 flex items-center justify-center">
         <canvas id="techCanvas" width="400" height="120" class="bg-white rounded-md border border-gray-300"></canvas>
       </div>
-      <input type="hidden" name="firmaTecnico" id="techData" />
     </div>
   </div>
 
@@ -33,7 +32,7 @@
 
     <div class="mb-4">
       <label class="block text-sm font-medium text-gray-700 mb-1">Nombre completo:</label>
-      <input type="text" name="nombreGerente" class="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500" />
+      <input type="text" class="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500" />
     </div>
 
     <div>
@@ -47,7 +46,6 @@
       <div class="border-2 border-dashed border-gray-300 rounded-md h-32 bg-gray-50 flex items-center justify-center">
         <canvas id="managerCanvas" width="400" height="120" class="bg-white rounded-md border border-gray-300"></canvas>
       </div>
-      <input type="hidden" name="firmaGerente" id="managerData" />
     </div>
   </div>
 
@@ -92,12 +90,5 @@
   window.onload = function() {
     initSignatureCanvas('techCanvas');
     initSignatureCanvas('managerCanvas');
-    const form = document.querySelector('form');
-    if (form) {
-      form.addEventListener('submit', () => {
-        document.getElementById('techData').value = document.getElementById('techCanvas').toDataURL();
-        document.getElementById('managerData').value = document.getElementById('managerCanvas').toDataURL();
-      });
-    }
   };
 </script>
