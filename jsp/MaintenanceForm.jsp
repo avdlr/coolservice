@@ -24,6 +24,8 @@
     <c:forEach var="section" items="${sections}">
         <c:set var="sectionTitle" value="${section.title}" scope="request" />
         <c:set var="activities" value="${section.activities}" scope="request" />
+        <c:set var="sectionId" value="${section.id}" scope="request" />
+        <c:set var="bienMalOnly" value="${section.id eq 'ducteria'}" scope="request" />
         <jsp:include page="checklist/aireCondicionado/ChecklistSection.jsp" />
     </c:forEach>
 
