@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,9 +17,9 @@ import clases.Section;
 /**
  * Servlet that prepares checklist data for the refrigeration maintenance form.
  */
-@SuppressWarnings("serial")
 @WebServlet("/refrigeracion-form")
 public class RefrigeracionFormServlet extends HttpServlet {
+   private static final long serialVersionUID = 1L;
    @Override
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       List<Section> sections = new ArrayList<>();
@@ -59,6 +60,13 @@ public class RefrigeracionFormServlet extends HttpServlet {
          new Activity("Revision de conexiones electricas"),
          new Activity("Revision del estado de los interruptores"),
          new Activity("Verificar platino de contactores"))));
+
+      String sectionId = request.getParameter("sectionId");
+      if (sectionId != null && !sectionId.isEmpty()) {
+         sections = sections.stream()
+               .filter(s -> sectionId.equals(s.getId()))
+               .collect(Collectors.toList());
+      }
       request.setAttribute("sections", sections);
       request.getRequestDispatcher("/MaintenanceFormRefrigeracion.jsp").forward(request, response);
    }
