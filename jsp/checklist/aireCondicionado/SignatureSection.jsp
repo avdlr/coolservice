@@ -9,7 +9,7 @@
 
     <div class="mb-4">
       <label class="block text-sm font-medium text-gray-700 mb-1">Nombre completo:</label>
-      <input type="text" class="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500" />
+      <input type="text" name="technicianName" class="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500" />
     </div>
 
     <div>
@@ -32,7 +32,7 @@
 
     <div class="mb-4">
       <label class="block text-sm font-medium text-gray-700 mb-1">Nombre completo:</label>
-      <input type="text" class="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500" />
+      <input type="text" name="managerName" class="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500" />
     </div>
 
     <div>

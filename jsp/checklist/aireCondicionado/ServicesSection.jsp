@@ -27,13 +27,13 @@
       <tbody id="servicesBody">
         <tr>
           <td class="py-2 px-2 border-b border-r border-gray-300">
-            <input type="text" class="w-full text-center border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
+            <input type="text" name="serviceQuantity[]" class="w-full text-center border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
           </td>
           <td class="py-2 px-2 border-b border-r border-gray-300">
-            <input type="text" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
+            <input type="text" name="servicePart[]" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
           </td>
           <td class="py-2 px-2 border-b border-r border-gray-300">
-            <input type="text" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
+            <input type="text" name="serviceDesc[]" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
           </td>
           <td class="py-2 px-2 border-b border-gray-300 text-center">
             <button class="text-red-500 hover:text-red-700 transition-colors" onclick="removeRow(this)">
@@ -62,13 +62,13 @@
     const newRow = document.createElement('tr');
     newRow.innerHTML = `
       <td class="py-2 px-2 border-b border-r border-gray-300">
-        <input type="text" class="w-full text-center border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
+        <input type="text" name="serviceQuantity[]" class="w-full text-center border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
       </td>
       <td class="py-2 px-2 border-b border-r border-gray-300">
-        <input type="text" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
+        <input type="text" name="servicePart[]" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
       </td>
       <td class="py-2 px-2 border-b border-r border-gray-300">
-        <input type="text" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
+        <input type="text" name="serviceDesc[]" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" />
       </td>
       <td class="py-2 px-2 border-b border-gray-300 text-center">
         <button class="text-red-500 hover:text-red-700 transition-colors" onclick="removeRow(this)">✖</button>
