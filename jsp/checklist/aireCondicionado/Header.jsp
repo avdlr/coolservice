@@ -49,9 +49,15 @@
       </div>
 
       <div>
-        <div class="mb-4">
-          <label class="block text-sm font-semibold text-gray-700">Unidad</label>
-            <input type="text" name="unidad" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" />
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700">Unidad</label>
+              <input type="text" name="unidad" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700">Orden de servicio</label>
+              <input type="text" id="ordenServicio" name="ordenServicio" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" value="<%= request.getParameter("orden") != null ? request.getParameter("orden") : "" %>" />
+          </div>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
