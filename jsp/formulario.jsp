@@ -60,7 +60,7 @@
 <!-- 	 </div> -->
 <!-- 	 <div id="sec-frmultimotec" class="form-group"> -->
 	 <div class="col-xs-2">Fecha &Uacute;ltima Atenci&oacute;n:</div>
-	<div class="col-xs-4"><input disabled type="text" id="frmultimotec" style="width:100%;" class="form-control"  placeholder="Fecha de última atención"/></div>
+	<div class="col-xs-4"><input disabled type="text" id="frmultimotec" style="width:100%;" class="form-control"  placeholder="Fecha de Ãºltima atenciÃ³n"/></div>
 <!-- 	</div> -->
 </div>
 </div>
@@ -131,7 +131,7 @@
 	 </select>
 	</div>
 	<div class="col-xs-2">Domicilio:</div>
-	<div class="col-xs-4"><input type="text" id="frmdireccion" style="width:100%;" class="form-control"  placeholder="nombre de la dirección"/></div>
+	<div class="col-xs-4"><input type="text" id="frmdireccion" style="width:100%;" class="form-control"  placeholder="nombre de la direcciÃ³n"/></div>
 	
 	
 	
@@ -207,7 +207,7 @@
 	<div class="col-xs-2">Otro:</div>
 	<div class="col-xs-10">
 
-		<input type="text" id="razonservotro" style="width:100%; margin-top: 5px;" class="form-control"  placeholder="Describir razón del servicio"/>
+		<input type="text" id="razonservotro" style="width:100%; margin-top: 5px;" class="form-control"  placeholder="Describir razÃ³n del servicio"/>
 	</div>
 
 </div>
@@ -591,6 +591,16 @@
 		});
 	 }
 	
+function abrirFormatoAire() {
+    var orden = $("#frmordenServicio").val();
+    window.open("maintenance-form?orden=" + encodeURIComponent(orden), "_blank");
+}
+
+function abrirFormatoRefrigeracion() {
+    var orden = $("#frmordenServicio").val();
+    window.open("refrigeracion-form?orden=" + encodeURIComponent(orden), "_blank");
+}
+
 // });
 </script>
 </body>
