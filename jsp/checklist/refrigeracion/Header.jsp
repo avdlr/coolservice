@@ -33,7 +33,7 @@
       <div class="col-span-2">
         <div class="mb-4">
           <label class="block text-sm font-semibold text-gray-700">Cliente</label>
-          <input type="text" name="cliente" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" />
+          <input type="text" id="cliente" name="cliente" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" value="<%= request.getParameter("cliente") != null ? request.getParameter("cliente") : "" %>" />          
         </div>
 
         <div class="grid grid-cols-2 gap-4">

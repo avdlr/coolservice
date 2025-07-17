@@ -65,6 +65,19 @@
 </div>
 </div>
 
+<div class="col-xs-12" id="sec-tipopreventivo" style="padding-top: 5px; display:none;">
+<div class="row">
+        <div class="col-xs-2">Formato Preventivo:</div>
+        <div class="col-xs-4">
+            <select id="frmtipopreventivo" style="width:100%;" class="form-control">
+                <option value="">Seleccionar..</option>
+                <option value="aire">Mantenimiento de Aire Condicionado</option>
+                <option value="refrigeracion">Mantenimiento Refrigeracion</option>
+            </select>
+        </div>
+</div>
+</div>
+
 <div class="col-xs-12" style="padding-top: 5px;">
 <div class="row">
 <!-- 	<div id="sec-frmcliente" class="form-group"> -->
@@ -368,6 +381,29 @@
 			 dropdownParent: $("#dialog")
 		 });
 		 
+		 $("#sec-tipopreventivo").hide();
+		    $("#frmtipomantenimiento").on("change", function(){
+		        var t = $("#frmtipomantenimiento option:selected").text().trim();
+		        if(t === "MANTENIMIENTO PREVENTIVO"){
+		            $("#sec-tipopreventivo").show();
+		        }else{
+		            $("#sec-tipopreventivo").hide();
+		            $("#frmtipopreventivo").val("");
+		        }
+		    });
+		    		    
+		    $("#frmtipopreventivo").on("change", function(){
+		        var v = $(this).val();
+		        if(v === "aire"){
+		        	var orden = $("#frmordenServicio").val();
+				    window.open("../maintenance-form?orden=" + encodeURIComponent(orden), "_blank");		        	
+		        }else if(v === "refrigeracion"){
+		        	var orden = $("#frmordenServicio").val();
+				    window.open("../refrigeracion-form?orden=" + encodeURIComponent(orden), "_blank");		        	
+		        }
+		    });
+		    $("#frmtipomantenimiento").trigger("change");
+		 
 		 $('#frmhorareg').mask('00:00');
 // 		 $("#razonserv").select2({
 // 			 dropdownParent: $("#dialog")
@@ -590,17 +626,8 @@
 				}
 		});
 	 }
+		
 	
-function abrirFormatoAire() {
-    var orden = $("#frmordenServicio").val();
-    window.open("maintenance-form?orden=" + encodeURIComponent(orden), "_blank");
-}
-
-function abrirFormatoRefrigeracion() {
-    var orden = $("#frmordenServicio").val();
-    window.open("refrigeracion-form?orden=" + encodeURIComponent(orden), "_blank");
-}
-
 // });
 </script>
 </body>
