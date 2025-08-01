@@ -35,7 +35,7 @@
     <jsp:include page="checklist/aireCondicionado/SignatureSection.jsp" />
 
     <div class="my-4 text-center">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" id="saveButton" class="btn btn-primary" disabled>Guardar</button>
     </div>
 
 </div>

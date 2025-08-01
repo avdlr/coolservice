@@ -52,6 +52,22 @@
 </div>
 
 <script>
+  let techSigned = false;
+  let managerSigned = false;
+
+  function checkFormValidity() {
+    const saveBtn = document.getElementById('saveButton');
+    const techName = document.querySelector('input[name="technicianName"]');
+    const managerName = document.querySelector('input[name="managerName"]');
+
+    const valid = techName.value.trim() !== '' &&
+                  managerName.value.trim() !== '' &&
+                  techSigned && managerSigned;
+    if (saveBtn) {
+      saveBtn.disabled = !valid;
+    }
+  }
+
   function initSignatureCanvas(canvasId) {
     const canvas = document.getElementById(canvasId);
     const ctx = canvas.getContext('2d');
@@ -66,9 +82,13 @@
     const draw = (e) => {
       if (!drawing) return;
       ctx.lineTo(e.offsetX, e.offsetY);
-      ctx.strokeStyle = '#1f2937'; // Tailwind gray-800
+      ctx.strokeStyle = '#1f2937';
       ctx.lineWidth = 2;
       ctx.stroke();
+
+      if (canvasId === 'techCanvas') techSigned = true;
+      if (canvasId === 'managerCanvas') managerSigned = true;
+      checkFormValidity();
     };
 
     const stopDrawing = () => {
@@ -85,10 +105,17 @@
     const canvas = document.getElementById(canvasId);
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (canvasId === 'techCanvas') techSigned = false;
+    if (canvasId === 'managerCanvas') managerSigned = false;
+    checkFormValidity();
   }
 
   window.onload = function() {
     initSignatureCanvas('techCanvas');
     initSignatureCanvas('managerCanvas');
+
+    document.querySelector('input[name="technicianName"]').addEventListener('input', checkFormValidity);
+    document.querySelector('input[name="managerName"]').addEventListener('input', checkFormValidity);
   };
 </script>
