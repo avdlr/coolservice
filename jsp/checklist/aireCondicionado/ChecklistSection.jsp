@@ -34,7 +34,7 @@
               <td class="py-2 px-2 border-b border-gray-300 text-center">
                 <div class="flex justify-center space-x-4">
                   <label class="inline-flex items-center">
-                    <input type="radio" name="status-${sectionTitle}-${status.index}-Mal" class="form-radio h-4 w-4 text-red-600" />
+                    <input type="radio" name="status-${sectionTitle}-${status.index}-Bien" class="form-radio h-4 w-4 text-red-600" />
                     <span class="ml-1 text-sm text-gray-700">M</span>
                   </label>
                 </div>
@@ -51,7 +51,7 @@
             <th class="py-2 px-2 border-b border-r border-gray-300 text-center text-sm font-medium text-gray-700">Juegos</th>
             <th class="py-2 px-2 border-b border-r border-gray-300 text-center text-sm font-medium text-gray-700">Comedor</th>
             <th class="py-2 px-2 border-b border-r border-gray-300 text-center text-sm font-medium text-gray-700">Cocina</th>
-            <th class="py-2 px-2 border-b border-gray-300 text-center text-sm font-medium text-gray-700">BaÃ±os</th>
+            <th class="py-2 px-2 border-b border-gray-300 text-center text-sm font-medium text-gray-700">Baños</th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +61,7 @@
                 ${activity.name}
               </td>
 
-              <c:forEach var="zone" items="${['Juegos', 'Comedor', 'Cocina', 'BaÃ±os']}">
+              <c:forEach var="zone" items="${['Juegos', 'Comedor', 'Cocina', 'Baños']}">
                 <td class="py-2 px-2 border-b border-r border-gray-300 text-center">
                   <div class="flex justify-center space-x-4">
                     <label class="inline-flex items-center">
