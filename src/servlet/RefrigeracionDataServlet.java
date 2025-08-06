@@ -1,25 +1,29 @@
 package servlet;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Map;
-import javax.servlet.ServletContext;
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import org.json.JSONObject;
 
 /**
- * Persists data from the refrigeration maintenance form to a JSON file.
+ * Persists data from the refrigeration maintenance form to a MySQL table.
  */
 @SuppressWarnings("serial")
 @WebServlet("/refrigeracion-form/save")
 public class RefrigeracionDataServlet extends HttpServlet {
+
+    @Resource(name = "jdbc/coolService")
+    private DataSource dataSource;
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -37,16 +41,15 @@ public class RefrigeracionDataServlet extends HttpServlet {
             }
         }
 
-        ServletContext ctx = getServletContext();
-        String dirPath = ctx.getRealPath("/WEB-INF/data/refrigeracion");
-        File dir = new File(dirPath);
-        if (!dir.exists()) {
-            dir.mkdirs();
+        try (Connection conn = dataSource.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(
+                        "INSERT INTO refrigeracion_data (data) VALUES (?)")) {
+            stmt.setString(1, json.toString());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new ServletException("Unable to save refrigeration data", e);
         }
-        File file = new File(dir, System.currentTimeMillis() + ".json");
-        try (Writer writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8")) {
-            writer.write(json.toString(2));
-        }
+
         response.setContentType("text/plain");
         response.getWriter().write("OK");
     }
