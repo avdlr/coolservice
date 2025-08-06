@@ -34,13 +34,24 @@
     <jsp:include page="checklist/aireCondicionado/ServicesSection.jsp" />
     <jsp:include page="checklist/aireCondicionado/SignatureSection.jsp" />
 
+    <div id="successAlert" class="text-center text-white bg-[#005c9b] p-4 rounded-md mb-4" style="display:none;">
+        Checklist guardado exitosamente
+    </div>
     <div class="my-4 text-center">
         <button type="submit" id="saveButton" class="btn btn-primary" disabled>Guardar</button>
     </div>
 
 </div>
 </form>
-
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const saveButton = document.getElementById('saveButton');
+    const alertBox = document.getElementById('successAlert');
+    saveButton.addEventListener('click', function () {
+        alertBox.style.display = 'block';
+    });
+});
+</script>
 </body>
 </html>
 
