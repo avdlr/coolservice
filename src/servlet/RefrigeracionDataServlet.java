@@ -41,10 +41,13 @@ public class RefrigeracionDataServlet extends HttpServlet {
             }
         }
 
+        String ordenServicio = request.getParameter("ordenServicio");
+
         try (Connection conn = dataSource.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(
-                        "INSERT INTO refrigeracion_data (data) VALUES (?)")) {
-            stmt.setString(1, json.toString());
+                        "INSERT INTO refrigeracion_data (orden_servicio, data) VALUES (?, ?)")) {
+            stmt.setString(1, ordenServicio);
+            stmt.setString(2, json.toString());
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new ServletException("Unable to save refrigeration data", e);
