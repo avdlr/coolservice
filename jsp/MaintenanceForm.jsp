@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<form method="post" action="maintenance-form/save">
+<form id="maintenanceForm" method="post" action="maintenance-form/save">
 <div class="container mx-auto">
     <%-- Static header --%>
     <jsp:include page="checklist/aireCondicionado/Header.jsp" />
@@ -34,21 +34,21 @@
     <jsp:include page="checklist/aireCondicionado/ServicesSection.jsp" />
     <jsp:include page="checklist/aireCondicionado/SignatureSection.jsp" />
 
-    <div id="successAlert" class="text-center text-white bg-[#005c9b] p-4 rounded-md mb-4" style="display:none;">
-        Checklist guardado exitosamente
-    </div>
     <div class="my-4 text-center">
-        <button type="submit" id="saveButton" class="btn btn-primary" disabled>Guardar</button>
+        <button type="submit" id="saveButton" class="btn btn-primary">Guardar</button>
     </div>
 
 </div>
 </form>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const saveButton = document.getElementById('saveButton');
-    const alertBox = document.getElementById('successAlert');
-    saveButton.addEventListener('click', function () {
-        alertBox.style.display = 'block';
+    const form = document.getElementById('maintenanceForm');
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const resp = await fetch(form.action, { method: 'POST', body: formData });
+        const text = await resp.text();
+        alert(text);
     });
 });
 </script>
