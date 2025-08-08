@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const ordenInput = document.getElementById('ordenServicio');
     if (ordenInput && ordenInput.value) {
         try {
-            const resp = await fetch(`maintenance-form/save?ordenServicio=${encodeURIComponent(ordenInput.value)}`);
+            const resp = await fetch('maintenance-form/save?ordenServicio=' + encodeURIComponent(ordenInput.value));
             if (resp.ok) {
                 const data = await resp.json();
                 Object.entries(data).forEach(([key, value]) => {
