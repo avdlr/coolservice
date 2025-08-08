@@ -296,8 +296,8 @@
     <li><a href="#" id="tabRefrigeracionLink">Refrigeracion</a></li>
   </ul>
   <div class="tab-content">
-    <iframe id="tabAire" class="maintTab" src="MaintenanceForm.jsp" style="width:100%; border:0; height:800px;"></iframe>
-    <iframe id="tabRefrigeracion" class="maintTab" src="MaintenanceFormRefrigeracion.jsp" style="width:100%; border:0; height:800px; display:none;"></iframe>
+    <iframe id="tabAire" class="maintTab" style="width:100%; border:0; height:800px;"></iframe>
+    <iframe id="tabRefrigeracion" class="maintTab" style="width:100%; border:0; height:800px; display:none;"></iframe>
   </div>
 </div>
 
@@ -310,6 +310,11 @@
                         if($('#frmtipomantenimiento').val() === 'PREVENTIVO'){
                                 $('#formtecnico').hide();
                                 $('#maintenanceTabs').show();
+                                $('#loadingfrm').css('height','60%');
+                                var orden = encodeURIComponent($('#frmordenServicio').val());
+                                var cliente = encodeURIComponent($('#frmcliente').val());
+                                $('#tabAire').attr('src', '../maintenance-form?orden=' + orden + '&cliente=' + cliente);
+                                $('#tabRefrigeracion').attr('src', '../refrigeracion-form?orden=' + orden + '&cliente=' + cliente);
                         }
 
                         $('#tabAireLink').on('click', function(e){
