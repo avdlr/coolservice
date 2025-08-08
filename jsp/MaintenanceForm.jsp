@@ -41,8 +41,34 @@
 </div>
 </form>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     const form = document.getElementById('maintenanceForm');
+    const ordenInput = document.getElementById('ordenServicio');
+    if (ordenInput && ordenInput.value) {
+        try {
+            const resp = await fetch(`maintenance-form/save?ordenServicio=${encodeURIComponent(ordenInput.value)}`);
+            if (resp.ok) {
+                const data = await resp.json();
+                Object.entries(data).forEach(([key, value]) => {
+                    const inputs = form.querySelectorAll(`[name='${key}']`);
+                    inputs.forEach(input => {
+                        if (input.type === 'checkbox' || input.type === 'radio') {
+                            if (Array.isArray(value)) {
+                                input.checked = value.includes(input.value);
+                            } else {
+                                input.checked = input.value === String(value) || value === true || value === 'on';
+                            }
+                        } else {
+                            input.value = value;
+                        }
+                    });
+                });
+            }
+        } catch (err) {
+            console.error('Unable to load saved data', err);
+        }
+    }
+
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
         const formData = new FormData(form);

@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -55,5 +56,32 @@ public class RefrigeracionDataServlet extends HttpServlet {
 
         response.setContentType("text/plain");
         response.getWriter().write("OK");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String ordenServicio = request.getParameter("ordenServicio");
+        if (ordenServicio == null || ordenServicio.isEmpty()) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing ordenServicio");
+            return;
+        }
+
+        try (Connection conn = dataSource.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(
+                        "SELECT data FROM refrigeracion_data WHERE orden_servicio = ?")) {
+            stmt.setString(1, ordenServicio);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String data = rs.getString("data");
+                    response.setContentType("application/json");
+                    response.getWriter().write(data);
+                } else {
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                }
+            }
+        } catch (SQLException e) {
+            throw new ServletException("Unable to load refrigeration data", e);
+        }
     }
 }
