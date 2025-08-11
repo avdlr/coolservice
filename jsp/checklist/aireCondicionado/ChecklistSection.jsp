@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/checklist.css">
 
@@ -19,6 +20,7 @@
         </thead>
         <tbody>
           <c:forEach var="activity" items="${activities}" varStatus="status">
+            <c:set var="inputName" value="${fn:replace(fn:concat(fn:concat(fn:concat('status-', sectionTitle), fn:concat('-', status.index)), '-Bien'), ' ', '_')}" />
             <tr class="${status.index % 2 == 0 ? 'bg-white' : 'bg-gray-50'}">
               <td class="py-2 px-4 border-b border-r border-gray-300 text-sm text-gray-800">
                 ${activity.name}
@@ -26,7 +28,7 @@
               <td class="py-2 px-2 border-b border-r border-gray-300 text-center">
                 <div class="flex justify-center space-x-4">
                   <label class="inline-flex items-center">
-                    <input type="radio" name="status-${sectionTitle}-${status.index}-Bien" class="form-radio h-4 w-4 text-[#005c9b]" />
+                    <input type="radio" name="${inputName}" value="B" class="form-radio h-4 w-4 text-[#005c9b]" <c:if test="${savedData[inputName] eq 'B'}">checked</c:if>/>
                     <span class="ml-1 text-sm text-gray-700">B</span>
                   </label>
                 </div>
@@ -34,7 +36,7 @@
               <td class="py-2 px-2 border-b border-gray-300 text-center">
                 <div class="flex justify-center space-x-4">
                   <label class="inline-flex items-center">
-                    <input type="radio" name="status-${sectionTitle}-${status.index}-Bien" class="form-radio h-4 w-4 text-red-600" />
+                    <input type="radio" name="${inputName}" value="M" class="form-radio h-4 w-4 text-red-600" <c:if test="${savedData[inputName] eq 'M'}">checked</c:if>/>
                     <span class="ml-1 text-sm text-gray-700">M</span>
                   </label>
                 </div>
@@ -51,25 +53,26 @@
             <th class="py-2 px-2 border-b border-r border-gray-300 text-center text-sm font-medium text-gray-700">Juegos</th>
             <th class="py-2 px-2 border-b border-r border-gray-300 text-center text-sm font-medium text-gray-700">Comedor</th>
             <th class="py-2 px-2 border-b border-r border-gray-300 text-center text-sm font-medium text-gray-700">Cocina</th>
-            <th class="py-2 px-2 border-b border-gray-300 text-center text-sm font-medium text-gray-700">Baños</th>
+            <th class="py-2 px-2 border-b border-gray-300 text-center text-sm font-medium text-gray-700">Baos</th>
           </tr>
         </thead>
         <tbody>
           <c:forEach var="activity" items="${activities}" varStatus="status">
+            <c:set var="nameBase" value="${fn:replace(fn:concat(fn:concat('status-', sectionTitle), fn:concat('-', status.index)), ' ', '_')}" />
             <tr class="${status.index % 2 == 0 ? 'bg-white' : 'bg-gray-50'}">
               <td class="py-2 px-4 border-b border-r border-gray-300 text-sm text-gray-800">
                 ${activity.name}
               </td>
-
-              <c:forEach var="zone" items="${['Juegos', 'Comedor', 'Cocina', 'Baños']}">
+              <c:forEach var="zone" items="${['Juegos', 'Comedor', 'Cocina', 'Baos']}">
+                <c:set var="inputName" value="${fn:replace(fn:concat(nameBase, fn:concat('-', zone)), ' ', '_')}" />
                 <td class="py-2 px-2 border-b border-r border-gray-300 text-center">
                   <div class="flex justify-center space-x-4">
                     <label class="inline-flex items-center">
-                      <input type="radio" name="status-${sectionTitle}-${status.index}-${zone}" class="form-radio h-4 w-4 text-[#005c9b]" />
+                      <input type="radio" name="${inputName}" value="B" class="form-radio h-4 w-4 text-[#005c9b]" <c:if test="${savedData[inputName] eq 'B'}">checked</c:if>/>
                       <span class="ml-1 text-sm text-gray-700">B</span>
                     </label>
                     <label class="inline-flex items-center">
-                      <input type="radio" name="status-${sectionTitle}-${status.index}-${zone}" class="form-radio h-4 w-4 text-red-600" />
+                      <input type="radio" name="${inputName}" value="M" class="form-radio h-4 w-4 text-red-600" <c:if test="${savedData[inputName] eq 'M'}">checked</c:if>/>
                       <span class="ml-1 text-sm text-gray-700">M</span>
                     </label>
                   </div>

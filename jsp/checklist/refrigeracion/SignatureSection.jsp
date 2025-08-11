@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/checklist.css">
 
 <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -9,7 +10,7 @@
 
     <div class="mb-4">
       <label class="block text-sm font-medium text-gray-700 mb-1">Nombre completo:</label>
-      <input type="text" name="technicianName" class="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500" />
+      <input type="text" name="technicianName" class="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500" value="${savedData.technicianName}" />
     </div>
 
     <div>
@@ -32,7 +33,7 @@
 
     <div class="mb-4">
       <label class="block text-sm font-medium text-gray-700 mb-1">Nombre completo:</label>
-      <input type="text" name="managerName" class="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500" />
+      <input type="text" name="managerName" class="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500" value="${savedData.managerName}" />
     </div>
 
     <div>
