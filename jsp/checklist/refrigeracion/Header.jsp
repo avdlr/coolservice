@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/checklist.css">
 
@@ -33,17 +34,17 @@
       <div class="col-span-2">
         <div class="mb-4">
           <label class="block text-sm font-semibold text-gray-700">Cliente</label>
-          <input type="text" id="cliente" name="cliente" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" value="<%= request.getParameter("cliente") != null ? request.getParameter("cliente") : "" %>" />          
+          <input type="text" id="cliente" name="cliente" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" value="${not empty savedData.cliente ? savedData.cliente : (not empty param.cliente ? param.cliente : '')}" />
         </div>
 
         <div class="grid grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-semibold text-gray-700">Área</label>
-              <input type="text" name="area" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" />
+              <input type="text" name="area" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" value="${not empty savedData.area ? savedData.area : ''}" />
           </div>
           <div>
             <label class="block text-sm font-semibold text-gray-700">Plaza</label>
-              <input type="text" name="plaza" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" />
+              <input type="text" name="plaza" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" value="${not empty savedData.plaza ? savedData.plaza : ''}" />
           </div>
         </div>
       </div>
@@ -52,22 +53,22 @@
         <div class="grid grid-cols-2 gap-4 mb-4">
           <div>
             <label class="block text-sm font-semibold text-gray-700">Unidad</label>
-            <input type="text" name="unidad" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" />
+            <input type="text" name="unidad" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" value="${not empty savedData.unidad ? savedData.unidad : ''}" />
           </div>
           <div>
             <label class="block text-sm font-semibold text-gray-700">Orden de servicio</label>
-            <input type="text" id="ordenServicio" name="ordenServicio" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" value="<%= request.getParameter("ordenServicio") != null ? request.getParameter("ordenServicio") : (request.getParameter("orden") != null ? request.getParameter("orden") : "") %>" />
+            <input type="text" id="ordenServicio" name="ordenServicio" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" value="${not empty savedData.ordenServicio ? savedData.ordenServicio : (not empty param.ordenServicio ? param.ordenServicio : (not empty param.orden ? param.orden : ''))}" />
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-semibold text-gray-700">Fecha</label>
-              <input type="date" id="fecha" name="fecha" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" />
+              <input type="date" id="fecha" name="fecha" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" value="${not empty savedData.fecha ? savedData.fecha : ''}" />
           </div>
           <div>
             <label class="block text-sm font-semibold text-gray-700">Hora de Entrada</label>
-              <input type="time" id="hora" name="horaEntrada" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" />
+              <input type="time" id="hora" name="horaEntrada" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" value="${not empty savedData.horaEntrada ? savedData.horaEntrada : ''}" />
           </div>
         </div>
       </div>
@@ -77,8 +78,14 @@
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {
+    const fechaInput = document.getElementById('fecha');
+    const horaInput = document.getElementById('hora');
     const today = new Date();
-    document.getElementById('fecha').value = today.toISOString().split('T')[0];
-    document.getElementById('hora').value = today.toTimeString().substring(0, 5);
+    if (!fechaInput.value) {
+      fechaInput.value = today.toISOString().split('T')[0];
+    }
+    if (!horaInput.value) {
+      horaInput.value = today.toTimeString().substring(0, 5);
+    }
   });
 </script>
