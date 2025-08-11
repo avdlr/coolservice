@@ -1,5 +1,6 @@
 package servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,20 +30,36 @@ public class RefrigeracionDataServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        Map<String, String[]> params = request.getParameterMap();
+        String contentType = request.getContentType();
         JSONObject json = new JSONObject();
-        for (Map.Entry<String, String[]> entry : params.entrySet()) {
-            String[] value = entry.getValue();
-            if (value != null) {
-                if (value.length == 1) {
-                    json.put(entry.getKey(), value[0]);
-                } else {
-                    json.put(entry.getKey(), value);
+        String ordenServicio = null;
+
+        if (contentType != null && contentType.contains("application/json")) {
+            StringBuilder body = new StringBuilder();
+            try (BufferedReader reader = request.getReader()) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    body.append(line);
                 }
             }
+            json = new JSONObject(body.toString());
+            ordenServicio = json.optString("ordenServicio", null);
+        } else {
+            Map<String, String[]> params = request.getParameterMap();
+            for (Map.Entry<String, String[]> entry : params.entrySet()) {
+                String[] value = entry.getValue();
+                if (value != null) {
+                    if (value.length == 1) {
+                        json.put(entry.getKey(), value[0]);
+                    } else {
+                        json.put(entry.getKey(), value);
+                    }
+                }
+            }
+            ordenServicio = request.getParameter("ordenServicio");
         }
 
-        String ordenServicio = request.getParameter("ordenServicio");
+        json.remove("ordenServicio");
 
         try (Connection conn = dataSource.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(
