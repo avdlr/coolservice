@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<form id="maintenanceForm" method="post" action="maintenance-form/save">
+<form id="maintenanceForm" method="post" action="<%= request.getContextPath() %>/maintenance-form/save">
 <div class="container mx-auto">
     <%-- Static header --%>
     <jsp:include page="checklist/aireCondicionado/Header.jsp" />
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const ordenInput = document.getElementById('ordenServicio');
     if (ordenInput && ordenInput.value) {
         try {
-            const resp = await fetch('maintenance-form/save?ordenServicio=' + encodeURIComponent(ordenInput.value));
+            const resp = await fetch(form.action + '?ordenServicio=' + encodeURIComponent(ordenInput.value));
             if (resp.ok) {
                 const data = await resp.json();
                 Object.entries(data).forEach(([key, value]) => {

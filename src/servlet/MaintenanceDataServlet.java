@@ -68,12 +68,34 @@ public class MaintenanceDataServlet extends HttpServlet {
 
         json.remove("ordenServicio");
 
-        try (Connection conn = dataSource.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(
+        try (Connection conn = dataSource.getConnection()) {
+            // Verify if data for this orden_servicio already exists
+            boolean exists;
+            try (PreparedStatement check = conn.prepareStatement(
+                    "SELECT 1 FROM airecondicionado_data WHERE orden_servicio = ?")) {
+                check.setString(1, ordenServicio);
+                try (ResultSet rs = check.executeQuery()) {
+                    exists = rs.next();
+                }
+            }
+
+            if (exists) {
+                // Update existing record
+                try (PreparedStatement update = conn.prepareStatement(
+                        "UPDATE airecondicionado_data SET data = ? WHERE orden_servicio = ?")) {
+                    update.setString(1, json.toString());
+                    update.setString(2, ordenServicio);
+                    update.executeUpdate();
+                }
+            } else {
+                // Insert new record
+                try (PreparedStatement insert = conn.prepareStatement(
                         "INSERT INTO airecondicionado_data (orden_servicio, data) VALUES (?, ?)")) {
-            stmt.setString(1, ordenServicio);
-            stmt.setString(2, json.toString());
-            stmt.executeUpdate();
+                    insert.setString(1, ordenServicio);
+                    insert.setString(2, json.toString());
+                    insert.executeUpdate();
+                }
+            }
         } catch (SQLException e) {
             throw new ServletException("Unable to save maintenance data", e);
         }
