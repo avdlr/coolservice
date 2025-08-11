@@ -15,7 +15,7 @@
           Medición de presión (colocar valor psi) ALTA
         </td>
         <td class="py-2 px-2 border-b border-gray-300">
-          <input type="number" name="${base}_presion_alta" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[fn:concat(base,'_presion_alta')]}"/>
+          <input type="number" name="${base}_presion_alta" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[fn:join([base, '_presion_alta'], '')]}"/>
         </td>
       </tr>
       <tr class="bg-gray-50">
@@ -23,7 +23,7 @@
           Medición de presión (colocar valor psi) BAJA
         </td>
         <td class="py-2 px-2 border-b border-gray-300">
-          <input type="number" name="${base}_presion_baja" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[fn:concat(base,'_presion_baja')]}"/>
+          <input type="number" name="${base}_presion_baja" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[fn:join([base, '_presion_baja'], '')]}"/>
         </td>
       </tr>
     </tbody>
