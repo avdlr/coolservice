@@ -56,7 +56,7 @@
           </div>
           <div>
             <label class="block text-sm font-semibold text-gray-700">Orden de servicio</label>
-              <input type="text" id="ordenServicio" name="ordenServicio" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" value="<%= request.getParameter("orden") != null ? request.getParameter("orden") : "" %>" />
+              <input type="text" id="ordenServicio" name="ordenServicio" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#005c9b] focus:ring-[#005c9b] sm:text-sm" value="<%= request.getParameter("ordenServicio") != null ? request.getParameter("ordenServicio") : (request.getParameter("orden") != null ? request.getParameter("orden") : "") %>" />
           </div>
         </div>
 
