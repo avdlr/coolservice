@@ -111,11 +111,13 @@
     checkFormValidity();
   }
 
-  window.onload = function() {
+  document.addEventListener('DOMContentLoaded', function() {
     initSignatureCanvas('techCanvas');
     initSignatureCanvas('managerCanvas');
 
     document.querySelector('input[name="technicianName"]').addEventListener('input', checkFormValidity);
     document.querySelector('input[name="managerName"]').addEventListener('input', checkFormValidity);
-  };
+
+    checkFormValidity();
+  });
 </script>
