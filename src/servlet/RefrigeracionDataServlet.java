@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import org.json.JSONObject;
  */
 @SuppressWarnings("serial")
 @WebServlet("/refrigeracion-form/save")
+@MultipartConfig
 public class RefrigeracionDataServlet extends HttpServlet {
 
     @Resource(name = "jdbc/coolService")
@@ -57,6 +59,11 @@ public class RefrigeracionDataServlet extends HttpServlet {
                 }
             }
             ordenServicio = request.getParameter("ordenServicio");
+        }
+
+        if (ordenServicio == null || ordenServicio.isEmpty()) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing ordenServicio");
+            return;
         }
 
         json.remove("ordenServicio");
