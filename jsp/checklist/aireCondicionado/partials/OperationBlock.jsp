@@ -2,6 +2,7 @@
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="../loadData.jspf" %>
 <c:set var="base" value="${fn:replace(param.title,' ','_')}" />
 <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/checklist.css">
 

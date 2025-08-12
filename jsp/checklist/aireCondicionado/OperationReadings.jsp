@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="loadData.jspf" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/checklist.css">
 
 <div class="mb-8">

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="loadData.jspf" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/checklist.css">
 
 <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
