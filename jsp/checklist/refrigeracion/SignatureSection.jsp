@@ -24,6 +24,7 @@
 
       <div class="border-2 border-dashed border-gray-300 rounded-md h-32 bg-gray-50 flex items-center justify-center">
         <canvas id="techCanvas" width="400" height="120" class="bg-white rounded-md border border-gray-300"></canvas>
+        <input type="hidden" name="technicianSignature" id="technicianSignature" value="${savedData.technicianSignature}" />
       </div>
     </div>
   </div>
@@ -47,6 +48,7 @@
 
       <div class="border-2 border-dashed border-gray-300 rounded-md h-32 bg-gray-50 flex items-center justify-center">
         <canvas id="managerCanvas" width="400" height="120" class="bg-white rounded-md border border-gray-300"></canvas>
+        <input type="hidden" name="managerSignature" id="managerSignature" value="${savedData.managerSignature}" />
       </div>
     </div>
   </div>
@@ -108,8 +110,14 @@
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (canvasId === 'techCanvas') techSigned = false;
-    if (canvasId === 'managerCanvas') managerSigned = false;
+    if (canvasId === 'techCanvas') {
+      techSigned = false;
+      document.getElementById('technicianSignature').value = '';
+    }
+    if (canvasId === 'managerCanvas') {
+      managerSigned = false;
+      document.getElementById('managerSignature').value = '';
+    }
     checkFormValidity();
   }
 
@@ -121,5 +129,13 @@
     document.querySelector('input[name="managerName"]').addEventListener('input', checkFormValidity);
 
     checkFormValidity();
+
+    const form = document.getElementById('maintenanceForm') || document.getElementById('refrigeracionForm') || document.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', function() {
+        document.getElementById('technicianSignature').value = document.getElementById('techCanvas').toDataURL('image/png');
+        document.getElementById('managerSignature').value = document.getElementById('managerCanvas').toDataURL('image/png');
+      });
+    }
   });
 </script>
