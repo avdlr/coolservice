@@ -15,25 +15,31 @@
       <tr>
         <td class="py-2 px-4 border-b border-r border-gray-300 text-sm font-medium text-gray-700">Voltage</td>
         <td class="py-2 px-2 border-b border-r border-gray-300">
-<input type="number" name="${base}_voltage_AB" placeholder="AB" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[fn:join([base, '_voltage_AB'], '')]}"/>
+          <c:set var="voltageABKey">${base}_voltage_AB</c:set>
+          <input type="number" name="${base}_voltage_AB" placeholder="AB" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[voltageABKey]}"/>
         </td>
         <td class="py-2 px-2 border-b border-r border-gray-300">
-<input type="number" name="${base}_voltage_BC" placeholder="BC" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[fn:join([base, '_voltage_BC'], '')]}"/>
+          <c:set var="voltageBCKey">${base}_voltage_BC</c:set>
+          <input type="number" name="${base}_voltage_BC" placeholder="BC" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[voltageBCKey]}"/>
         </td>
         <td class="py-2 px-2 border-b border-gray-300">
-<input type="number" name="${base}_voltage_CA" placeholder="CA" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[fn:join([base, '_voltage_CA'], '')]}"/>
+          <c:set var="voltageCAKey">${base}_voltage_CA</c:set>
+          <input type="number" name="${base}_voltage_CA" placeholder="CA" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[voltageCAKey]}"/>
         </td>
       </tr>
       <tr class="bg-gray-50">
         <td class="py-2 px-4 border-b border-r border-gray-300 text-sm font-medium text-gray-700">Amperage</td>
         <td class="py-2 px-2 border-b border-r border-gray-300">
-<input type="number" name="${base}_amp_A" placeholder="A" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[fn:join([base, '_amp_A'], '')]}"/>
+          <c:set var="ampAKey">${base}_amp_A</c:set>
+          <input type="number" name="${base}_amp_A" placeholder="A" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[ampAKey]}"/>
         </td>
         <td class="py-2 px-2 border-b border-r border-gray-300">
-<input type="number" name="${base}_amp_B" placeholder="B" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[fn:join([base, '_amp_B'], '')]}"/>
+          <c:set var="ampBKey">${base}_amp_B</c:set>
+          <input type="number" name="${base}_amp_B" placeholder="B" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[ampBKey]}"/>
         </td>
         <td class="py-2 px-2 border-b border-gray-300">
-<input type="number" name="${base}_amp_C" placeholder="C" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[fn:join([base, '_amp_C'], '')]}"/>
+          <c:set var="ampCKey">${base}_amp_C</c:set>
+          <input type="number" name="${base}_amp_C" placeholder="C" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[ampCKey]}"/>
         </td>
       </tr>
     </tbody>

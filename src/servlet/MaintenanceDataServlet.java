@@ -46,6 +46,9 @@ public class MaintenanceDataServlet extends HttpServlet {
             }
             json = new JSONObject(body.toString());
             ordenServicio = json.optString("ordenServicio", null);
+            if (ordenServicio == null || ordenServicio.isEmpty()) {
+                ordenServicio = json.optString("orden", null);
+            }
         } else {
             Map<String, String[]> params = request.getParameterMap();
             for (Map.Entry<String, String[]> entry : params.entrySet()) {
@@ -59,6 +62,9 @@ public class MaintenanceDataServlet extends HttpServlet {
                 }
             }
             ordenServicio = request.getParameter("ordenServicio");
+            if (ordenServicio == null || ordenServicio.isEmpty()) {
+                ordenServicio = request.getParameter("orden");
+            }
         }
 
         if (ordenServicio == null || ordenServicio.isEmpty()) {
@@ -108,6 +114,9 @@ public class MaintenanceDataServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String ordenServicio = request.getParameter("ordenServicio");
+        if (ordenServicio == null || ordenServicio.isEmpty()) {
+            ordenServicio = request.getParameter("orden");
+        }
         if (ordenServicio == null || ordenServicio.isEmpty()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing ordenServicio");
             return;
