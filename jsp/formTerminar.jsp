@@ -304,7 +304,7 @@
 <!-- </div> -->
 <script type="text/javascript">
 // $(function(){
-	var equiposlista = $.parseJSON('<%=equipos.toString()%>');
+        var equiposlista = $.parseJSON('<%= (equipos != null) ? equipos.toString() : "[]" %>');
          $(document).ready(function() {
 
                         if($('#frmtipomantenimiento').val() === 'PREVENTIVO'){
@@ -316,7 +316,8 @@
                                 $('#tabAire').attr('src', '../maintenance-form?orden=' + orden + '&cliente=' + cliente);
                                 $('#tabRefrigeracion').attr('src', '../refrigeracion-form?orden=' + orden + '&cliente=' + cliente);
                                 $('#aceptarform').on('mousedown', function(){
-                                        $('#marca, #serie, #modelo, #comentarios, #cond1, #cond2, #tenicoserv').val('NA');
+                                        $('#marca, #serie, #modelo, #comentarios, #tenicoserv').val('NA');
+                                        $('#cond1, #cond2').val('0');
                                         $('#voltaje, #amperes, #tempopera, #voltaje2, #amperes2').val('0');
                                         $('#servreal').prop('selectedIndex',1);
                                         $('#nombreequipo').prop('selectedIndex',1);
