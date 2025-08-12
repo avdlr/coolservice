@@ -1403,11 +1403,11 @@
  	        		text: "Aceptar", 
  	        		click:    function() {
 						var param="accion=DESPACHAR";
-						var paramrecibido = $("#frmrecibido").val();
-						var parampuesto = $("#frmpuesto").val();
-						var bandvalida = true;
-						if(paramrecibido==""){$("#sec-frmrecibido").addClass("has-error"); bandvalida=false;}else{$("#sec-frmrecibido").removeClass("has-error");}
-						if(parampuesto==""){$("#sec-frmpuesto").addClass("has-error"); bandvalida=false;}else{$("#sec-frmpuesto").removeClass("has-error");}
+                                               var paramrecibido = $("#dialog #frmrecibido").val();
+                                               var parampuesto = $("#dialog #frmpuesto").val();
+                                               var bandvalida = true;
+                                               if(paramrecibido==""){$("#dialog #sec-frmrecibido").addClass("has-error"); bandvalida=false;}else{$("#dialog #sec-frmrecibido").removeClass("has-error");}
+                                               if(parampuesto==""){$("#dialog #sec-frmpuesto").addClass("has-error"); bandvalida=false;}else{$("#dialog #sec-frmpuesto").removeClass("has-error");}
  	        			param += "&orden="+escape(idorden)+"&recibido="+escape(paramrecibido)+"&usuario=<%=usuario%>&puesto="+parampuesto+"&estatus="+sigestatus+"&actualestatus="+actualestatus+"&idaccion="+idaccion;
  	        			if(bandvalida)
 						{
