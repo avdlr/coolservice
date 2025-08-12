@@ -3,6 +3,9 @@
 Map<String, Object> savedData = (Map<String, Object>) request.getAttribute("savedData");
 if (savedData == null) {
     String ordenServicio = request.getParameter("ordenServicio");
+    if (ordenServicio == null || ordenServicio.isEmpty()) {
+        ordenServicio = request.getParameter("orden");
+    }
     if (ordenServicio != null && !ordenServicio.isEmpty()) {
         try {
             InitialContext ctx = new InitialContext();

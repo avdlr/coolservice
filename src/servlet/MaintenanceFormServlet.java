@@ -60,6 +60,9 @@ public class MaintenanceFormServlet extends HttpServlet {
       request.setAttribute("sections", sections);
 
       String ordenServicio = request.getParameter("ordenServicio");
+      if (ordenServicio == null || ordenServicio.isEmpty()) {
+         ordenServicio = request.getParameter("orden");
+      }
       if (ordenServicio != null && !ordenServicio.isEmpty()) {
          try (Connection conn = dataSource.getConnection();
                PreparedStatement stmt = conn.prepareStatement(
