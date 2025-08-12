@@ -100,6 +100,6 @@ public class RefrigeracionFormServlet extends HttpServlet {
          }
       }
 
-      request.getRequestDispatcher("/MaintenanceFormRefrigeracion.jsp").forward(request, response);
+      request.getRequestDispatcher("/jsp/MaintenanceFormRefrigeracion.jsp").forward(request, response);
    }
 }
