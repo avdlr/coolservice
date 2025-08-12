@@ -144,7 +144,6 @@
     document.querySelector('input[name="managerName"]').addEventListener('input', checkFormValidity);
 
     checkFormValidity();
-
     loadSignature('techCanvas', 'technicianSignature');
     loadSignature('managerCanvas', 'managerSignature');
 
