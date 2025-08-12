@@ -77,7 +77,7 @@
 <div class="col-xs-12" style="padding-top: 5px;">
 <div class="row">
 <div class="col-xs-2">Domicilio:</div>
-	<div class="col-xs-4"><input type="text" id="frmdireccion" style="width:100%;" class="form-control"  placeholder="nombre de la dirección" value="<%=registro.getString("domicilio")%>"/></div>
+	<div class="col-xs-4"><input type="text" id="frmdireccion" style="width:100%;" class="form-control"  placeholder="nombre de la direcciÃ³n" value="<%=registro.getString("domicilio")%>"/></div>
 	<div class="col-xs-2">Ciudad:</div>
 	<div class="col-xs-4"><input type="text" id="frmciudad" style="width:100%;" class="form-control"  placeholder="nombre de la ciudad" value="<%=registro.getString("ciudad")%>"/></div>
 	
@@ -130,9 +130,9 @@
 <div class="col-xs-12" style="padding-top: 25px;">
 <div class="row">
 	<div class="col-xs-2">Recibido por:</div>
-	<div class="col-xs-4"><input type="text" disabled id="recibidopor" style="width:100%;" class="form-control"  placeholder="Nombre de quien recibió" value="<%=registro.getString("RecibidoPorNombre")%>"/></div>
+	<div class="col-xs-4"><input type="text" disabled id="recibidopor" style="width:100%;" class="form-control"  placeholder="Nombre de quien recibiÃ³" value="<%=registro.getString("RecibidoPorNombre")%>"/></div>
 	<div class="col-xs-2">Puesto:</div>
-	<div class="col-xs-4"><input type="text" disabled id="puestorecibido" style="width:100%;" class="form-control"  placeholder="Puesto de quien recibió" value="<%=registro.getString("RecibidoPorPuesto")%>"/></div>
+	<div class="col-xs-4"><input type="text" disabled id="puestorecibido" style="width:100%;" class="form-control"  placeholder="Puesto de quien recibiÃ³" value="<%=registro.getString("RecibidoPorPuesto")%>"/></div>
 </div>
 </div>
 <div class="col-xs-12" style="padding-top: 5px;">
@@ -219,7 +219,7 @@
 	<div class="col-xs-2"><input type="text" id="cond2" style="width:100%;" class="form-control"  placeholder="psi"/></div>
 	<div class="col-xs-2">Temperatura de Operaci&oacute;n:</div>
 	<div class="col-xs-2"><input type="text" id="tempopera" style="width:100%;" class="form-control"  placeholder=""/></div>
-	<div class="col-xs-2"><input type="radio" name="tempounidad" value="C"/> <label style="display:inline-block;">°C</label> &nbsp;&nbsp;&nbsp;<input type="radio" name="tempounidad" value="F" /> °F</div>
+	<div class="col-xs-2"><input type="radio" name="tempounidad" value="C"/> <label style="display:inline-block;">Â°C</label> &nbsp;&nbsp;&nbsp;<input type="radio" name="tempounidad" value="F" /> Â°F</div>
 
 </div>
 </div>
@@ -315,6 +315,14 @@
                                 var cliente = encodeURIComponent($('#frmcliente').val());
                                 $('#tabAire').attr('src', '../maintenance-form?orden=' + orden + '&cliente=' + cliente);
                                 $('#tabRefrigeracion').attr('src', '../refrigeracion-form?orden=' + orden + '&cliente=' + cliente);
+                                $('#aceptarform').on('mousedown', function(){
+                                        $('#marca, #serie, #modelo, #comentarios, #cond1, #cond2, #tenicoserv').val('NA');
+                                        $('#voltaje, #amperes, #tempopera, #voltaje2, #amperes2').val('0');
+                                        $('#servreal').prop('selectedIndex',1);
+                                        $('#nombreequipo').prop('selectedIndex',1);
+                                        $('input[name=servterminado]').first().prop('checked',true);
+                                        $('input[name=tempounidad]').first().prop('checked',true);
+                                });
                         }
 
                         $('#tabAireLink').on('click', function(e){
