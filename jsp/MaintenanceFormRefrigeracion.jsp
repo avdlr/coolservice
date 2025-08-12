@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="clases.Activity"%>
 <%@ page import="clases.Section"%>
+<%@ include file="checklist/refrigeracion/loadData.jspf" %>
 
 <html>
 <head>
