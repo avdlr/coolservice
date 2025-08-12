@@ -77,6 +77,6 @@ public class MaintenanceFormServlet extends HttpServlet {
          }
       }
 
-      request.getRequestDispatcher("/MaintenanceForm.jsp").forward(request, response);
+      request.getRequestDispatcher("/jsp/MaintenanceForm.jsp").forward(request, response);
    }
 }
