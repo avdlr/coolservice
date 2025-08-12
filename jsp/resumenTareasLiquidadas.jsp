@@ -84,7 +84,21 @@
 						<td style="text-align:center;">
 						<div class="btn-group" style="width: 100%;">
 		                		<span style="width:100%; font-size:10px; cursor:pointer; font-weight: bold;" class="label btn-success dropdown-toggle" data-toggle="dropdown" style="font-size: smaller;"><%=registro.getString("estatus") %></span>
-		                		<ul class="dropdown-menu" role="menu" style="margin-left: 100px; margin-top: -30px;"> 
+		                		<ul class="dropdown-menu" role="menu" style="margin-left: 100px; margin-top: -30px;">
+
+<% if("2".equals(registro.getString("tipoorden"))) { %>
+        <li class="dropdown-submenu">
+            <span class="btn btn-primary fa fa-print dropdown-toggle" data-toggle="dropdown" style="width: 100%;" title="IMPRESION DE ORDEN">
+                <label style="font-family: monospace; cursor: pointer;">IMPRESION DE ORDEN</label>
+            </span>
+            <ul class="dropdown-menu">
+                <li><span onclick="realizaIMPRESION('<%=registro.getString("idorden") %>','<%=registro.getString("FolioOrden") %>','AC')" class="btn btn-primary" style="width: 100%;" title="AIRE CONDICIONADO"><label style="font-family: monospace; cursor: pointer;">AIRE CONDICIONADO</label></span></li>
+                <li><span onclick="realizaIMPRESION('<%=registro.getString("idorden") %>','<%=registro.getString("FolioOrden") %>','RF')" class="btn btn-primary" style="width: 100%;" title="REFRIGERACION"><label style="font-family: monospace; cursor: pointer;">REFRIGERACION</label></span></li>
+            </ul>
+        </li>
+<% } %>
+
+ 
 		                		
 		                		<%
 		                			for(int j=0; j<acciones.length(); j++)
@@ -151,7 +165,7 @@
                                     	</span>  
                              
                                     </td>
-                                    <td align="right" width="50%"> <span>Página <%=pagina %> de <%=TOTALPAGINASAg %> </span></td>
+                                    <td align="right" width="50%"> <span>PÃ¡gina <%=pagina %> de <%=TOTALPAGINASAg %> </span></td>
                                 </tr>                                
                         </table>
 				
@@ -190,7 +204,18 @@
 	var parfechaini = '<%=fechaini%>';
 	var parfechafin = '<%=fechafin%>';
 	var paginaAg = <%=pagina%>;
-	var totalPaginasAg = <%=TOTALPAGINASAg%>; 
+	var totalPaginasAg = <%=TOTALPAGINASAg%>;
+
+function realizaIMPRESION(idorden, ordenserv, tipo) {
+        if (tipo === 'AC') {
+                window.open("../maintenance-form?orden=" + encodeURIComponent(idorden) + "&folioOrden=" + encodeURIComponent(ordenserv));
+        } else if (tipo === 'RF') {
+                window.open("../refrigeracion-form?orden=" + encodeURIComponent(idorden) + "&folioOrden=" + encodeURIComponent(ordenserv));
+        } else {
+                window.open("../GeneraImpreso?idOrden=" + encodeURIComponent(idorden) + "&folioOrden=" + encodeURIComponent(ordenserv));
+        }
+}
+ 
  	
  	function siguiente()
 	{
