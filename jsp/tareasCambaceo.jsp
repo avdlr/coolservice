@@ -29,7 +29,7 @@
 	<form style="width:99%;">
 	    <fieldset>
 	    	<div class="row">
-	    		<div class="col-xs-12" style="font-: bold;">Â¿Desea objetar la solicitud Cambaceo Preliquidaci&oacute;n? Preliquidaci&oacute;n</div>
+	    		<div class="col-xs-12" style="font-: bold;">¿Desea objetar la solicitud Cambaceo Preliquidaci&oacute;n? Preliquidaci&oacute;n</div>
 	    		<div class="col-xs-12">SI <input type="radio" name="radioObjetar" value="SI"/> NO <input type="radio" name="radioObjetar" value="NO"/></div>
 	    		<div class="col-xs-12">&nbsp;</div>
 	    		<div class="col-xs-4" align="right">Tipo de Objeci&oacute;n: </div>
@@ -44,7 +44,7 @@
 
 
 
-<div id="dialog-form" title="Asignar TÃ©cnico">
+<div id="dialog-form" title="Asignar Técnico">
   <form>
     <fieldset>
       <label for="name">Folio Pisa:</label>
@@ -222,7 +222,7 @@
   </form>
   </div>
   <div id="aprovMovil" class="tab-pane fade">
-  informaciÃ³n de aprovisionamiento
+  información de aprovisionamiento
   </div>
   </div>
 </div>
@@ -381,7 +381,7 @@
     </form>
   </div>
    	<div id="menu1" class="tab-pane fade"> -->
- 	 	informaciÃ³n de aprovisionamiento
+ 	 	información de aprovisionamiento
   	</div>
   </div>
   </div>
@@ -535,10 +535,10 @@
 		<div class="col-xs-9 col-sm-10">
 			<div class="row">
 			<div class="col-xs-6">
-				<input type="text" id="rango1" style="width:100%;" class="form-control" placeholder="MÃ­nimo"/>
+				<input type="text" id="rango1" style="width:100%;" class="form-control" placeholder="Mínimo"/>
 			</div>
 			<div class="col-xs-6">
-				<input type="text" id="rango2" style="width:100%;" class="form-control" placeholder="MÃ¡ximo"/>
+				<input type="text" id="rango2" style="width:100%;" class="form-control" placeholder="Máximo"/>
 			</div>
 			</div>
 		</div>
@@ -826,7 +826,7 @@
 //             height: 400,
 //             width: 350,
 //             modal: true,
-//             title: "AsignaciÃ³n de Tarea",
+//             title: "Asignación de Tarea",
 //             buttons: [{
 //               text : "Aceptar",
 //               "class": "btn btn-primary",
@@ -837,14 +837,14 @@
 //             	  if(expediente!="")
 //             	  {
 //             	    	swal({
-//             	    		title: "",Â Â 
-//             	    		text: "Desea asignar la order "+folioplex+" al tecnico "+nombre+"?", Â Â 
-// //                 			text: "You will not be able to recover this imaginary file!", Â Â 
-//                 			type: "info", Â Â 
-//                 			showCancelButton: true, Â Â 
+//             	    		title: "",  
+//             	    		text: "Desea asignar la order "+folioplex+" al tecnico "+nombre+"?",   
+// //                 			text: "You will not be able to recover this imaginary file!",   
+//                 			type: "info",   
+//                 			showCancelButton: true,   
 //                 			cancelButtonText: "Cancelar",
-//                 			confirmButtonColor: "#3a5a74", Â Â 
-//                 			confirmButtonText: "Aceptar", Â Â 
+//                 			confirmButtonColor: "#3a5a74",   
+//                 			confirmButtonText: "Aceptar",   
 //                 			closeOnConfirm: true }, 
 //                 			function(){
 //                         				$.ajax({
@@ -904,8 +904,8 @@
 //             	  }
 //             	  else
 //             		  {
-//             		  swal("Debe seleccionar un tÃ©cnico", "", "warning");
-// //             		  	alert("Debe seleccionar un tÃ©cnico");
+//             		  swal("Debe seleccionar un técnico", "", "warning");
+// //             		  	alert("Debe seleccionar un técnico");
 //             		  }
             	  
 //             	  }
@@ -926,17 +926,17 @@
     function abrirDESPACHAR(foliopisa)
     {
     	swal({
-    		title: "",Â Â 
-    		text: "Â¿Desea despachar la orden: "+foliopisa+"?", Â Â 
-//     			text: "You will not be able to recover this imaginary file!", Â Â 
-    			type: "info", Â Â 
-    			showCancelButton: true, Â Â 
+    		title: "",  
+    		text: "¿Desea despachar la orden: "+foliopisa+"?",   
+//     			text: "You will not be able to recover this imaginary file!",   
+    			type: "info",   
+    			showCancelButton: true,   
     			cancelButtonText: "Cancelar",
-    			confirmButtonColor: "#3a5a74", Â Â Â 
-    			confirmButtonText: "Aceptar", Â Â 
+    			confirmButtonColor: "#3a5a74",    
+    			confirmButtonText: "Aceptar",   
     			closeOnConfirm: true }, 
     			function(){
-    				Â Â var parametros="estado=DESPACHADA&tipo=DESPACHADA&foliopisa="+foliopisa+"&lbr=<%=lbr%>";
+    				  var parametros="estado=DESPACHADA&tipo=DESPACHADA&foliopisa="+foliopisa+"&lbr=<%=lbr%>";
     		    	$.ajax({
     		  			url: 'actualizaEstado.jsp?'+parametros,
     		  			type: "GET",
@@ -1095,7 +1095,7 @@
         autoOpen: false,
         height: 400,
         width: 350,
-        title: "LiquidaciÃ³n",
+        title: "Liquidación",
         modal: true
         });
     
@@ -1184,7 +1184,7 @@
 //             autoOpen: false,
 //             height: 450,
 //             width: 350,
-//             title: "Folio Plex: "+folioplex+" Folio Pisa: "+foliopisa+" TelÃ©fono: "+telefono,
+//             title: "Folio Plex: "+folioplex+" Folio Pisa: "+foliopisa+" Teléfono: "+telefono,
 //             modal: true,
 //             open: function(){
 //             	$(this).scrollTop(0);
@@ -1200,7 +1200,7 @@
 //             autoOpen: false,
 //             height: 530,
 //             width: 1218,
-//             title: "Folio Plex: "+folioplex+"       Folio Pisa: "+foliopisa+"        TelÃ©fono: "+telefono,
+//             title: "Folio Plex: "+folioplex+"       Folio Pisa: "+foliopisa+"        Teléfono: "+telefono,
 //             modal: true,
 //             open: function(){
 //             	$(this).scrollTop(0);
@@ -1215,12 +1215,12 @@
 //             });
 //     	if($(window).width()<1200)
 //     	{
-//     		dialogDetalleMovil.parent().find("span.ui-dialog-title").html("Folio Plex: <label style'font-weight: normal;'>"+folioplex+"</label>   &nbsp;&nbsp;&nbsp;    Folio Pisa: <label style'font-weight: normal;'>"+foliopisa+"</label>    &nbsp;&nbsp;&nbsp;     TelÃ©fono: <label style'font-weight: normal;'>"+telefono+"</label>");
+//     		dialogDetalleMovil.parent().find("span.ui-dialog-title").html("Folio Plex: <label style'font-weight: normal;'>"+folioplex+"</label>   &nbsp;&nbsp;&nbsp;    Folio Pisa: <label style'font-weight: normal;'>"+foliopisa+"</label>    &nbsp;&nbsp;&nbsp;     Teléfono: <label style'font-weight: normal;'>"+telefono+"</label>");
 //     		dialogDetalleMovil.dialog( "open" );
 //     	}
 //     	else
 //     	{
-//     		dialogDetalle.parent().find("span.ui-dialog-title").html("Folio Plex: <label style'font-weight: normal;'>"+folioplex+"</label>   &nbsp;&nbsp;&nbsp;    Folio Pisa: <label style'font-weight: normal;'>"+foliopisa+"</label>    &nbsp;&nbsp;&nbsp;     TelÃ©fono: <label style'font-weight: normal;'>"+telefono+"</label>");
+//     		dialogDetalle.parent().find("span.ui-dialog-title").html("Folio Plex: <label style'font-weight: normal;'>"+folioplex+"</label>   &nbsp;&nbsp;&nbsp;    Folio Pisa: <label style'font-weight: normal;'>"+foliopisa+"</label>    &nbsp;&nbsp;&nbsp;     Teléfono: <label style'font-weight: normal;'>"+telefono+"</label>");
 //     		dialogDetalle.dialog( "open" );
 //     	}
 
@@ -1251,7 +1251,7 @@
 //             autoOpen: false,
 //             height: 600,
 //             width: 430,
-//             title: "ActivaciÃ³n FIBRA a la casa",
+//             title: "Activación FIBRA a la casa",
 //             modal: true,
 //             buttons: [{
 //             	id: "aprovAprovisionar",
@@ -1442,14 +1442,14 @@
     function abrirLIQUIDAR(foliopisa)
     {
     	swal({
-    		title: "",Â Â 
-    		text: "Â¿Desea liquidar la orden: "+foliopisa+"?", Â Â 
-//     			text: "You will not be able to recover this imaginary file!", Â Â 
-    			type: "info", Â Â 
-    			showCancelButton: true, Â Â 
+    		title: "",  
+    		text: "¿Desea liquidar la orden: "+foliopisa+"?",   
+//     			text: "You will not be able to recover this imaginary file!",   
+    			type: "info",   
+    			showCancelButton: true,   
     			cancelButtonText: "Cancelar",
-    			confirmButtonColor: "#3a5a74", Â Â Â 
-    			confirmButtonText: "Liquidar", Â Â 
+    			confirmButtonColor: "#3a5a74",    
+    			confirmButtonText: "Liquidar",   
     			closeOnConfirm: true }, 
     			function(){
     				var parametros="estado=COMPLETE&tipo=COMPLETE&foliopisa="+foliopisa+"&lbr=<%=lbr%>";
@@ -1559,12 +1559,6 @@
     		$("#btnAsigMasiva").css("display",'none');
     	}
     }
-    // Stub implementation added to prevent ReferenceError when terminating tasks.
-    // TODO: Implement actual termination logic for Cambaceo tasks if needed.
-    function realizaTERMINAR(idorden, orden, sigestatus, actualestatus, idaccion) {
-        console.warn('realizaTERMINAR not implemented for Cambaceo tasks', idorden, orden);
-    }
-
     
     
     

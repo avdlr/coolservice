@@ -171,7 +171,7 @@
 		<div class="col-xs-9">
 			<div class="row">
 			<div class="col-xs-12 col-sm-6">
-<!-- 				<input type="text" id="rango1" style="width:100%;" class="form-control" maxlength="4" placeholder="MÃ­nimo"/> -->
+<!-- 				<input type="text" id="rango1" style="width:100%;" class="form-control" maxlength="4" placeholder="Mínimo"/> -->
 				<div class='input-group date' id='fechainicio'>
                     <input type='text' class="form-control" />
                     <span class="input-group-addon">
@@ -180,7 +180,7 @@
                 </div>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-<!-- 				<input type="text" id="rango2" style="width:100%;" class="form-control" maxlength="4" placeholder="MÃ¡ximo"/> -->
+<!-- 				<input type="text" id="rango2" style="width:100%;" class="form-control" maxlength="4" placeholder="Máximo"/> -->
 				<div class='input-group date' id='fechafin'>
                     <input type='text' class="form-control" />
                     <span class="input-group-addon">
@@ -287,18 +287,18 @@
 // 	            filteringType: "local",
 // 	            filteringCondition: "contains",
 // 	            highlightMatchesMode: "contains",
-// 	            placeHolder: "Buscar tÃ©cnico...",
+// 	            placeHolder: "Buscar técnico...",
 // 	            dropDownOrientation: "bottom"
 // // 	         	selectionChanged: storeTecnicos
 // 	        });
 // 		$("#selectTecnicoR").select2({
 // 			data:storeTecnicos,
-// 			placeholder: "Seleccione TÃ©cnico"
+// 			placeholder: "Seleccione Técnico"
 // 		});
 		
 // 		$("#selectTecnicoActual").select2({
 // 			data:storeTecnicoActual,
-// 			placeholder: "Seleccione TÃ©cnico"
+// 			placeholder: "Seleccione Técnico"
 // 		});
 
 		$('#fechainicio').datetimepicker(
@@ -477,7 +477,7 @@
     /**********************************************************************/ 
     function abrirASIGNAR(foliopisa,telefono,folioplex,expediente)
     {
-    	// En el parametro estado se le envia el estado en el que fue levantada la acciÃ³n
+    	// En el parametro estado se le envia el estado en el que fue levantada la acción
     	var parametros="";
     	if(tipoAccion == ""){
     		tipoAccion="Asignar";
@@ -507,7 +507,7 @@
     		  					if(resp.trim() == "COMPLETE"){
     		  						resp="LIQUIDADA";
     		  					}
-    		  					swal("", "No se pudo realizo la acciÃ³n porque la tarea ya esta " + resp+".", "error");
+    		  					swal("", "No se pudo realizo la acción porque la tarea ya esta " + resp+".", "error");
     		  					cargaTareas();
     		  				}
     		  				tipoAccion="";
@@ -528,7 +528,7 @@
             height: 400,
             width: 500,
             modal: true,
-            title: "ReasignaciÃ³n de Tarea",
+            title: "Reasignación de Tarea",
             buttons: [{
               text : "Aceptar",
               "class": "btn btn-primary",
@@ -540,13 +540,13 @@
   	  			if(expedienteNuevo!="" && expedienteNuevo!=undefined)
   	  			{
   	    	swal({
-  	    		title: "",Â Â 
-  	    		text: "Â¿Desea asignar la orden "+foliopisa+" al tecnico "+nombre+"?", Â Â Â Â 
-      			type: "info", Â Â 
-      			showCancelButton: true, Â Â 
+  	    		title: "",  
+  	    		text: "¿Desea asignar la orden "+foliopisa+" al tecnico "+nombre+"?",     
+      			type: "info",   
+      			showCancelButton: true,   
       			cancelButtonText: "Cancelar",
-      			confirmButtonColor: "#3a5a74", Â Â 
-      			confirmButtonText: "Aceptar", Â Â 
+      			confirmButtonColor: "#3a5a74",   
+      			confirmButtonText: "Aceptar",   
       			closeOnConfirm: false }, 
       			function(){
        				$.ajax({
@@ -558,12 +558,12 @@
                  				{
 			                 				
 			                 				swal({
-				            	    		title: "",Â Â 
-				            	    		text: "La asignaciÃ³n de tarea(s) fue satisfactoria.", Â Â 
-				                			type: "success", Â Â 
-				                			showCancelButton: false, Â Â 
-				                			confirmButtonColor: "#3a5a74", Â Â 
-				                			confirmButtonText: "Aceptar", Â Â 
+				            	    		title: "",  
+				            	    		text: "La asignación de tarea(s) fue satisfactoria.",   
+				                			type: "success",   
+				                			showCancelButton: false,   
+				                			confirmButtonColor: "#3a5a74",   
+				                			confirmButtonText: "Aceptar",   
 				                			closeOnConfirm: true }, 
 				                			function(){
 				                				//Borrar tarea del panel de Tareas
@@ -586,7 +586,7 @@
   	  }
   	  else
   		  {
-  		  swal("Debe seleccionar un tÃ©cnico", "", "warning");
+  		  swal("Debe seleccionar un técnico", "", "warning");
   		  }
 //             	  var expediente=$("#selectTecnico").find("option:selected").val();
 //             	  var nombre=$("#selectTecnicoR").find("option:selected").text();
@@ -595,13 +595,13 @@
 //             	  if(expediente!="")
 //             	  {
 //             	    	swal({
-//             	    		title: "",Â Â 
-//             	    		text: "Desea asignar la order "+folioplex+" al tecnico "+nombre+"?", Â Â Â 
-//                 			type: "info", Â Â 
-//                 			showCancelButton: true, Â Â 
+//             	    		title: "",  
+//             	    		text: "Desea asignar la order "+folioplex+" al tecnico "+nombre+"?",    
+//                 			type: "info",   
+//                 			showCancelButton: true,   
 //                 			cancelButtonText: "Cancelar",
-//                 			confirmButtonColor: "#3a5a74", Â Â 
-//                 			confirmButtonText: "Aceptar", Â Â 
+//                 			confirmButtonColor: "#3a5a74",   
+//                 			confirmButtonText: "Aceptar",   
 //                 			closeOnConfirm: true }, 
 //                 			function(){
 //                         				$.ajax({
@@ -660,7 +660,7 @@
 //             	  }
 //             	  else
 //             		  {
-//             		  swal("Debe seleccionar un tÃ©cnico", "", "warning");
+//             		  swal("Debe seleccionar un técnico", "", "warning");
 //             		  }
             	  
             	  }
@@ -687,16 +687,16 @@
 							if(resp.trim()=="OK")
     		  				{
     		  					swal({
-					    		title: "",Â Â 
-					    		text: "Â¿Desea despachar la orden: "+foliopisa+"?", Â Â  Â Â 
-					    			type: "info", Â Â 
-					    			showCancelButton: true, Â Â 
+					    		title: "",  
+					    		text: "¿Desea despachar la orden: "+foliopisa+"?",      
+					    			type: "info",   
+					    			showCancelButton: true,   
 					    			cancelButtonText: "Cancelar",
-					    			confirmButtonColor: "#3a5a74", Â Â Â 
-					    			confirmButtonText: "Aceptar", Â Â 
+					    			confirmButtonColor: "#3a5a74",    
+					    			confirmButtonText: "Aceptar",   
 					    			closeOnConfirm: true }, 
 					    			function(){
-					    				Â Â var parametros="estado=DESPACHADA&tipo=DESPACHADA&folioplex="+folioplex+"&foliopisa="+foliopisa;
+					    				  var parametros="estado=DESPACHADA&tipo=DESPACHADA&folioplex="+folioplex+"&foliopisa="+foliopisa;
 					    		    	$.ajax({
 					    		  			url: 'actualizaEstado.jsp?'+parametros,
 					    		  			type: "GET",
@@ -810,7 +810,7 @@
         autoOpen: false,
         height: 400,
         width: 350,
-        title: "LiquidaciÃ³n",
+        title: "Liquidación",
         modal: true
         });
     
@@ -871,7 +871,7 @@
     /***********************************/  
     function abrirOBJETAR(foliopisa,telefono,folioplex,expediente,estado)
     {
-		// En el parametro estado se le envia el estado en el que fue levantada la acciÃ³n
+		// En el parametro estado se le envia el estado en el que fue levantada la acción
     	var parametros = "folioplex="+folioplex+"&estado=DESPACHADA";
   		$.ajax({
 		url: "../ValidarEstadoTarea?"+parametros,
@@ -888,7 +888,7 @@
 	  					if(resp.trim() == "COMPLETE"){
 	  						resp="LIQUIDADA";
 	  					}
-	  					swal("", "No se pudo realizo la acciÃ³n porque la tarea ya esta " + resp+".", "error");
+	  					swal("", "No se pudo realizo la acción porque la tarea ya esta " + resp+".", "error");
 	  					cargaTareas();
 		  			}
 				}
@@ -907,13 +907,13 @@
   		  	{
     	
 		    	swal({
-		    		title: "",Â Â 
-		    		text: "Â¿Desea liquidar la orden: "+foliopisa+"?", Â Â 
-	    			type: "info", Â Â 
-	    			showCancelButton: true, Â Â 
+		    		title: "",  
+		    		text: "¿Desea liquidar la orden: "+foliopisa+"?",   
+	    			type: "info",   
+	    			showCancelButton: true,   
 	    			cancelButtonText: "Cancelar",
-	    			confirmButtonColor: "#3a5a74", Â Â Â 
-	    			confirmButtonText: "Liquidar", Â Â 
+	    			confirmButtonColor: "#3a5a74",    
+	    			confirmButtonText: "Liquidar",   
 	    			closeOnConfirm: true }, 
 	    			function(){
 	    				var parametros="estado=COMPLETE&tipo=COMPLETE&folioplex="+folioplex+"&foliopisa="+foliopisa;
@@ -1138,12 +1138,12 @@
  											{
  												$("#container").mLoading("hide");
  												swal({
- 						            	    		title: "",Â Â 
- 						            	    		text: "Incidencia Capturada!.", Â Â 
- 						                			type: "success", Â Â 
- 						                			showCancelButton: false, Â Â 
- 						                			confirmButtonColor: "#3a5a74", Â Â 
- 						                			confirmButtonText: "Aceptar", Â Â 
+ 						            	    		title: "",  
+ 						            	    		text: "Incidencia Capturada!.",   
+ 						                			type: "success",   
+ 						                			showCancelButton: false,   
+ 						                			confirmButtonColor: "#3a5a74",   
+ 						                			confirmButtonText: "Aceptar",   
  						                			closeOnConfirm: true }, 
  						                			function(){
  						                				cargaTareas();
@@ -1208,7 +1208,7 @@
     	var tituloform = "";
     	var alto = 0;
 
-    		tituloform = "Reasignar TÃ©cnico";
+    		tituloform = "Reasignar Técnico";
     		alto=h-150;
     		
     		if(w<600)
@@ -1261,12 +1261,12 @@
  											{
  												$("#container").mLoading("hide");
  												swal({
- 						            	    		title: "",Â Â 
- 						            	    		text: "Incidencia Asignada!.", Â Â 
- 						                			type: "success", Â Â 
- 						                			showCancelButton: false, Â Â 
- 						                			confirmButtonColor: "#3a5a74", Â Â 
- 						                			confirmButtonText: "Aceptar", Â Â 
+ 						            	    		title: "",  
+ 						            	    		text: "Incidencia Asignada!.",   
+ 						                			type: "success",   
+ 						                			showCancelButton: false,   
+ 						                			confirmButtonColor: "#3a5a74",   
+ 						                			confirmButtonText: "Aceptar",   
  						                			closeOnConfirm: true }, 
  						                			function(){
  						                				cargaTareas();
@@ -1324,7 +1324,7 @@
     	var tituloform = "";
     	var alto = 0;
 
-    		tituloform = "Asignar TÃ©cnico";
+    		tituloform = "Asignar Técnico";
     		alto=h-150;
     		if(w<600)
     		{
@@ -1374,12 +1374,12 @@
  											{
  												$("#container").mLoading("hide");
  												swal({
- 						            	    		title: "",Â Â 
- 						            	    		text: "Incidencia Asignada!.", Â Â 
- 						                			type: "success", Â Â 
- 						                			showCancelButton: false, Â Â 
- 						                			confirmButtonColor: "#3a5a74", Â Â 
- 						                			confirmButtonText: "Aceptar", Â Â 
+ 						            	    		title: "",  
+ 						            	    		text: "Incidencia Asignada!.",   
+ 						                			type: "success",   
+ 						                			showCancelButton: false,   
+ 						                			confirmButtonColor: "#3a5a74",   
+ 						                			confirmButtonText: "Aceptar",   
  						                			closeOnConfirm: true }, 
  						                			function(){
  						                				cargaTareas();
@@ -1459,11 +1459,11 @@
  	        		text: "Aceptar", 
  	        		click:    function() {
 						var param="accion=DESPACHAR";
-                                               var paramrecibido = $("#dialog #frmrecibido").val();
-                                               var parampuesto = $("#dialog #frmpuesto").val();
-                                               var bandvalida = true;
-                                               if(paramrecibido==""){$("#dialog #sec-frmrecibido").addClass("has-error"); bandvalida=false;}else{$("#dialog #sec-frmrecibido").removeClass("has-error");}
-                                               if(parampuesto==""){$("#dialog #sec-frmpuesto").addClass("has-error"); bandvalida=false;}else{$("#dialog #sec-frmpuesto").removeClass("has-error");}
+						var paramrecibido = $("#frmrecibido").val();
+						var parampuesto = $("#frmpuesto").val();
+						var bandvalida = true;
+						if(paramrecibido==""){$("#sec-frmrecibido").addClass("has-error"); bandvalida=false;}else{$("#sec-frmrecibido").removeClass("has-error");}
+						if(parampuesto==""){$("#sec-frmpuesto").addClass("has-error"); bandvalida=false;}else{$("#sec-frmpuesto").removeClass("has-error");}
  	        			param += "&orden="+escape(idorden)+"&recibido="+escape(paramrecibido)+"&usuario=<%=usuario%>&puesto="+parampuesto+"&estatus="+sigestatus+"&actualestatus="+actualestatus+"&idaccion="+idaccion;
  	        			if(bandvalida)
 						{
@@ -1487,12 +1487,12 @@
  											{
  												$("#container").mLoading("hide");
  												swal({
- 						            	    		title: "",Â Â 
- 						            	    		text: "Trabajo en Curso!.", Â Â 
- 						                			type: "success", Â Â 
- 						                			showCancelButton: false, Â Â 
- 						                			confirmButtonColor: "#3a5a74", Â Â 
- 						                			confirmButtonText: "Aceptar", Â Â 
+ 						            	    		title: "",  
+ 						            	    		text: "Trabajo en Curso!.",   
+ 						                			type: "success",   
+ 						                			showCancelButton: false,   
+ 						                			confirmButtonColor: "#3a5a74",   
+ 						                			confirmButtonText: "Aceptar",   
  						                			closeOnConfirm: true }, 
  						                			function(){
  						                				cargaTareas();
@@ -1621,21 +1621,14 @@
 	 	   				parnombreequipo =$("#otroNombreEquipo").val();
 	 	   				if(parnombreequipo==""){$("#sec-otroNombreEquipo").addClass("has-error"); bandvalida=false;}else{$("#sec-otroNombreEquipo").removeClass("has-error");}
 	 	   				}
-                                                var parservterminado = $("input[name=servterminado]:checked").val();
-                                                var partempounidad = $("input[name=tempounidad]:checked").val();
-                                                if(parservterminado==undefined){parservterminado="";}
-                                                if(partempounidad==undefined){partempounidad="";}
-                                                if($("#frmtipomantenimiento").val() !== "PREVENTIVO"){
-                                                if(partempounidad==""){$("#sec-otroNombreEquipo").addClass("has-error");bandvalida=false;}else{$("#sec-otroNombreEquipo").removeClass("has-error");}
-                                                }
+	 	   				var parservterminado = $('input[name=servterminado]:checked').val();
+	 	   				var partempounidad = $('input[name=tempounidad]:checked').val();
+	 	   				if(partempounidad==undefined){$("#sec-otroNombreEquipo").addClass("has-error"); bandvalida=false;}else{$("#sec-otroNombreEquipo").removeClass("has-error");}
+	 	   			    if(parservterminado==undefined){parservterminado=""}
  	        			var param = "accion=TERMINAR";
  	        			param += "&orden="+escape(idorden)+"&marca="+escape(parmarca)+"&serie="+escape(parserie)+"&modelo="+escape(parmodelo)+"&voltaje="+escape(parvoltaje)+"&amperes="+escape(paramperes)+"&servreal="+escape(parservreal)+"&comentarios="+escape(parcomentarios);
  	        			param += "&cond1="+escape(parcon1)+"&cond2="+escape(parcon2)+"&tempopera="+escape(partempopera)+"&voltaje2="+escape(parvoltaje2)+"&amperes2="+escape(paramperes2)+"&tenicoserv="+escape(partenicoserv)+"&servterminado="+escape(parservterminado)+"&usuario=<%=usuario%>&nombreequipo="+escape(parnombreequipo)+"&tempounidad="+partempounidad+"&bandservreal="+bandservreal+"&bandEquipo="+bandEquipo+"&estatus="+sigestatus+"&actualestatus="+actualestatus+"&idaccion="+idaccion;
 //  	        			alert(param);
-                                        if($("#frmtipomantenimiento").val() === "PREVENTIVO"){
-                                                bandvalida = true;
-                                                $(".has-error").removeClass("has-error");
-                                        }
  	        			if(bandvalida)
  	        			{
 //  	        			$("#dialog").mLoading("show");
@@ -1658,12 +1651,12 @@
  											{
  												$("#container").mLoading("hide");
  												swal({
- 						            	    		title: "",Â Â 
- 						            	    		text: "Trabajo Terminado!.", Â Â 
- 						                			type: "success", Â Â 
- 						                			showCancelButton: false, Â Â 
- 						                			confirmButtonColor: "#3a5a74", Â Â 
- 						                			confirmButtonText: "Aceptar", Â Â 
+ 						            	    		title: "",  
+ 						            	    		text: "Trabajo Terminado!.",   
+ 						                			type: "success",   
+ 						                			showCancelButton: false,   
+ 						                			confirmButtonColor: "#3a5a74",   
+ 						                			confirmButtonText: "Aceptar",   
  						                			closeOnConfirm: true }, 
  						                			function(){
  						                				cargaTareas();
@@ -1786,12 +1779,12 @@
  											{
  												$("#container").mLoading("hide");
  												swal({
- 						            	    		title: "",Â Â 
- 						            	    		text: "Trabajo Suspendido!.", Â Â 
- 						                			type: "success", Â Â 
- 						                			showCancelButton: false, Â Â 
- 						                			confirmButtonColor: "#3a5a74", Â Â 
- 						                			confirmButtonText: "Aceptar", Â Â 
+ 						            	    		title: "",  
+ 						            	    		text: "Trabajo Suspendido!.",   
+ 						                			type: "success",   
+ 						                			showCancelButton: false,   
+ 						                			confirmButtonColor: "#3a5a74",   
+ 						                			confirmButtonText: "Aceptar",   
  						                			closeOnConfirm: true }, 
  						                			function(){
  						                				cargaTareas();
@@ -1850,13 +1843,13 @@
     function realizaREANUDAR(idorden,ordenserv, sigestatus,actualestatus,idaccion)
     {
     	swal({
-	    		title: "",Â Â 
-	    		text: "Â¿Desea reanudar el trabajo "+ordenserv+"?", Â Â Â Â 
-  			type: "info", Â Â 
-  			showCancelButton: true, Â Â 
+	    		title: "",  
+	    		text: "¿Desea reanudar el trabajo "+ordenserv+"?",     
+  			type: "info",   
+  			showCancelButton: true,   
   			cancelButtonText: "Cancelar",
-  			confirmButtonColor: "#3a5a74", Â Â 
-  			confirmButtonText: "Aceptar", Â Â 
+  			confirmButtonColor: "#3a5a74",   
+  			confirmButtonText: "Aceptar",   
   			closeOnConfirm: false }, 
   			function(){
   				var param="accion=REANUDAR";
@@ -1882,12 +1875,12 @@
 										if(item.resp=="OK")
 										{
 											swal({
-					            	    		title: "",Â Â 
-					            	    		text: "Trabajo Reanudado!.", Â Â 
-					                			type: "success", Â Â 
-					                			showCancelButton: false, Â Â 
-					                			confirmButtonColor: "#3a5a74", Â Â 
-					                			confirmButtonText: "Aceptar", Â Â 
+					            	    		title: "",  
+					            	    		text: "Trabajo Reanudado!.",   
+					                			type: "success",   
+					                			showCancelButton: false,   
+					                			confirmButtonColor: "#3a5a74",   
+					                			confirmButtonText: "Aceptar",   
 					                			closeOnConfirm: true }, 
 					                			function(){
 					                				cargaTareas();
@@ -1916,13 +1909,13 @@
     function realizaCERRAR(idorden,ordenserv,sigestatus,actualestatus,idaccion)
     {
     	swal({
-	    		title: "",Â Â 
-	    		text: "Â¿Desea cerrar el trabajo "+ordenserv+"?", Â Â Â Â 
-  			type: "info", Â Â 
-  			showCancelButton: true, Â Â 
+	    		title: "",  
+	    		text: "¿Desea cerrar el trabajo "+ordenserv+"?",     
+  			type: "info",   
+  			showCancelButton: true,   
   			cancelButtonText: "Cancelar",
-  			confirmButtonColor: "#3a5a74", Â Â 
-  			confirmButtonText: "Aceptar", Â Â 
+  			confirmButtonColor: "#3a5a74",   
+  			confirmButtonText: "Aceptar",   
   			closeOnConfirm: false }, 
   			function(){
   			
@@ -1949,12 +1942,12 @@
 										if(item.resp=="OK")
 										{
 											swal({
-					            	    		title: "",Â Â 
-					            	    		text: "Trabajo Cerrado!.", Â Â 
-					                			type: "success", Â Â 
-					                			showCancelButton: false, Â Â 
-					                			confirmButtonColor: "#3a5a74", Â Â 
-					                			confirmButtonText: "Aceptar", Â Â 
+					            	    		title: "",  
+					            	    		text: "Trabajo Cerrado!.",   
+					                			type: "success",   
+					                			showCancelButton: false,   
+					                			confirmButtonColor: "#3a5a74",   
+					                			confirmButtonText: "Aceptar",   
 					                			closeOnConfirm: true }, 
 					                			function(){
 					                				cargaTareas();
@@ -1984,13 +1977,13 @@
     function realizaELIMINAR(idorden,ordenserv,sigestatus,actualestatus,idaccion)
     {
     	swal({
-	    		title: "",Â Â 
-	    		text: "Â¿Desea eliminar el trabajo "+ordenserv+"?", Â Â Â Â 
-  			type: "info", Â Â 
-  			showCancelButton: true, Â Â 
+	    		title: "",  
+	    		text: "¿Desea eliminar el trabajo "+ordenserv+"?",     
+  			type: "info",   
+  			showCancelButton: true,   
   			cancelButtonText: "Eliminar",
-  			confirmButtonColor: "#3a5a74", Â Â 
-  			confirmButtonText: "Aceptar", Â Â 
+  			confirmButtonColor: "#3a5a74",   
+  			confirmButtonText: "Aceptar",   
   			closeOnConfirm: false }, 
   			function(){
   			
@@ -2017,12 +2010,12 @@
 										if(item.resp=="OK")
 										{
 											swal({
-					            	    		title: "",Â Â 
-					            	    		text: "Trabajo Eliminado!.", Â Â 
-					                			type: "success", Â Â 
-					                			showCancelButton: false, Â Â 
-					                			confirmButtonColor: "#3a5a74", Â Â 
-					                			confirmButtonText: "Aceptar", Â Â 
+					            	    		title: "",  
+					            	    		text: "Trabajo Eliminado!.",   
+					                			type: "success",   
+					                			showCancelButton: false,   
+					                			confirmButtonColor: "#3a5a74",   
+					                			confirmButtonText: "Aceptar",   
 					                			closeOnConfirm: true }, 
 					                			function(){
 					                				cargaTareas();
@@ -2107,12 +2100,12 @@
  	   										{
  	   										$("#container").mLoading("hide");
  	   											swal({
- 	   					            	    		title: "",Â Â 
- 	   					            	    		text: "El trabajo ya puede ser terminado!.", Â Â 
- 	   					                			type: "success", Â Â 
- 	   					                			showCancelButton: false, Â Â 
- 	   					                			confirmButtonColor: "#3a5a74", Â Â 
- 	   					                			confirmButtonText: "Aceptar", Â Â 
+ 	   					            	    		title: "",  
+ 	   					            	    		text: "El trabajo ya puede ser terminado!.",   
+ 	   					                			type: "success",   
+ 	   					                			showCancelButton: false,   
+ 	   					                			confirmButtonColor: "#3a5a74",   
+ 	   					                			confirmButtonText: "Aceptar",   
  	   					                			closeOnConfirm: true }, 
  	   					                			function(){
  	   					                				modaldialog.dialog( "close" ); 
@@ -2139,7 +2132,7 @@
  	        			}
  	        			else
  	        			{
- 	        				swal("", "Debe seleccionar la confirmaciÃ³n para autorizar!", "error");
+ 	        				swal("", "Debe seleccionar la confirmación para autorizar!", "error");
  	        			}
  	        			
  	        			},
@@ -2234,13 +2227,13 @@
     function eliminarfactura(idfactura, foliofactura, proveedor)
     {
     	swal({
-	    		title: "",Â Â 
-	    		text: "Â¿Desea eliminar la factura \""+foliofactura+"\" del proveedor \""+proveedor+"\"?", Â Â Â Â 
-  			type: "info", Â Â 
-  			showCancelButton: true, Â Â 
+	    		title: "",  
+	    		text: "¿Desea eliminar la factura \""+foliofactura+"\" del proveedor \""+proveedor+"\"?",     
+  			type: "info",   
+  			showCancelButton: true,   
   			cancelButtonText: "Cancelar",
-  			confirmButtonColor: "#3a5a74", Â Â 
-  			confirmButtonText: "Aceptar", Â Â 
+  			confirmButtonColor: "#3a5a74",   
+  			confirmButtonText: "Aceptar",   
   			closeOnConfirm: false }, 
   			function(){
   				param="accion=ELIMINARFACT&idfactura="+idfactura;

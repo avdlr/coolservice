@@ -69,7 +69,7 @@ public class RefrigeracionFormServlet extends HttpServlet {
          new Activity("Calibracion de control de presion"),
          new Activity("Revision del tiempo de deshielo"),
          new Activity("Flujo adecuado de ventilacion a travez del serpentin"))));
-      sections.add(new Section("tablero", "TABLERO ELÉCTRICO", Arrays.asList(
+      sections.add(new Section("tablero", "TABLERO ELECTRICO", Arrays.asList(
          new Activity("Revision de conexiones electricas"),
          new Activity("Revision del estado de los interruptores"),
          new Activity("Verificar platino de contactores"))));

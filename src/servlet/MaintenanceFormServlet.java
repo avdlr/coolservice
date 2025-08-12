@@ -54,7 +54,7 @@ public class MaintenanceFormServlet extends HttpServlet {
                   new Activity("Revision de la vibracion en motores y compresores"),
                   new Activity("Evaluacion del estado de conexiones electricas"),
                   new Activity("Verificar carga adecuada de refrigerante"))));
-      sections.add(new Section("tablero", "TABLERO ELÉCTRICO",
+      sections.add(new Section("tablero", "TABLERO ELECTRICO",
             Arrays.asList(new Activity("Revision de conexiones electricas"),
                   new Activity("Verificar platinos de contactores"))));
       request.setAttribute("sections", sections);
