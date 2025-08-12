@@ -3,6 +3,47 @@
 <%@ include file="loadData.jspf" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/checklist.css">
 
+<%
+// Convert saved values to lists so single entries don't break EL indexing
+java.util.List<String> serviceQuantities = new java.util.ArrayList<>();
+java.util.List<String> serviceParts = new java.util.ArrayList<>();
+java.util.List<String> serviceDescs = new java.util.ArrayList<>();
+
+if (savedData != null) {
+    Object qObj = savedData.get("serviceQuantity[]");
+    Object pObj = savedData.get("servicePart[]");
+    Object dObj = savedData.get("serviceDesc[]");
+
+    if (qObj instanceof java.util.List) {
+        for (Object q : (java.util.List<?>) qObj) {
+            serviceQuantities.add(String.valueOf(q));
+        }
+    } else if (qObj != null) {
+        serviceQuantities.add(String.valueOf(qObj));
+    }
+
+    if (pObj instanceof java.util.List) {
+        for (Object p : (java.util.List<?>) pObj) {
+            serviceParts.add(String.valueOf(p));
+        }
+    } else if (pObj != null) {
+        serviceParts.add(String.valueOf(pObj));
+    }
+
+    if (dObj instanceof java.util.List) {
+        for (Object d : (java.util.List<?>) dObj) {
+            serviceDescs.add(String.valueOf(d));
+        }
+    } else if (dObj != null) {
+        serviceDescs.add(String.valueOf(dObj));
+    }
+}
+
+request.setAttribute("serviceQuantities", serviceQuantities);
+request.setAttribute("serviceParts", serviceParts);
+request.setAttribute("serviceDescs", serviceDescs);
+%>
+
 <div class="mb-8">
   <h2 class="text-lg font-bold text-white bg-[#005c9b] py-2 px-4 rounded-t-md">
     Servicios a resolver
@@ -28,20 +69,17 @@
       </thead>
       <tbody id="servicesBody">
         <c:choose>
-          <c:when test="${not empty savedData['serviceQuantity[]']}">
-            <c:set var="quantities" value="${savedData['serviceQuantity[]']}" />
-            <c:set var="parts" value="${savedData['servicePart[]']}" />
-            <c:set var="descs" value="${savedData['serviceDesc[]']}" />
-            <c:forEach var="qty" items="${quantities}" varStatus="i">
+          <c:when test="${not empty serviceQuantities}">
+            <c:forEach var="qty" items="${serviceQuantities}" varStatus="i">
               <tr>
                 <td class="py-2 px-2 border-b border-r border-gray-300">
                   <input type="text" name="serviceQuantity[]" class="w-full text-center border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" value="${qty}" />
                 </td>
                 <td class="py-2 px-2 border-b border-r border-gray-300">
-                  <input type="text" name="servicePart[]" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" value="${parts[i.index]}" />
+                  <input type="text" name="servicePart[]" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" value="${serviceParts[i.index]}" />
                 </td>
                 <td class="py-2 px-2 border-b border-r border-gray-300">
-                  <input type="text" name="serviceDesc[]" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" value="${descs[i.index]}" />
+                  <input type="text" name="serviceDesc[]" class="w-full border-gray-300 rounded-sm focus:border-[#005c9b] focus:ring-[#005c9b]" value="${serviceDescs[i.index]}" />
                 </td>
                 <td class="py-2 px-2 border-b border-gray-300 text-center">
                   <button class="text-red-500 hover:text-red-700 transition-colors" onclick="removeRow(this)">
