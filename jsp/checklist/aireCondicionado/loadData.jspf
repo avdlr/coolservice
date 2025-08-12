@@ -1,0 +1,27 @@
+<%@ page import="java.util.Map, javax.naming.InitialContext, javax.sql.DataSource, java.sql.*, org.json.JSONObject" %>
+<%
+Map<String, Object> savedData = (Map<String, Object>) request.getAttribute("savedData");
+if (savedData == null) {
+    String ordenServicio = request.getParameter("ordenServicio");
+    if (ordenServicio != null && !ordenServicio.isEmpty()) {
+        try {
+            InitialContext ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/coolService");
+            try (Connection conn = ds.getConnection();
+                 PreparedStatement stmt = conn.prepareStatement(
+                     "SELECT data FROM airecondicionado_data WHERE orden_servicio = ?")) {
+                stmt.setString(1, ordenServicio);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        JSONObject json = new JSONObject(rs.getString("data"));
+                        savedData = json.toMap();
+                        request.setAttribute("savedData", savedData);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // Optional: log error
+        }
+    }
+}
+%>
