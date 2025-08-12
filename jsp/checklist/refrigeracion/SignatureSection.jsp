@@ -121,6 +121,21 @@
     checkFormValidity();
   }
 
+  function loadSignature(canvasId, inputId) {
+    const dataUrl = document.getElementById(inputId).value;
+    if (!dataUrl) return;
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.onload = function() {
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
+    img.src = dataUrl;
+    if (canvasId === 'techCanvas') techSigned = true;
+    if (canvasId === 'managerCanvas') managerSigned = true;
+    checkFormValidity();
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     initSignatureCanvas('techCanvas');
     initSignatureCanvas('managerCanvas');
@@ -129,6 +144,8 @@
     document.querySelector('input[name="managerName"]').addEventListener('input', checkFormValidity);
 
     checkFormValidity();
+    loadSignature('techCanvas', 'technicianSignature');
+    loadSignature('managerCanvas', 'managerSignature');
 
     const form = document.getElementById('maintenanceForm') || document.getElementById('refrigeracionForm') || document.querySelector('form');
     if (form) {
