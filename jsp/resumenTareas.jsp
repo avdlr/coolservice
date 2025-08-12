@@ -150,7 +150,9 @@
                                     	</span>  
                              
                                     </td>
-                                    <td align="right" width="50%"> <span>Página <%=pagina %> de <%=TOTALPAGINASAg %> </span></td>
+</div>
+<script src="../assets/js/resumenTareas.js"></script>
+        var usuarioAccion = '<%=usuario%>';
                                 </tr>                                
                         </table>
 				
