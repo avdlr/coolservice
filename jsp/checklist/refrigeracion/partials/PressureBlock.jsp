@@ -18,7 +18,7 @@
         </td>
         <td class="py-2 px-2 border-b border-gray-300">
           <c:set var="presionAltaKey">${base}_presion_alta</c:set>
-          <input type="number" name="${base}_presion_alta" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[presionAltaKey]}"/>
+          <input type="number" name="${base}_presion_alta" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${requestScope.savedData[presionAltaKey]}"/>
         </td>
       </tr>
       <tr class="bg-gray-50">
@@ -27,7 +27,7 @@
         </td>
         <td class="py-2 px-2 border-b border-gray-300">
           <c:set var="presionBajaKey">${base}_presion_baja</c:set>
-          <input type="number" name="${base}_presion_baja" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${savedData[presionBajaKey]}"/>
+          <input type="number" name="${base}_presion_baja" class="w-full text-center border-gray-300 rounded-sm focus:border-blue-500 focus:ring-blue-500" value="${requestScope.savedData[presionBajaKey]}"/>
         </td>
       </tr>
     </tbody>
