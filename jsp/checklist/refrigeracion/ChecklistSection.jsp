@@ -20,9 +20,9 @@
         </thead>
         <tbody>
           <c:forEach var="activity" items="${activities}" varStatus="status">
-            <c:set var="baseName" value="${fn:replace('status-' + sectionTitle + '-' + status.index, ' ', '_')}" />
-            <c:set var="nameBien" value="${baseName}-Bien" />
-            <c:set var="nameMal" value="${baseName}-Mal" />
+            <c:set var="baseName" value="${fn:replace(fn:concat(fn:concat('status-', sectionTitle), fn:concat('-', status.index)), ' ', '_')}" />
+            <c:set var="nameBien" value="${fn:concat(baseName, '-Bien')}" />
+            <c:set var="nameMal" value="${fn:concat(baseName, '-Mal')}" />
             <tr class="${status.index % 2 == 0 ? 'bg-white' : 'bg-gray-50'}">
               <td class="py-2 px-4 border-b border-r border-gray-300 text-sm text-gray-800">
                 ${activity.name}
@@ -58,13 +58,13 @@
         </thead>
         <tbody>
           <c:forEach var="activity" items="${activities}" varStatus="status">
-            <c:set var="nameBase" value="${fn:replace('status-' + sectionTitle + '-' + status.index, ' ', '_')}" />
+            <c:set var="nameBase" value="${fn:replace(fn:concat(fn:concat('status-', sectionTitle), fn:concat('-', status.index)), ' ', '_')}" />
             <tr class="${status.index % 2 == 0 ? 'bg-white' : 'bg-gray-50'}">
               <td class="py-2 px-4 border-b border-r border-gray-300 text-sm text-gray-800">
                 ${activity.name}
               </td>
               <c:forEach var="zone" items="${['Conservacion','Freezer']}">
-                <c:set var="inputName" value="${fn:replace(nameBase + '-' + zone, ' ', '_')}" />
+                <c:set var="inputName" value="${fn:replace(fn:concat(fn:concat(nameBase, '-'), zone), ' ', '_')}" />
                 <td class="py-2 px-2 border-b border-r border-gray-300 text-center">
                   <div class="flex justify-center space-x-4">
                     <label class="inline-flex items-center">
