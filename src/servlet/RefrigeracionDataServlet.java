@@ -106,13 +106,15 @@ public class RefrigeracionDataServlet extends HttpServlet {
             throw new ServletException("Unable to save refrigeration data", e);
         }
 
-        response.setContentType("text/plain");
+        response.setContentType("text/plain;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         response.getWriter().write("OK");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String ordenServicio = request.getParameter("ordenServicio");
         if (ordenServicio == null || ordenServicio.isEmpty()) {
             ordenServicio = request.getParameter("orden");
@@ -129,7 +131,8 @@ public class RefrigeracionDataServlet extends HttpServlet {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     String data = rs.getString("data");
-                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.setContentType("application/json;charset=UTF-8");
                     response.getWriter().write(data);
                 } else {
                     response.sendError(HttpServletResponse.SC_NOT_FOUND);
