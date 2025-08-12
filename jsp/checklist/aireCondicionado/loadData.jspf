@@ -1,4 +1,4 @@
-<%@ page import="java.util.Map, javax.naming.InitialContext, javax.sql.DataSource, java.sql.*, org.json.JSONObject" %>
+<%@ page import="java.util.Map, javax.naming.InitialContext, javax.sql.DataSource, java.sql.*, com.google.gson.Gson" %>
 <%
 Map<String, Object> savedData = (Map<String, Object>) request.getAttribute("savedData");
 if (savedData == null) {
@@ -13,8 +13,8 @@ if (savedData == null) {
                 stmt.setString(1, ordenServicio);
                 try (ResultSet rs = stmt.executeQuery()) {
                     if (rs.next()) {
-                        JSONObject json = new JSONObject(rs.getString("data"));
-                        savedData = json.toMap();
+                        Gson gson = new Gson();
+                        savedData = gson.fromJson(rs.getString("data"), Map.class);
                         request.setAttribute("savedData", savedData);
                     }
                 }

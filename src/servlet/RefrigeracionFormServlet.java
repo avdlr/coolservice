@@ -17,7 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import java.util.Map;
 
 import clases.Activity;
 import clases.Section;
@@ -89,8 +90,9 @@ public class RefrigeracionFormServlet extends HttpServlet {
             stmt.setString(1, ordenServicio);
             try (ResultSet rs = stmt.executeQuery()) {
                if (rs.next()) {
-                  JSONObject json = new JSONObject(rs.getString("data"));
-                  request.setAttribute("savedData", json.toMap());
+                  Gson gson = new Gson();
+                  Map<String, Object> savedData = gson.fromJson(rs.getString("data"), Map.class);
+                  request.setAttribute("savedData", savedData);
                }
             }
          } catch (SQLException e) {
