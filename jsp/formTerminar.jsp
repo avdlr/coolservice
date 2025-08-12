@@ -309,6 +309,7 @@
 
                         if($('#frmtipomantenimiento').val() === 'PREVENTIVO'){
                                 $('#formtecnico').hide();
+                                $('#formtecnico').find(':input').prop('disabled', true);
                                 $('#maintenanceTabs').show();
                                 $('#loadingfrm').css('height','60%');
                                 var orden = encodeURIComponent($('#frmordenServicio').val());
