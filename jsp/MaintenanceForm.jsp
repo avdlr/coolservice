@@ -13,6 +13,8 @@
     <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="../assets/css/style.css" rel="stylesheet">
     <link href="../assets/css/style-responsive.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -37,6 +39,7 @@
 
     <div class="my-4 text-center">
         <button type="submit" id="saveButton" class="btn btn-primary" disabled>Guardar</button>
+        <button type="button" id="downloadPdf" class="btn btn-secondary ms-2">Descargar PDF</button>
     </div>
 
 </div>
@@ -77,6 +80,35 @@ document.addEventListener('DOMContentLoaded', async function () {
         const text = await resp.text();
         alert(text);
     });
+
+    const pdfBtn = document.getElementById('downloadPdf');
+    if (pdfBtn) {
+        pdfBtn.addEventListener('click', function () {
+            const { jsPDF } = window.jspdf;
+            html2canvas(form).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'pt', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height * pdfWidth / imgWidth;
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+                heightLeft -= pdfHeight;
+
+                while (heightLeft > 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+                    heightLeft -= pdfHeight;
+                }
+
+                pdf.save('maintenance-form.pdf');
+            });
+        });
+    }
 });
 </script>
 </body>
