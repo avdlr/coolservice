@@ -2303,7 +2303,13 @@
     
     function realizaIMPRESION(idorden,ordenserv,sigestatus,actualestatus,idaccion)
     {
-    	window.open("../GeneraImpreso?idOrden="+idorden+"&folioOrden="+ordenserv);
+        if(idaccion === 'AIRE'){
+            window.open("../maintenance-form?orden="+idorden+"&pdf=true");
+        }else if(idaccion === 'REF'){
+            window.open("../refrigeracion-form?orden="+idorden+"&pdf=true");
+        }else{
+            window.open("../GeneraImpreso?idOrden="+idorden+"&folioOrden="+ordenserv);
+        }
     }
     
     function realizaCAPTURA(idorden,ordenserv,sigestatus,actualestatus,idaccion)
