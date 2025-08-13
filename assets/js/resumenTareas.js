@@ -93,6 +93,44 @@
     };
   }
 
+  if (typeof global.abrirformulario !== 'function') {
+    // Basic implementation used when legacy JSP helpers are missing.
+    global.abrirformulario = function(accion) {
+      var w = global.innerWidth || 800;
+      var h = global.innerHeight || 600;
+      var titulo = (accion === 'A') ? 'Capturar Incidencia' : 'Despachar Incidencia';
+
+      if (global.$ && global.$('#dialog').length && global.$.fn.dialog) {
+        var alto = (w < 800) ? h : 650;
+        var $dlg = global.$('#dialog').dialog({
+          autoOpen: false,
+          modal: true,
+          title: titulo,
+          width: w - 30,
+          height: alto,
+          buttons: [
+            {
+              id: 'aceptarform',
+              text: 'Aceptar',
+              click: function(){ global.$(this).dialog('close'); }
+            },
+            {
+              text: 'Cerrar',
+              click: function(){ global.$(this).dialog('close'); }
+            }
+          ]
+        });
+
+        // Placeholder content when the original JSP dialog is unavailable.
+        $dlg.html('<p>Formulario no disponible.</p>');
+        $dlg.dialog('open');
+      } else {
+        // Fallback that at least notifies the user.
+        global.alert(titulo);
+      }
+    };
+  }
+
   if (typeof global.cargaTareas !== 'function') {
     global.cargaTareas = function() {
       if (global.location && typeof global.location.reload === 'function') {
