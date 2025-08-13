@@ -166,8 +166,12 @@
 				
 					
 				</div>
-    
- 
+
+  <script>
+    var usuarioAccion = '<%=usuario%>';
+  </script>
+  <script src="../assets/js/resumenTareas.js"></script>
+
   <script>
     
 //   checkedRows = [];
@@ -287,4 +291,4 @@ function realizaIMPRESION(idorden, ordenserv, tipo) {
   	  $(this).addClass('active').siblings().removeClass('active');
   	});
 
- </script>   
+ </script>
