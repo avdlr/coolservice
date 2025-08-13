@@ -149,19 +149,15 @@
                                     	<a href="#" onclick="ultimaPag();"><img border="0" src="<%=request.getContextPath()%>/assets/img/page-last.gif" alt="Ultima" width="16" height="16"></a>
                                     	</span>  
                              
-                                   </td>
-                                    <td align="right" width="50%"> <span>PÃ¡gina <%=pagina %> de <%=TOTALPAGINASAg %> </span></td>
-                                </tr>
+                                    </td>
+                                    <td align="right" width="50%"> <span>Página <%=pagina %> de <%=TOTALPAGINASAg %> </span></td>
+                                </tr>                                
                         </table>
-
-
-                                </div>
-
-  <script>
-    var usuarioAccion = '<%=usuario%>';
-  </script>
-  <script src="../assets/js/resumenTareas.js"></script>
-
+				
+					
+				</div>
+    
+ 
   <script>
     
 //   checkedRows = [];
@@ -267,7 +263,7 @@
 	}
 
     $('#tablaTareas').on('click', '.clickable-row', function(event) {
-          $(this).addClass('active').siblings().removeClass('active');
-        });
+  	  $(this).addClass('active').siblings().removeClass('active');
+  	});
 
- </script>
+ </script>   
