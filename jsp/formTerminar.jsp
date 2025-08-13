@@ -315,13 +315,13 @@
                                var cliente = encodeURIComponent($('#frmcliente').val());
                                $('#tabAire').attr('src', '../maintenance-form?orden=' + orden + '&cliente=' + cliente);
                                $('#tabRefrigeracion').attr('src', '../refrigeracion-form?orden=' + orden + '&cliente=' + cliente);
-                               $('#marca, #serie, #modelo, #comentarios, #tenicoserv').val('NA');
-                               $('#cond1, #cond2').val('0');
-                               $('#voltaje, #amperes, #tempopera, #voltaje2, #amperes2').val('0');
-                               $('#servreal').prop('selectedIndex',1);
-                               $('#nombreequipo').prop('selectedIndex',1);
-                               $('input[name=servterminado]').first().prop('checked',true);
-                               $('input[name=tempounidad]').first().prop('checked',true);
+                       }
+
+                       if ($('#formtecnico').is(':hidden') && $('#frmtipomantenimiento').val() === 'PREVENTIVO') {
+                               $('#marca, #serie, #modelo, #comentarios, #tenicoserv, #otroNombreEquipo, #otroServicioReal').val('NA');
+                               $('#cond1, #cond2, #voltaje, #amperes, #tempopera, #voltaje2, #amperes2').val('0');
+                               $('#servreal, #nombreequipo').prop('selectedIndex', 1);
+                               $('input[name=servterminado], input[name=tempounidad]').first().prop('checked', true);
                        }
 
                         $('#tabAireLink').on('click', function(e){
