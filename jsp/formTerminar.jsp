@@ -317,8 +317,8 @@
                                 $('#tabRefrigeracion').attr('src', '../refrigeracion-form?orden=' + orden + '&cliente=' + cliente);
                         }
 
-                        $('#aceptarform').on('mousedown', function(){
-                                if($('#formtecnico').is(':hidden') && $('#frmtipomantenimiento').val() === 'PREVENTIVO'){
+                       $('#aceptarform').on('mousedown touchstart', function(){
+                               if($('#formtecnico').is(':hidden') && $('#frmtipomantenimiento').val() === 'PREVENTIVO'){
                                         $('#marca, #serie, #modelo, #comentarios, #tenicoserv').val('NA');
                                         $('#cond1, #cond2').val('0');
                                         $('#voltaje, #amperes, #tempopera, #voltaje2, #amperes2').val('0');
