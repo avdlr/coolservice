@@ -103,6 +103,17 @@
 		                				}
 		                			}
 		                		%>
+                                               <% if("TERMINADO".equals(registro.getString("estatus")) && "2".equals(registro.getString("tipoorden"))) { %>
+                                                   <li class="dropdown-submenu">
+                                                       <a href="#" class="btn btn-primary fa fa-print" style="width: 100%;" data-toggle="dropdown" title="IMPRESION DE ORDEN">
+                                                           <label style="font-family: monospace; cursor: pointer;">IMPRESION DE ORDEN</label>
+                                                       </a>
+                                                       <ul class="dropdown-menu">
+                                                           <li><a href="#" onclick="realizaIMPRESION('<%=registro.getString("idorden") %>','<%=registro.getString("FolioOrden") %>','','','AIRE')" style="font-family: monospace; cursor: pointer;">AIRE CONDICIONADO</a></li>
+                                                           <li><a href="#" onclick="realizaIMPRESION('<%=registro.getString("idorden") %>','<%=registro.getString("FolioOrden") %>','','','REF')" style="font-family: monospace; cursor: pointer;">REFRIGERACION</a></li>
+                                                       </ul>
+                                                   </li>
+                                               <% } %>
 <%-- 		                			<li ><span onclick="realizaDETALLE('<%=registro.getString("idorden") %>','<%=registro.getString("FolioOrden") %>')" class="btn btn-primary fa fa-search-plus" style="width: 100%;"  title="DETALLE"> <label style="font-family: monospace; cursor: pointer;">DETALLE</label></span></li> --%>
 <%-- 		                		<li ><span onclick="abrirAsignar('<%=registro.getString("idorden") %>','<%=registro.getString("FolioOrden") %>')" class="btn btn-primary fa fa-user-plus" style="width: 100%;"  title="Asignar"> <label style="font-family: monospace; cursor: pointer;">Asignar</label></span></li> --%>
 <!-- 		                		<li ><span onclick="abrirformulario('T')" class="btn btn-primary fa fa-play-circle-o" style="width: 100%;"  title="Despachar"> <label style="font-family: monospace; cursor: pointer;">Despachar</label></span></li> -->
@@ -151,7 +162,7 @@
                                     	</span>  
                              
                                     </td>
-                                    <td align="right" width="50%"> <span>Página <%=pagina %> de <%=TOTALPAGINASAg %> </span></td>
+                                    <td align="right" width="50%"> <span>PÃ¡gina <%=pagina %> de <%=TOTALPAGINASAg %> </span></td>
                                 </tr>                                
                         </table>
 				
