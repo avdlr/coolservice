@@ -86,7 +86,9 @@
 		                		<span style="width:100%; font-size:10px; cursor:pointer; font-weight: bold;" class="label btn-success dropdown-toggle" data-toggle="dropdown" style="font-size: smaller;"><%=registro.getString("estatus") %></span>
 		                		<ul class="dropdown-menu" role="menu" style="margin-left: 100px; margin-top: -30px;">
 
-<% if("2".equals(registro.getString("tipoorden")) && "TERMINADO".equals(registro.getString("estatus"))) { %>
+<% if("2".equals(registro.getString("tipoorden")) &&
+        ("TERMINADO".equals(registro.getString("estatus")) ||
+         "LIQUIDADA".equals(registro.getString("estatus")))) { %>
         <li><span onclick="realizaIMPRESION('<%=registro.getString("idorden") %>','<%=registro.getString("FolioOrden") %>','AC')" class="btn btn-primary fa fa-print" style="width: 100%;" title="AIRE CONDICIONADO"><label style="font-family: monospace; cursor: pointer;">AIRE CONDICIONADO</label></span></li>
         <li><span onclick="realizaIMPRESION('<%=registro.getString("idorden") %>','<%=registro.getString("FolioOrden") %>','RF')" class="btn btn-primary fa fa-print" style="width: 100%;" title="REFRIGERACION"><label style="font-family: monospace; cursor: pointer;">REFRIGERACION</label></span></li>
 <% } %>
