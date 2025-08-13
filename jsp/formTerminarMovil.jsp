@@ -105,7 +105,7 @@
 <div class="col-xs-4">Domicilio:</div>
 	<div class="col-xs-8">
 	<textarea disabled class="form-control" rows="5" id="frmdireccion" style="width:100%;" ><%=registro.getString("domicilio")%></textarea>
-<%-- 	<input type="text" id="frmdireccion" style="width:100%;" class="form-control"  placeholder="nombre de la dirección" value="<%=registro.getString("domicilio")%>"/> --%>
+<%-- 	<input type="text" id="frmdireccion" style="width:100%;" class="form-control"  placeholder="nombre de la direcciÃ³n" value="<%=registro.getString("domicilio")%>"/> --%>
 	</div>
 </div>
 </div>
@@ -171,7 +171,7 @@
 <div class="col-xs-12" style="padding-top: 5px;">
 <div class="row">
 	<div class="col-xs-4">Recibido por:</div>
-	<div class="col-xs-8"><input type="text" disabled id="recibidopor" style="width:100%;" class="form-control"  placeholder="Nombre de quien recibió" value="<%=registro.getString("RecibidoPorNombre")%>"/></div>
+	<div class="col-xs-8"><input type="text" disabled id="recibidopor" style="width:100%;" class="form-control"  placeholder="Nombre de quien recibiÃ³" value="<%=registro.getString("RecibidoPorNombre")%>"/></div>
 	
 </div>
 </div>
@@ -179,7 +179,7 @@
 <div class="col-xs-12" style="padding-top: 5px;">
 <div class="row">
 	<div class="col-xs-4">Puesto:</div>
-	<div class="col-xs-8"><input type="text" disabled id="puestorecibido" style="width:100%;" class="form-control"  placeholder="Puesto de quien recibió" value="<%=registro.getString("RecibidoPorPuesto")%>"/></div>
+	<div class="col-xs-8"><input type="text" disabled id="puestorecibido" style="width:100%;" class="form-control"  placeholder="Puesto de quien recibiÃ³" value="<%=registro.getString("RecibidoPorPuesto")%>"/></div>
 </div>
 </div>
 <div class="col-xs-12" style="padding-top: 5px;">
@@ -289,7 +289,7 @@
 <div class="row">
 	<div class="col-xs-4">Temp. de Operaci&oacute;n:</div>
 	<div class="col-xs-4"><input type="text" id="tempopera" style="width:100%;" class="form-control"  placeholder=""/></div>
-	<div class="col-xs-4"><input type="radio" name="tempounidad" value="C"/> <label style="display:inline-block;">°C</label> &nbsp;&nbsp;&nbsp;<input type="radio" name="tempounidad" value="F" /> °F</div>
+	<div class="col-xs-4"><input type="radio" name="tempounidad" value="C"/> <label style="display:inline-block;">Â°C</label> &nbsp;&nbsp;&nbsp;<input type="radio" name="tempounidad" value="F" /> Â°F</div>
 
 </div>
 </div>
@@ -391,7 +391,7 @@
 <!-- </div> -->
 <script type="text/javascript">
 // $(function(){
-	var equiposlista = $.parseJSON('<%=equipos.toString()%>');
+        var equiposlista = $.parseJSON('<%= (equipos != null) ? equipos.toString() : "[]" %>');
 	 $(document).ready(function() {
 		 
 		 $("#voltaje").keydown(function (e) {
@@ -536,20 +536,32 @@
 				$("#frmciudad").attr('disabled','disabled'); 
 				
 			}
-			else
-			{
-				$("#frmordenServicio").attr('disabled','disabled');
-				$("#frmcliente").attr('disabled','disabled'); 
-				$("#frmdireccion").attr('disabled','disabled'); 
-				$("#frmciudad").attr('disabled','disabled'); 
-				$("#frmsucu").attr('disabled','disabled'); 
-				$("#frmgerente").attr('disabled','disabled'); 
-				$("#frmtipomantenimiento").attr('disabled','disabled'); 
-				$("#frmultimotec").attr('disabled','disabled'); 
-			}
+                        else
+                        {
+                                $("#frmordenServicio").attr('disabled','disabled');
+                                $("#frmcliente").attr('disabled','disabled');
+                                $("#frmdireccion").attr('disabled','disabled');
+                                $("#frmciudad").attr('disabled','disabled');
+                                $("#frmsucu").attr('disabled','disabled');
+                                $("#frmgerente").attr('disabled','disabled');
+                                $("#frmtipomantenimiento").attr('disabled','disabled');
+                                $("#frmultimotec").attr('disabled','disabled');
+                        }
 
-		
-		 consultaFacturas("C");
+                        if($('#formtecnico').is(':hidden') && $('#frmtipomantenimiento').val() === 'PREVENTIVO'){
+                                $('#aceptarform').on('mousedown', function(){
+                                        $('#marca, #serie, #modelo, #comentarios, #tenicoserv').val('NA');
+                                        $('#cond1, #cond2').val('0');
+                                        $('#voltaje, #amperes, #tempopera, #voltaje2, #amperes2').val('0');
+                                        $('#servreal').prop('selectedIndex',1);
+                                        $('#nombreequipo').prop('selectedIndex',1);
+                                        $('input[name=servterminado]').first().prop('checked',true);
+                                        $('input[name=tempounidad]').first().prop('checked',true);
+                                });
+                        }
+
+
+                 consultaFacturas("C");
 		 $("#otroNombreEquipo").attr('maxlength','50');
 		 $("#marca").attr('maxlength','50');
 		 $("#modelo").attr('maxlength','50');

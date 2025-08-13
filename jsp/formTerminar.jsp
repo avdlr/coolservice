@@ -77,7 +77,7 @@
 <div class="col-xs-12" style="padding-top: 5px;">
 <div class="row">
 <div class="col-xs-2">Domicilio:</div>
-	<div class="col-xs-4"><input type="text" id="frmdireccion" style="width:100%;" class="form-control"  placeholder="nombre de la direcci�n" value="<%=registro.getString("domicilio")%>"/></div>
+	<div class="col-xs-4"><input type="text" id="frmdireccion" style="width:100%;" class="form-control"  placeholder="nombre de la direcciÃ³n" value="<%=registro.getString("domicilio")%>"/></div>
 	<div class="col-xs-2">Ciudad:</div>
 	<div class="col-xs-4"><input type="text" id="frmciudad" style="width:100%;" class="form-control"  placeholder="nombre de la ciudad" value="<%=registro.getString("ciudad")%>"/></div>
 	
@@ -130,9 +130,9 @@
 <div class="col-xs-12" style="padding-top: 25px;">
 <div class="row">
 	<div class="col-xs-2">Recibido por:</div>
-	<div class="col-xs-4"><input type="text" disabled id="recibidopor" style="width:100%;" class="form-control"  placeholder="Nombre de quien recibi�" value="<%=registro.getString("RecibidoPorNombre")%>"/></div>
+	<div class="col-xs-4"><input type="text" disabled id="recibidopor" style="width:100%;" class="form-control"  placeholder="Nombre de quien recibiÃ³" value="<%=registro.getString("RecibidoPorNombre")%>"/></div>
 	<div class="col-xs-2">Puesto:</div>
-	<div class="col-xs-4"><input type="text" disabled id="puestorecibido" style="width:100%;" class="form-control"  placeholder="Puesto de quien recibi�" value="<%=registro.getString("RecibidoPorPuesto")%>"/></div>
+	<div class="col-xs-4"><input type="text" disabled id="puestorecibido" style="width:100%;" class="form-control"  placeholder="Puesto de quien recibiÃ³" value="<%=registro.getString("RecibidoPorPuesto")%>"/></div>
 </div>
 </div>
 <div class="col-xs-12" style="padding-top: 5px;">
@@ -219,7 +219,7 @@
 	<div class="col-xs-2"><input type="text" id="cond2" style="width:100%;" class="form-control"  placeholder="psi"/></div>
 	<div class="col-xs-2">Temperatura de Operaci&oacute;n:</div>
 	<div class="col-xs-2"><input type="text" id="tempopera" style="width:100%;" class="form-control"  placeholder=""/></div>
-	<div class="col-xs-2"><input type="radio" name="tempounidad" value="C"/> <label style="display:inline-block;">�C</label> &nbsp;&nbsp;&nbsp;<input type="radio" name="tempounidad" value="F" /> �F</div>
+	<div class="col-xs-2"><input type="radio" name="tempounidad" value="C"/> <label style="display:inline-block;">Â°C</label> &nbsp;&nbsp;&nbsp;<input type="radio" name="tempounidad" value="F" /> Â°F</div>
 
 </div>
 </div>
@@ -290,13 +290,59 @@
 
 </div>
 </div>
+<div id="maintenanceTabs" style="display:none;">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#" id="tabAireLink">Aire Condicionado</a></li>
+    <li><a href="#" id="tabRefrigeracionLink">Refrigeracion</a></li>
+  </ul>
+  <div class="tab-content">
+    <iframe id="tabAire" class="maintTab" style="width:100%; border:0; height:800px;"></iframe>
+    <iframe id="tabRefrigeracion" class="maintTab" style="width:100%; border:0; height:800px; display:none;"></iframe>
+  </div>
+</div>
+
 <!-- </div> -->
 <script type="text/javascript">
 // $(function(){
-	var equiposlista = $.parseJSON('<%=equipos.toString()%>');
-	 $(document).ready(function() {
-			 
-			 $("#voltaje").keydown(function (e) {
+        var equiposlista = $.parseJSON('<%= (equipos != null) ? equipos.toString() : "[]" %>');
+         $(document).ready(function() {
+
+                        if($('#frmtipomantenimiento').val() === 'PREVENTIVO'){
+                                $('#formtecnico').hide();
+                                $('#maintenanceTabs').show();
+                                $('#loadingfrm').css('height','60%');
+                                var orden = encodeURIComponent($('#frmordenServicio').val());
+                                var cliente = encodeURIComponent($('#frmcliente').val());
+                                $('#tabAire').attr('src', '../maintenance-form?orden=' + orden + '&cliente=' + cliente);
+                                $('#tabRefrigeracion').attr('src', '../refrigeracion-form?orden=' + orden + '&cliente=' + cliente);
+                                $('#aceptarform').on('mousedown', function(){
+                                        $('#marca, #serie, #modelo, #comentarios, #tenicoserv').val('NA');
+                                        $('#cond1, #cond2').val('0');
+                                        $('#voltaje, #amperes, #tempopera, #voltaje2, #amperes2').val('0');
+                                        $('#servreal').prop('selectedIndex',1);
+                                        $('#nombreequipo').prop('selectedIndex',1);
+                                        $('input[name=servterminado]').first().prop('checked',true);
+                                        $('input[name=tempounidad]').first().prop('checked',true);
+                                });
+                        }
+
+                        $('#tabAireLink').on('click', function(e){
+                                e.preventDefault();
+                                $('#tabAireLink').parent().addClass('active');
+                                $('#tabRefrigeracionLink').parent().removeClass('active');
+                                $('#tabAire').show();
+                                $('#tabRefrigeracion').hide();
+                        });
+
+                        $('#tabRefrigeracionLink').on('click', function(e){
+                                e.preventDefault();
+                                $('#tabRefrigeracionLink').parent().addClass('active');
+                                $('#tabAireLink').parent().removeClass('active');
+                                $('#tabAire').hide();
+                                $('#tabRefrigeracion').show();
+                        });
+
+                        $("#voltaje").keydown(function (e) {
 			        // Allow: backspace, delete, tab, escape, enter and .
 //	 		        alert(e.keyCode);
 			        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190,109]) !== -1 ||
