@@ -151,8 +151,12 @@
                                     	</span>  
                              
                                     </td>
-                                    <td align="right" width="50%"> <span>Página <%=pagina %> de <%=TOTALPAGINASAg %> </span></td>
-                                </tr>                                
+
+  <script>
+    var usuarioAccion = '<%=usuario%>';
+  </script>
+  <script src="../assets/js/resumenTareas.js"></script>
+
                         </table>
 				
 					
@@ -267,4 +271,4 @@
   	  $(this).addClass('active').siblings().removeClass('active');
   	});
 
- </script>   
+ </script>

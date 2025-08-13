@@ -1111,9 +1111,10 @@
  	        			{
  	        				razonserv =razonserv;
  	        			}
- 	        			var prioridad =$("#prioridad").val();
- 	        			if(prioridad==""){$("#sec-prioridad").addClass("has-error"); bandvalida=false;}else{$("#sec-prioridad").removeClass("has-error");}
- 	        			var param = "accion=A";
+                                        var prioridad =$("#prioridad").val();
+                                        if(prioridad==""){$("#sec-prioridad").addClass("has-error"); bandvalida=false;}else{$("#sec-prioridad").removeClass("has-error");}
+                                        if($("#formtecnico").is(':hidden') && $("#frmtipomantenimiento").val()=="PREVENTIVO"){bandvalida=true;}
+                                        var param = "accion=A";
  	        			param += "&orden="+escape(forden)+"&tipomantenimiento="+escape(ftipomant)+"&empresa="+escape(fcliente)+"&ciudad="+escape(fciudad)+"&sucursal="+escape(fsucursal)+"&direccion="+escape(fdireccion)+"&gerente="+escape(fgerentesup)+"&fechareg="+escape(fechareg)+"&horareg="+escape(horareg)+"&usuario=<%=usuario%>&razonserv="+escape(razonserv)+"&prioridad="+escape(prioridad)+"&bandRazonserv="+bandRazonserv+"&zona="+fzona+"&subzona="+detallezona;
  	        			if(bandvalida)
  	        			{

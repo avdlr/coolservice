@@ -92,4 +92,12 @@
       }
     };
   }
+
+  if (typeof global.cargaTareas !== 'function') {
+    global.cargaTareas = function() {
+      if (global.location && typeof global.location.reload === 'function') {
+        global.location.reload();
+      }
+    };
+  }
 })(this);
