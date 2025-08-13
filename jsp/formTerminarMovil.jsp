@@ -548,8 +548,9 @@
                                 $("#frmultimotec").attr('disabled','disabled');
                         }
 
-                        if($('#formtecnico').is(':hidden') && $('#frmtipomantenimiento').val() === 'PREVENTIVO'){
-                                $('#aceptarform').on('mousedown', function(){
+
+                        $('#aceptarform').on('mousedown', function(){
+                                if($('#formtecnico').is(':hidden') && $('#frmtipomantenimiento').val() === 'PREVENTIVO'){
                                         $('#marca, #serie, #modelo, #comentarios, #tenicoserv').val('NA');
                                         $('#cond1, #cond2').val('0');
                                         $('#voltaje, #amperes, #tempopera, #voltaje2, #amperes2').val('0');
@@ -557,8 +558,8 @@
                                         $('#nombreequipo').prop('selectedIndex',1);
                                         $('input[name=servterminado]').first().prop('checked',true);
                                         $('input[name=tempounidad]').first().prop('checked',true);
-                                });
-                        }
+                                }
+                        });
 
 
                  consultaFacturas("C");
