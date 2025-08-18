@@ -39,8 +39,8 @@
     <jsp:include page="checklist/refrigeracion/SignatureSection.jsp" />
 
     <div class="my-4 text-center">
-        <button type="submit" id="saveButton" class="btn btn-primary" disabled>Guardar</button>
-        <button type="button" id="downloadPdf" class="btn btn-secondary ms-2">Descargar PDF</button>
+        <button type="submit" id="saveButton" class="btn btn-primary" disabled data-html2canvas-ignore="true">Guardar</button>
+        <button type="button" id="downloadPdf" class="btn btn-secondary ms-2" data-html2canvas-ignore="true">Descargar PDF</button>
     </div>
 
 </div>
@@ -107,7 +107,7 @@ const pdfBtn = document.getElementById('downloadPdf');
                 }
 
                 const ordenValue = ordenInput && ordenInput.value ? `-${ordenInput.value}` : '';
-                pdf.save('refrigeracion-form${ordenValue}.pdf');
+                pdf.save(`refrigeracion-form${ordenValue}.pdf`);
             });
         });
     }
