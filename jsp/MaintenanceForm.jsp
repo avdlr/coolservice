@@ -87,14 +87,30 @@ document.addEventListener('DOMContentLoaded', async function () {
             const { jsPDF } = window.jspdf;
             html2canvas(form).then(canvas => {
                 const imgData = canvas.toDataURL('image/png');
-                const pdf = new jsPDF('p', 'pt', 'a4');
+                const pdf = new jsPDF('p', 'pt', 'a5');
                 const pdfWidth = pdf.internal.pageSize.getWidth();
-                const pdfHeight = canvas.height * pdfWidth / canvas.width;
-                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                pdf.save('maintenance-form.pdf');
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height * pdfWidth / imgWidth;
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+                heightLeft -= pdfHeight;
+
+                while (heightLeft > 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+                    heightLeft -= pdfHeight;
+                }
+
+                const ordenValue = ordenInput && ordenInput.value ? `-${ordenInput.value}` : '';
+                pdf.save(`maintenance-form${ordenValue}.pdf`);
             });
         });
     }
+
 });
 </script>
 </body>
