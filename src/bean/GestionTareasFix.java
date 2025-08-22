@@ -17,11 +17,14 @@ import org.json.JSONObject;
  */
 public class GestionTareasFix {
     public JSONArray consultaTecnicoVisor(String zona, String fechaini, String fechafin) {
-        // Normalise the optional parameters
-        if ("0".equals(zona)) {
-            zona = "";
+        // Normalise the optional parameters.  The zone parameter is
+        // expected to be numeric by the stored functions used below.  An
+        // empty string causes MySQL to raise "Incorrect integer value: '' for
+        // column 'Zona'".  When the caller provides `null`, an empty value or
+        // "0" (meaning all zones) we pass "0" to avoid that error.
+        if (zona == null || zona.trim().isEmpty() || "0".equals(zona)) {
+            zona = "0";
         }
-        if (zona == null) zona = "";
         if (fechaini == null) fechaini = "";
         if (fechafin == null) fechafin = "";
 
