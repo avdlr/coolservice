@@ -39,19 +39,18 @@
 		a = ((c - 1) * 12 ) + 1;
 		//b = a  - 1 + lista_resumenConfiguracion.size() ;
 		
-		if (lista_resumenConfiguracion != null) {
-		    b = a - 1 + lista_resumenConfiguracion.size();
-		} else {
-		    b = a - 1;
-		    mensaje ="0 registros" ;
-		    // optionally handle "no registros"
-		}
+                if (lista_resumenConfiguracion != null && !lista_resumenConfiguracion.isEmpty()) {
+                    b = a - 1 + lista_resumenConfiguracion.size();
+                } else {
+                    b = a - 1;
+                    mensaje = "No se encontraron registros";
+                }
 
-		if (Integer.parseInt(numRegistrosAg) == 0){
-			mensaje ="0 registros" ;	
-		}else{
-			mensaje = a + " al " + b + " de " + numRegistrosAg ;	
-		}
+                if (Integer.parseInt(numRegistrosAg) == 0){
+                        mensaje = "No se encontraron registros";
+                }else{
+                        mensaje = a + " al " + b + " de " + numRegistrosAg ;
+                }
 	%>
 		var valUsuario = "<%=valUsuario%>";
 		$('#dvDescripcion').hide();
@@ -251,7 +250,7 @@ $(function() {
 		
 		function eliminarRegistro( claveUsuario) //estaba idregistro
 		{
-			if (confirm('¿Esta seguro que desea eliminar el registro?')) 
+			if (confirm('Â¿Esta seguro que desea eliminar el registro?')) 
 			{
 				$.ajax({
 					url: "../Usuarios_GestionRegistros",
@@ -316,7 +315,7 @@ $(function() {
 					Usuarios_Resumen objResumenConfiguracion = new Usuarios_Resumen();
 									 			int i;
 									 			String bgcolor = "";
-									 			 if (lista_resumenConfiguracion != null) {
+                                                                                                   if (lista_resumenConfiguracion != null && !lista_resumenConfiguracion.isEmpty()) {
 													for (i = 0; i < lista_resumenConfiguracion.size(); i++) {
 														objResumenConfiguracion = (Usuarios_Resumen)lista_resumenConfiguracion.get(i);
 														if( bgcolor.equals("") ){
@@ -383,11 +382,17 @@ $(function() {
 					</TR>
 					<%
 						}
-									 			 }
-					%>
-
-				</tbody>
-			</table>
+                                                                                                 }
+                                        %>
+                                </tbody>
+                        <% } else { %>
+                                <tbody>
+                                        <tr>
+                                                <td colspan="26" class="no-data">No se encontraron usuarios.</td>
+                                        </tr>
+                                </tbody>
+                        <% } %>
+                        </table>
 		</div>
 		<div style="overflow: auto; margin-left: 2%;">
 			<table style="margin: 0 auto;" align="center" width="100%">
