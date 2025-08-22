@@ -377,12 +377,11 @@ $(function() {
 						}
 					%>
 
-					<TR valign="middle" class="<%=bgcolor%>">
-						<TD colspan="26">&nbsp;</TD>
-					</TR>
-					<%
-						}
-                                                                                                 }
+                                        <TR valign="middle" class="<%=bgcolor%>">
+                                                <TD colspan="26">&nbsp;</TD>
+                                        </TR>
+                                        <%
+                                                }
                                         %>
                                 </tbody>
                         <% } else { %>
