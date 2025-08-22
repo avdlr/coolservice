@@ -75,9 +75,15 @@ public class GestionTareasFix {
                 ps.setString(++idx, zona);
                 ps.setString(++idx, fechaini);
                 ps.setString(++idx, fechafin);
+                ps.setString(++idx, zona);
+                ps.setString(++idx, fechaini);
+                ps.setString(++idx, fechafin);
                 // idPerfil for technicians
                 ps.setString(++idx, "1");
                 // Second select for unassigned tasks
+                ps.setString(++idx, zona);
+                ps.setString(++idx, fechaini);
+                ps.setString(++idx, fechafin);
                 ps.setString(++idx, zona);
                 ps.setString(++idx, fechaini);
                 ps.setString(++idx, fechafin);
