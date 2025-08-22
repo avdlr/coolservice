@@ -4,6 +4,7 @@
 <%@page import="servlet.Usuarios_ObtieneRegistros"%>
 <%@ page import="clases.Usuarios_Resumen"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%-- <%@page import="zntclases.Resumen" %> --%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,9 @@
 		String valUsuario = request.getParameter("valUsuario")!=null ? request.getParameter("valUsuario"):"";
 		String usuarioLogin = request.getParameter("usuarioLogin")!=null ? request.getParameter("usuarioLogin"):"";
 		String PAGINAAg  = request.getParameter("pagina") != null ? request.getParameter("pagina"):"1";
-		ArrayList lista_resumenConfiguracion = new ArrayList();
+		//ArrayList lista_resumenConfiguracion = new ArrayList();
+		List<?> lista_resumenConfiguracion =
+			    (List<?>) request.getAttribute("lista_resumenConfiguracion");
 	  	lista_resumenConfiguracion = objConf.obtieneResConf(valUsuario,Integer.parseInt(PAGINAAg));
 		String numRegistrosAg = String.valueOf(objConf.obtieneTotalReg(valUsuario));
 		int TOTALPAGINASAg = Integer.parseInt(numRegistrosAg) / registrosporpaginaAg;
@@ -34,7 +37,15 @@
 		int a;int b;
 		int c=Integer.parseInt(PAGINAAg);
 		a = ((c - 1) * 12 ) + 1;
-		b = a  - 1 + lista_resumenConfiguracion.size() ;
+		//b = a  - 1 + lista_resumenConfiguracion.size() ;
+		
+		if (lista_resumenConfiguracion != null) {
+		    b = a - 1 + lista_resumenConfiguracion.size();
+		} else {
+		    b = a - 1;
+		    mensaje ="0 registros" ;
+		    // optionally handle "no registros"
+		}
 
 		if (Integer.parseInt(numRegistrosAg) == 0){
 			mensaje ="0 registros" ;	
@@ -305,6 +316,7 @@ $(function() {
 					Usuarios_Resumen objResumenConfiguracion = new Usuarios_Resumen();
 									 			int i;
 									 			String bgcolor = "";
+									 			 if (lista_resumenConfiguracion != null) {
 													for (i = 0; i < lista_resumenConfiguracion.size(); i++) {
 														objResumenConfiguracion = (Usuarios_Resumen)lista_resumenConfiguracion.get(i);
 														if( bgcolor.equals("") ){
@@ -371,6 +383,7 @@ $(function() {
 					</TR>
 					<%
 						}
+									 			 }
 					%>
 
 				</tbody>
