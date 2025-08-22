@@ -25,10 +25,18 @@
 		String usuarioLogin = request.getParameter("usuarioLogin")!=null ? request.getParameter("usuarioLogin"):"";
 		String PAGINAAg  = request.getParameter("pagina") != null ? request.getParameter("pagina"):"1";
 		//ArrayList lista_resumenConfiguracion = new ArrayList();
-		List<?> lista_resumenConfiguracion =
-			    (List<?>) request.getAttribute("lista_resumenConfiguracion");
-	  	lista_resumenConfiguracion = objConf.obtieneResConf(valUsuario,Integer.parseInt(PAGINAAg));
-		String numRegistrosAg = String.valueOf(objConf.obtieneTotalReg(valUsuario));
+                List<?> lista_resumenConfiguracion =
+                            (List<?>) request.getAttribute("lista_resumenConfiguracion");
+                lista_resumenConfiguracion = objConf.obtieneResConf(valUsuario,Integer.parseInt(PAGINAAg));
+
+                System.err.println("usuarios_resumen.jsp debug: valUsuario=" + valUsuario
+                                + ", usuarioLogin=" + usuarioLogin
+                                + ", pagina=" + PAGINAAg);
+                System.err.println("usuarios_resumen.jsp debug: lista_resumenConfiguracion="
+                                + (lista_resumenConfiguracion == null ? "null" : lista_resumenConfiguracion.size()));
+
+                String numRegistrosAg = String.valueOf(objConf.obtieneTotalReg(valUsuario));
+                System.err.println("usuarios_resumen.jsp debug: numRegistrosAg=" + numRegistrosAg);
 		int TOTALPAGINASAg = Integer.parseInt(numRegistrosAg) / registrosporpaginaAg;
 		if (Integer.parseInt(numRegistrosAg) % registrosporpaginaAg>0 || TOTALPAGINASAg==0)
 		{
@@ -44,6 +52,7 @@
                 } else {
                     b = a - 1;
                     mensaje = "No se encontraron registros";
+                    System.err.println("usuarios_resumen.jsp debug: lista_resumenConfiguracion vacia para valUsuario=" + valUsuario);
                 }
 
                 if (Integer.parseInt(numRegistrosAg) == 0){
