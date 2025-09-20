@@ -23,8 +23,6 @@
     	registro = registros.getJSONObject(0);
     }
 
-    
-
 %>
 <style type="text/css">
 #reabrir-modal-overlay {
@@ -69,6 +67,7 @@
 }
 </style>
 <script type="text/javascript">
+
 document.addEventListener('DOMContentLoaded', function() {
         var statusInput = document.getElementById('frmestatus');
         var reopenSelect = document.getElementById('frmreabririncidencia');
@@ -96,10 +95,23 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (statusInput) {
                                 statusInput.value = originalStatus;
                         }
+
+var originalStatus = "";
+$(document).ready(function() {
+        $("#container").mLoading("hide");
+        originalStatus = $('#frmestatus').val();
+
+        function closeReopenModal(resetSelection) {
+                $('#reabrir-modal-overlay').fadeOut(150);
+                if (resetSelection) {
+                        $('#frmreabririncidencia').val('');
+                        $('#frmestatus').val(originalStatus);
+
                 }
         }
 
         function handleReopenError() {
+
                 hideReopenModal(true);
                 window.alert('No fue posible reabrir la incidencia. Intente nuevamente.');
         }
@@ -190,6 +202,77 @@ document.addEventListener('DOMContentLoaded', function() {
                         xhr.send(params);
                 });
         }
+                closeReopenModal(true);
+                alert('No fue posible reabrir la incidencia. Intente nuevamente.');
+        }
+
+        $('#frmreabririncidencia').on('change', function() {
+                if ($(this).val() === "SI") {
+                        $('#reabrir-modal-overlay').fadeIn(150);
+                } else {
+                        $('#frmestatus').val(originalStatus);
+                }
+        });
+
+        $('#reabrirCancelar').on('click', function() {
+                closeReopenModal(true);
+        });
+
+        $('#reabrirAceptar').on('click', function() {
+                var $button = $(this);
+                if ($button.prop('disabled')) {
+                        return;
+                }
+
+                $button.prop('disabled', true);
+
+                $.ajax({
+                        url: 'reanudarIncidencia.jsp',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                                orden: '<%=idorden%>',
+                                usuario: '<%=usuario%>',
+                                estatus: '2',
+                                actualestatus: originalStatus,
+                                idaccion: 'REANUDAR'
+                        }
+                }).done(function(resp) {
+                        var reopenSuccessful = false;
+
+                        if ($.isArray(resp)) {
+                                $.each(resp, function(i, item) {
+                                        if (item && item.resp && item.resp.toUpperCase() === 'OK') {
+                                                reopenSuccessful = true;
+                                                return false;
+                                        }
+                                });
+                        }
+
+                        if (reopenSuccessful) {
+                                $('#frmestatus').val('ASIGNADO');
+                                closeReopenModal(false);
+                                alert('La incidencia fue reabierta correctamente.');
+                        } else {
+                                handleReopenError();
+                        }
+                }).fail(function() {
+                        handleReopenError();
+                }).always(function() {
+                        $button.prop('disabled', false);
+                });
+        });
+$(document).ready(function() {
+	$("#container").mLoading("hide");
+	originalStatus = $('#frmestatus').val();
+	$('#frmreabririncidencia').on('change', function() {
+		if ($(this).val() === "SI") {
+			$('#frmestatus').val('ASIGNADO');
+		} else {
+			$('#frmestatus').val(originalStatus);
+		}
+	});
+
 });
 </script>
 </head>
