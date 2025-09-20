@@ -27,8 +27,17 @@
 
 %>
 <script type="text/javascript">
+var originalStatus = "";
 $(document).ready(function() {
 	$("#container").mLoading("hide");
+	originalStatus = $('#frmestatus').val();
+	$('#frmreabririncidencia').on('change', function() {
+		if ($(this).val() === "SI") {
+			$('#frmestatus').val('ASIGNADO');
+		} else {
+			$('#frmestatus').val(originalStatus);
+		}
+	});
 });
 </script>
 </head>
@@ -38,6 +47,13 @@ $(document).ready(function() {
 		<div class="col-xs-4 col-md-4"><input disabled type="text" id="frmtipomant" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("tipoorden")%>"/></div>
 		<div class="col-xs-2 col-md-2">Estatus:</div>
 		<div class="col-xs-4 col-md-4"><input disabled type="text" id="frmestatus" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("ESTATUS")%>"/></div>
+		<div class="col-xs-2 col-md-2" style="margin-top: 5px;">Reabrir Incidencia:</div>
+		<div class="col-xs-4 col-md-4" style="margin-top: 5px;">
+			<select id="frmreabririncidencia" class="form-control" style="width:100%;">
+				<option value="">Seleccione</option>
+				<option value="SI">SI</option>
+			</select>
+		</div>
 		<div class="col-xs-2" style="margin-top: 5px;">T&eacute;cnico Asignado:</div>
 		<div class="col-xs-4" style="margin-top: 5px;"><input disabled type="text" id="frmtecnicoasig" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("tecnico")%>"/></div>
 
@@ -308,7 +324,7 @@ $(document).ready(function() {
 				</div>
 				<div class="col-xs-2">Temperatura Operaci&oacute;n:</div>
 				<div class="col-xs-4">
-					<input disabled type="text" id="frmpuesto" style="width:100%;" class="form-control" value="<%=registro.getString("TEMPO")%> °<%=registro.getString("TEMPOUNI")%>" >
+					<input disabled type="text" id="frmpuesto" style="width:100%;" class="form-control" value="<%=registro.getString("TEMPO")%> Â°<%=registro.getString("TEMPOUNI")%>" >
 					
 				</div>
 			</div>
