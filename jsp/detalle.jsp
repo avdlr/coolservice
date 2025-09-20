@@ -74,6 +74,15 @@ document.addEventListener('DOMContentLoaded', function() {
         var modalOverlay = document.getElementById('reabrir-modal-overlay');
         var cancelButton = document.getElementById('reabrirCancelar');
         var acceptButton = document.getElementById('reabrirAceptar');
+        var reopenForm = document.getElementById('reanudarIncidenciaForm');
+        var reopenFormFields = {
+                orden: document.getElementById('reanudarOrden'),
+                usuario: document.getElementById('reanudarUsuario'),
+                estatus: document.getElementById('reanudarEstatus'),
+                actualestatus: document.getElementById('reanudarActualEstatus'),
+                idaccion: document.getElementById('reanudarAccion')
+        };
+
         var originalStatus = statusInput ? statusInput.value : '';
 
         function showReopenModal() {
@@ -96,6 +105,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                 statusInput.value = originalStatus;
                         }
 
+                }
+        }
+
+
 var originalStatus = "";
 $(document).ready(function() {
         $("#container").mLoading("hide");
@@ -115,6 +128,7 @@ $(document).ready(function() {
                 hideReopenModal(true);
                 window.alert('No fue posible reabrir la incidencia. Intente nuevamente.');
         }
+
 
         if (reopenSelect) {
                 reopenSelect.addEventListener('change', function() {
@@ -140,6 +154,48 @@ $(document).ready(function() {
 
         if (acceptButton) {
                 acceptButton.addEventListener('click', function() {
+                        if (!reopenForm) {
+                                var fallbackUrl = 'reanudarIncidencia.jsp?orden=' + encodeURIComponent('<%=idorden%>') +
+                                        '&usuario=' + encodeURIComponent('<%=usuario%>') +
+                                        '&estatus=2' +
+                                        '&actualestatus=' + encodeURIComponent(originalStatus) +
+                                        '&idaccion=REANUDAR';
+                                window.open(fallbackUrl, '_blank');
+                        } else {
+                                if (reopenFormFields.orden) {
+                                        reopenFormFields.orden.value = '<%=idorden%>';
+                                }
+                                if (reopenFormFields.usuario) {
+                                        reopenFormFields.usuario.value = '<%=usuario%>';
+                                }
+                                if (reopenFormFields.estatus) {
+                                        reopenFormFields.estatus.value = '2';
+                                }
+                                if (reopenFormFields.actualestatus) {
+                                        reopenFormFields.actualestatus.value = originalStatus;
+                                }
+                                if (reopenFormFields.idaccion) {
+                                        reopenFormFields.idaccion.value = 'REANUDAR';
+                                }
+
+                                reopenForm.target = 'reanudarIncidenciaVentana';
+                                window.open('', 'reanudarIncidenciaVentana');
+                                reopenForm.submit();
+                        }
+
+                        if (statusInput) {
+                                statusInput.value = 'ASIGNADO';
+                        }
+                        originalStatus = statusInput ? statusInput.value : originalStatus;
+
+                        if (reopenSelect) {
+                                reopenSelect.value = '';
+                        }
+
+                        hideReopenModal(false);
+                });
+        }
+
                         if (acceptButton.hasAttribute('disabled')) {
                                 return;
                         }
@@ -273,6 +329,7 @@ $(document).ready(function() {
 		}
 	});
 
+
 });
 </script>
 </head>
@@ -299,6 +356,14 @@ $(document).ready(function() {
                                 </div>
                         </div>
                 </div>
+
+                <form id="reanudarIncidenciaForm" action="reanudarIncidencia.jsp" method="post" target="reanudarIncidenciaVentana" style="display:none;">
+                        <input type="hidden" id="reanudarOrden" name="orden" value=""/>
+                        <input type="hidden" id="reanudarUsuario" name="usuario" value=""/>
+                        <input type="hidden" id="reanudarEstatus" name="estatus" value="2"/>
+                        <input type="hidden" id="reanudarActualEstatus" name="actualestatus" value=""/>
+                        <input type="hidden" id="reanudarAccion" name="idaccion" value="REANUDAR"/>
+                </form>
 		<div class="col-xs-2" style="margin-top: 5px;">T&eacute;cnico Asignado:</div>
 		<div class="col-xs-4" style="margin-top: 5px;"><input disabled type="text" id="frmtecnicoasig" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("tecnico")%>"/></div>
 
