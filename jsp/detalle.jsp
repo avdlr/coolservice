@@ -23,8 +23,6 @@
     	registro = registros.getJSONObject(0);
     }
 
-    
-
 %>
 <style type="text/css">
 #reabrir-modal-overlay {
@@ -69,6 +67,7 @@
 }
 </style>
 <script type="text/javascript">
+
 document.addEventListener('DOMContentLoaded', function() {
         var statusInput = document.getElementById('frmestatus');
         var reopenSelect = document.getElementById('frmreabririncidencia');
@@ -83,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 actualestatus: document.getElementById('reanudarActualEstatus'),
                 idaccion: document.getElementById('reanudarAccion')
         };
+
         var originalStatus = statusInput ? statusInput.value : '';
 
         function showReopenModal() {
@@ -104,8 +104,31 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (statusInput) {
                                 statusInput.value = originalStatus;
                         }
+
                 }
         }
+
+
+var originalStatus = "";
+$(document).ready(function() {
+        $("#container").mLoading("hide");
+        originalStatus = $('#frmestatus').val();
+
+        function closeReopenModal(resetSelection) {
+                $('#reabrir-modal-overlay').fadeOut(150);
+                if (resetSelection) {
+                        $('#frmreabririncidencia').val('');
+                        $('#frmestatus').val(originalStatus);
+
+                }
+        }
+
+        function handleReopenError() {
+
+                hideReopenModal(true);
+                window.alert('No fue posible reabrir la incidencia. Intente nuevamente.');
+        }
+
 
         if (reopenSelect) {
                 reopenSelect.addEventListener('change', function() {
@@ -172,6 +195,141 @@ document.addEventListener('DOMContentLoaded', function() {
                         hideReopenModal(false);
                 });
         }
+
+                        if (acceptButton.hasAttribute('disabled')) {
+                                return;
+                        }
+
+                        acceptButton.setAttribute('disabled', 'disabled');
+
+                        var params = [
+                                'orden=' + encodeURIComponent('<%=idorden%>'),
+                                'usuario=' + encodeURIComponent('<%=usuario%>'),
+                                'estatus=2',
+                                'actualestatus=' + encodeURIComponent(originalStatus),
+                                'idaccion=REANUDAR'
+                        ].join('&');
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', 'reanudarIncidencia.jsp', true);
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+
+                        xhr.onreadystatechange = function() {
+                                if (xhr.readyState !== 4) {
+                                        return;
+                                }
+
+                                acceptButton.removeAttribute('disabled');
+
+                                if (xhr.status >= 200 && xhr.status < 300) {
+                                        try {
+                                                var response = JSON.parse(xhr.responseText);
+                                                var reopenSuccessful = false;
+
+                                                if (Array.isArray(response)) {
+                                                        for (var i = 0; i < response.length; i++) {
+                                                                var item = response[i];
+                                                                if (item && item.resp && String(item.resp).toUpperCase() === 'OK') {
+                                                                        reopenSuccessful = true;
+                                                                        break;
+                                                                }
+                                                        }
+                                                }
+
+                                                if (reopenSuccessful) {
+                                                        if (statusInput) {
+                                                                statusInput.value = 'ASIGNADO';
+                                                        }
+                                                        originalStatus = statusInput ? statusInput.value : originalStatus;
+
+                                                        hideReopenModal(false);
+                                                        window.alert('La incidencia fue reabierta correctamente.');
+                                                } else {
+                                                        handleReopenError();
+                                                }
+                                        } catch (err) {
+                                                handleReopenError();
+                                        }
+                                } else {
+                                        handleReopenError();
+                                }
+                        };
+
+                        xhr.send(params);
+                });
+        }
+                closeReopenModal(true);
+                alert('No fue posible reabrir la incidencia. Intente nuevamente.');
+        }
+
+        $('#frmreabririncidencia').on('change', function() {
+                if ($(this).val() === "SI") {
+                        $('#reabrir-modal-overlay').fadeIn(150);
+                } else {
+                        $('#frmestatus').val(originalStatus);
+                }
+        });
+
+        $('#reabrirCancelar').on('click', function() {
+                closeReopenModal(true);
+        });
+
+        $('#reabrirAceptar').on('click', function() {
+                var $button = $(this);
+                if ($button.prop('disabled')) {
+                        return;
+                }
+
+                $button.prop('disabled', true);
+
+                $.ajax({
+                        url: 'reanudarIncidencia.jsp',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                                orden: '<%=idorden%>',
+                                usuario: '<%=usuario%>',
+                                estatus: '2',
+                                actualestatus: originalStatus,
+                                idaccion: 'REANUDAR'
+                        }
+                }).done(function(resp) {
+                        var reopenSuccessful = false;
+
+                        if ($.isArray(resp)) {
+                                $.each(resp, function(i, item) {
+                                        if (item && item.resp && item.resp.toUpperCase() === 'OK') {
+                                                reopenSuccessful = true;
+                                                return false;
+                                        }
+                                });
+                        }
+
+                        if (reopenSuccessful) {
+                                $('#frmestatus').val('ASIGNADO');
+                                closeReopenModal(false);
+                                alert('La incidencia fue reabierta correctamente.');
+                        } else {
+                                handleReopenError();
+                        }
+                }).fail(function() {
+                        handleReopenError();
+                }).always(function() {
+                        $button.prop('disabled', false);
+                });
+        });
+$(document).ready(function() {
+	$("#container").mLoading("hide");
+	originalStatus = $('#frmestatus').val();
+	$('#frmreabririncidencia').on('change', function() {
+		if ($(this).val() === "SI") {
+			$('#frmestatus').val('ASIGNADO');
+		} else {
+			$('#frmestatus').val(originalStatus);
+		}
+	});
+
+
 });
 </script>
 </head>
@@ -198,6 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </div>
                         </div>
                 </div>
+
                 <form id="reanudarIncidenciaForm" action="reanudarIncidencia.jsp" method="post" target="reanudarIncidenciaVentana" style="display:none;">
                         <input type="hidden" id="reanudarOrden" name="orden" value=""/>
                         <input type="hidden" id="reanudarUsuario" name="usuario" value=""/>
