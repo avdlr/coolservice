@@ -26,9 +26,124 @@
     
 
 %>
+<style type="text/css">
+#reabrir-modal-overlay {
+        background-color: rgba(0, 0, 0, 0.45);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: none;
+        z-index: 1050;
+}
+
+#reabrir-modal {
+        background-color: #ffffff;
+        border-radius: 4px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        margin: 10% auto;
+        max-width: 420px;
+        padding: 20px;
+}
+
+#reabrir-modal h4 {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0 0 10px 0;
+}
+
+#reabrir-modal p {
+        margin: 0;
+        font-size: 13px;
+}
+
+#reabrir-modal .modal-actions {
+        margin-top: 20px;
+        text-align: right;
+}
+
+#reabrir-modal .modal-actions button {
+        margin-left: 10px;
+        min-width: 90px;
+}
+</style>
 <script type="text/javascript">
+var originalStatus = "";
+
 $(document).ready(function() {
-	$("#container").mLoading("hide");
+        $("#container").mLoading("hide");
+        originalStatus = $('#frmestatus').val();
+
+        function closeReopenModal(resetSelection) {
+                $('#reabrir-modal-overlay').fadeOut(150);
+                if (resetSelection) {
+                        $('#frmreabririncidencia').val('');
+                        $('#frmestatus').val(originalStatus);
+                }
+        }
+
+        function handleReopenError() {
+                closeReopenModal(true);
+                alert('No fue posible reabrir la incidencia. Intente nuevamente.');
+        }
+
+        $('#frmreabririncidencia').on('change', function() {
+                if ($(this).val() === "SI") {
+                        $('#reabrir-modal-overlay').fadeIn(150);
+                } else {
+                        $('#frmestatus').val(originalStatus);
+                }
+        });
+
+        $('#reabrirCancelar').on('click', function() {
+                closeReopenModal(true);
+        });
+
+        $('#reabrirAceptar').on('click', function() {
+                var $button = $(this);
+                if ($button.prop('disabled')) {
+                        return;
+                }
+
+                $button.prop('disabled', true);
+
+                $.ajax({
+                        url: 'reanudarIncidencia.jsp',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                                orden: '<%=idorden%>',
+                                usuario: '<%=usuario%>',
+                                estatus: '2',
+                                actualestatus: originalStatus,
+                                idaccion: 'REANUDAR'
+                        }
+                }).done(function(resp) {
+                        var reopenSuccessful = false;
+
+                        if ($.isArray(resp)) {
+                                $.each(resp, function(i, item) {
+                                        if (item && item.resp && item.resp.toUpperCase() === 'OK') {
+                                                reopenSuccessful = true;
+                                                return false;
+                                        }
+                                });
+                        }
+
+                        if (reopenSuccessful) {
+                                $('#frmestatus').val('ASIGNADO');
+                                closeReopenModal(false);
+                                alert('La incidencia fue reabierta correctamente.');
+                        } else {
+                                handleReopenError();
+                        }
+                }).fail(function() {
+                        handleReopenError();
+                }).always(function() {
+                        $button.prop('disabled', false);
+                });
+        });
 });
 </script>
 </head>
@@ -38,6 +153,23 @@ $(document).ready(function() {
 		<div class="col-xs-4 col-md-4"><input disabled type="text" id="frmtipomant" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("tipoorden")%>"/></div>
 		<div class="col-xs-2 col-md-2">Estatus:</div>
 		<div class="col-xs-4 col-md-4"><input disabled type="text" id="frmestatus" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("ESTATUS")%>"/></div>
+		<div class="col-xs-2 col-md-2" style="margin-top: 5px;">Reabrir Incidencia:</div>
+		<div class="col-xs-4 col-md-4" style="margin-top: 5px;">
+			<select id="frmreabririncidencia" class="form-control" style="width:100%;">
+				<option value="">Seleccione</option>
+				<option value="SI">SI</option>
+			</select>
+		</div>
+                <div id="reabrir-modal-overlay">
+                        <div id="reabrir-modal">
+                                <h4>Reabrir incidencia</h4>
+                                <p>&iquest;Desea reabrir la incidencia seleccionada?</p>
+                                <div class="modal-actions">
+                                        <button type="button" id="reabrirCancelar" class="btn btn-default">Cancelar</button>
+                                        <button type="button" id="reabrirAceptar" class="btn btn-primary">Aceptar</button>
+                                </div>
+                        </div>
+                </div>
 		<div class="col-xs-2" style="margin-top: 5px;">T&eacute;cnico Asignado:</div>
 		<div class="col-xs-4" style="margin-top: 5px;"><input disabled type="text" id="frmtecnicoasig" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("tecnico")%>"/></div>
 
@@ -308,7 +440,7 @@ $(document).ready(function() {
 				</div>
 				<div class="col-xs-2">Temperatura Operaci&oacute;n:</div>
 				<div class="col-xs-4">
-					<input disabled type="text" id="frmpuesto" style="width:100%;" class="form-control" value="<%=registro.getString("TEMPO")%> °<%=registro.getString("TEMPOUNI")%>" >
+					<input disabled type="text" id="frmpuesto" style="width:100%;" class="form-control" value="<%=registro.getString("TEMPO")%> Â°<%=registro.getString("TEMPOUNI")%>" >
 					
 				</div>
 			</div>
