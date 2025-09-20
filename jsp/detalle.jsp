@@ -70,7 +70,6 @@
 </style>
 <script type="text/javascript">
 var originalStatus = "";
-
 $(document).ready(function() {
         $("#container").mLoading("hide");
         originalStatus = $('#frmestatus').val();
@@ -144,6 +143,16 @@ $(document).ready(function() {
                         $button.prop('disabled', false);
                 });
         });
+$(document).ready(function() {
+	$("#container").mLoading("hide");
+	originalStatus = $('#frmestatus').val();
+	$('#frmreabririncidencia').on('change', function() {
+		if ($(this).val() === "SI") {
+			$('#frmestatus').val('ASIGNADO');
+		} else {
+			$('#frmestatus').val(originalStatus);
+		}
+	});
 });
 </script>
 </head>
