@@ -23,8 +23,6 @@
     	registro = registros.getJSONObject(0);
     }
 
-    
-
 %>
 <style type="text/css">
 #reabrir-modal-overlay {
@@ -69,6 +67,35 @@
 }
 </style>
 <script type="text/javascript">
+
+document.addEventListener('DOMContentLoaded', function() {
+        var statusInput = document.getElementById('frmestatus');
+        var reopenSelect = document.getElementById('frmreabririncidencia');
+        var modalOverlay = document.getElementById('reabrir-modal-overlay');
+        var cancelButton = document.getElementById('reabrirCancelar');
+        var acceptButton = document.getElementById('reabrirAceptar');
+        var originalStatus = statusInput ? statusInput.value : '';
+
+        function showReopenModal() {
+                if (modalOverlay) {
+                        modalOverlay.style.display = 'block';
+                }
+        }
+
+        function hideReopenModal(resetSelection) {
+                if (modalOverlay) {
+                        modalOverlay.style.display = 'none';
+                }
+
+                if (resetSelection) {
+                        if (reopenSelect) {
+                                reopenSelect.value = '';
+                        }
+
+                        if (statusInput) {
+                                statusInput.value = originalStatus;
+                        }
+
 var originalStatus = "";
 $(document).ready(function() {
         $("#container").mLoading("hide");
@@ -79,10 +106,102 @@ $(document).ready(function() {
                 if (resetSelection) {
                         $('#frmreabririncidencia').val('');
                         $('#frmestatus').val(originalStatus);
+
                 }
         }
 
         function handleReopenError() {
+
+                hideReopenModal(true);
+                window.alert('No fue posible reabrir la incidencia. Intente nuevamente.');
+        }
+
+        if (reopenSelect) {
+                reopenSelect.addEventListener('change', function() {
+                        if (this.value === 'SI') {
+                                if (statusInput) {
+                                        statusInput.value = 'ASIGNADO';
+                                }
+
+                                showReopenModal();
+                        } else {
+                                if (statusInput) {
+                                        statusInput.value = originalStatus;
+                                }
+                        }
+                });
+        }
+
+        if (cancelButton) {
+                cancelButton.addEventListener('click', function() {
+                        hideReopenModal(true);
+                });
+        }
+
+        if (acceptButton) {
+                acceptButton.addEventListener('click', function() {
+                        if (acceptButton.hasAttribute('disabled')) {
+                                return;
+                        }
+
+                        acceptButton.setAttribute('disabled', 'disabled');
+
+                        var params = [
+                                'orden=' + encodeURIComponent('<%=idorden%>'),
+                                'usuario=' + encodeURIComponent('<%=usuario%>'),
+                                'estatus=2',
+                                'actualestatus=' + encodeURIComponent(originalStatus),
+                                'idaccion=REANUDAR'
+                        ].join('&');
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', 'reanudarIncidencia.jsp', true);
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+
+                        xhr.onreadystatechange = function() {
+                                if (xhr.readyState !== 4) {
+                                        return;
+                                }
+
+                                acceptButton.removeAttribute('disabled');
+
+                                if (xhr.status >= 200 && xhr.status < 300) {
+                                        try {
+                                                var response = JSON.parse(xhr.responseText);
+                                                var reopenSuccessful = false;
+
+                                                if (Array.isArray(response)) {
+                                                        for (var i = 0; i < response.length; i++) {
+                                                                var item = response[i];
+                                                                if (item && item.resp && String(item.resp).toUpperCase() === 'OK') {
+                                                                        reopenSuccessful = true;
+                                                                        break;
+                                                                }
+                                                        }
+                                                }
+
+                                                if (reopenSuccessful) {
+                                                        if (statusInput) {
+                                                                statusInput.value = 'ASIGNADO';
+                                                        }
+                                                        originalStatus = statusInput ? statusInput.value : originalStatus;
+
+                                                        hideReopenModal(false);
+                                                        window.alert('La incidencia fue reabierta correctamente.');
+                                                } else {
+                                                        handleReopenError();
+                                                }
+                                        } catch (err) {
+                                                handleReopenError();
+                                        }
+                                } else {
+                                        handleReopenError();
+                                }
+                        };
+
+                        xhr.send(params);
+                });
+        }
                 closeReopenModal(true);
                 alert('No fue posible reabrir la incidencia. Intente nuevamente.');
         }
@@ -153,6 +272,7 @@ $(document).ready(function() {
 			$('#frmestatus').val(originalStatus);
 		}
 	});
+
 });
 </script>
 </head>
