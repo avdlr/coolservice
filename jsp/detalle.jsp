@@ -26,9 +26,152 @@
     
 
 %>
+<style type="text/css">
+#reabrir-modal-overlay {
+        background-color: rgba(0, 0, 0, 0.45);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: none;
+        z-index: 1050;
+}
+
+#reabrir-modal {
+        background-color: #ffffff;
+        border-radius: 4px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        margin: 10% auto;
+        max-width: 420px;
+        padding: 20px;
+}
+
+#reabrir-modal h4 {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0 0 10px 0;
+}
+
+#reabrir-modal p {
+        margin: 0;
+        font-size: 13px;
+}
+
+#reabrir-modal .modal-actions {
+        margin-top: 20px;
+        text-align: right;
+}
+
+#reabrir-modal .modal-actions button {
+        margin-left: 10px;
+        min-width: 90px;
+}
+</style>
 <script type="text/javascript">
-$(document).ready(function() {
-	$("#container").mLoading("hide");
+document.addEventListener('DOMContentLoaded', function() {
+        var statusInput = document.getElementById('frmestatus');
+        var reopenSelect = document.getElementById('frmreabririncidencia');
+        var modalOverlay = document.getElementById('reabrir-modal-overlay');
+        var cancelButton = document.getElementById('reabrirCancelar');
+        var acceptButton = document.getElementById('reabrirAceptar');
+        var reopenForm = document.getElementById('reanudarIncidenciaForm');
+        var reopenFormFields = {
+                orden: document.getElementById('reanudarOrden'),
+                usuario: document.getElementById('reanudarUsuario'),
+                estatus: document.getElementById('reanudarEstatus'),
+                actualestatus: document.getElementById('reanudarActualEstatus'),
+                idaccion: document.getElementById('reanudarAccion')
+        };
+        var originalStatus = statusInput ? statusInput.value : '';
+
+        function showReopenModal() {
+                if (modalOverlay) {
+                        modalOverlay.style.display = 'block';
+                }
+        }
+
+        function hideReopenModal(resetSelection) {
+                if (modalOverlay) {
+                        modalOverlay.style.display = 'none';
+                }
+
+                if (resetSelection) {
+                        if (reopenSelect) {
+                                reopenSelect.value = '';
+                        }
+
+                        if (statusInput) {
+                                statusInput.value = originalStatus;
+                        }
+                }
+        }
+
+        if (reopenSelect) {
+                reopenSelect.addEventListener('change', function() {
+                        if (this.value === 'SI') {
+                                if (statusInput) {
+                                        statusInput.value = 'ASIGNADO';
+                                }
+
+                                showReopenModal();
+                        } else {
+                                if (statusInput) {
+                                        statusInput.value = originalStatus;
+                                }
+                        }
+                });
+        }
+
+        if (cancelButton) {
+                cancelButton.addEventListener('click', function() {
+                        hideReopenModal(true);
+                });
+        }
+
+        if (acceptButton) {
+                acceptButton.addEventListener('click', function() {
+                        if (!reopenForm) {
+                                var fallbackUrl = 'reanudarIncidencia.jsp?orden=' + encodeURIComponent('<%=idorden%>') +
+                                        '&usuario=' + encodeURIComponent('<%=usuario%>') +
+                                        '&estatus=2' +
+                                        '&actualestatus=' + encodeURIComponent(originalStatus) +
+                                        '&idaccion=REANUDAR';
+                                window.open(fallbackUrl, '_blank');
+                        } else {
+                                if (reopenFormFields.orden) {
+                                        reopenFormFields.orden.value = '<%=idorden%>';
+                                }
+                                if (reopenFormFields.usuario) {
+                                        reopenFormFields.usuario.value = '<%=usuario%>';
+                                }
+                                if (reopenFormFields.estatus) {
+                                        reopenFormFields.estatus.value = '2';
+                                }
+                                if (reopenFormFields.actualestatus) {
+                                        reopenFormFields.actualestatus.value = originalStatus;
+                                }
+                                if (reopenFormFields.idaccion) {
+                                        reopenFormFields.idaccion.value = 'REANUDAR';
+                                }
+
+                                reopenForm.target = 'reanudarIncidenciaVentana';
+                                window.open('', 'reanudarIncidenciaVentana');
+                                reopenForm.submit();
+                        }
+
+                        if (statusInput) {
+                                statusInput.value = 'ASIGNADO';
+                        }
+                        originalStatus = statusInput ? statusInput.value : originalStatus;
+
+                        if (reopenSelect) {
+                                reopenSelect.value = '';
+                        }
+
+                        hideReopenModal(false);
+                });
+        }
 });
 </script>
 </head>
@@ -38,6 +181,30 @@ $(document).ready(function() {
 		<div class="col-xs-4 col-md-4"><input disabled type="text" id="frmtipomant" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("tipoorden")%>"/></div>
 		<div class="col-xs-2 col-md-2">Estatus:</div>
 		<div class="col-xs-4 col-md-4"><input disabled type="text" id="frmestatus" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("ESTATUS")%>"/></div>
+		<div class="col-xs-2 col-md-2" style="margin-top: 5px;">Reabrir Incidencia:</div>
+		<div class="col-xs-4 col-md-4" style="margin-top: 5px;">
+			<select id="frmreabririncidencia" class="form-control" style="width:100%;">
+				<option value="">Seleccione</option>
+				<option value="SI">SI</option>
+			</select>
+		</div>
+                <div id="reabrir-modal-overlay">
+                        <div id="reabrir-modal">
+                                <h4>Reabrir incidencia</h4>
+                                <p>&iquest;Desea reabrir la incidencia seleccionada?</p>
+                                <div class="modal-actions">
+                                        <button type="button" id="reabrirCancelar" class="btn btn-default">Cancelar</button>
+                                        <button type="button" id="reabrirAceptar" class="btn btn-primary">Aceptar</button>
+                                </div>
+                        </div>
+                </div>
+                <form id="reanudarIncidenciaForm" action="reanudarIncidencia.jsp" method="post" target="reanudarIncidenciaVentana" style="display:none;">
+                        <input type="hidden" id="reanudarOrden" name="orden" value=""/>
+                        <input type="hidden" id="reanudarUsuario" name="usuario" value=""/>
+                        <input type="hidden" id="reanudarEstatus" name="estatus" value="2"/>
+                        <input type="hidden" id="reanudarActualEstatus" name="actualestatus" value=""/>
+                        <input type="hidden" id="reanudarAccion" name="idaccion" value="REANUDAR"/>
+                </form>
 		<div class="col-xs-2" style="margin-top: 5px;">T&eacute;cnico Asignado:</div>
 		<div class="col-xs-4" style="margin-top: 5px;"><input disabled type="text" id="frmtecnicoasig" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("tecnico")%>"/></div>
 
@@ -308,7 +475,7 @@ $(document).ready(function() {
 				</div>
 				<div class="col-xs-2">Temperatura Operaci&oacute;n:</div>
 				<div class="col-xs-4">
-					<input disabled type="text" id="frmpuesto" style="width:100%;" class="form-control" value="<%=registro.getString("TEMPO")%> °<%=registro.getString("TEMPOUNI")%>" >
+					<input disabled type="text" id="frmpuesto" style="width:100%;" class="form-control" value="<%=registro.getString("TEMPO")%> Â°<%=registro.getString("TEMPOUNI")%>" >
 					
 				</div>
 			</div>
