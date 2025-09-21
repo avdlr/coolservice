@@ -1,85 +1,64 @@
 package bean;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class GestionTareasReabrirIncidencia {
 
-	   public JSONArray reanudarTarea(String idorden, String estatus) {
-		      //String tecnico = this.consultaUltimoTecnico(idorden);
-		      Conexion conexion = Conexion.instance();
-		      Connection conn = null;
-		      ResultSet rs = null;
-		      int resultado = 0;
-		      PreparedStatement pst = null;
-		      JSONObject registro = null;
-		      JSONArray registros = null;
-		      new StringBuffer();
+           public JSONArray reanudarTarea(String idorden, String estatus) {
+                      Conexion conexion = Conexion.instance();
+                      JSONArray registros = new JSONArray();
+                      JSONObject registro = new JSONObject();
 
-		      try {
-		         conn = conexion.getConnection();
-		         if (conn != null) {
-		            StringBuffer query = new StringBuffer("update csorden set IdEstatusOrden=? where idCSOrden=?");
-		            System.out.println("-----------antes de prepare");
-		            pst = conn.prepareStatement(query.toString());
-		            System.out.println("-----------despues de prepare");
-		            int cont = 0;
-		            cont = cont + 1;
-		            pst.setString(cont, estatus);
-		            ++cont;
-		            pst.setInt(cont, Integer.parseInt(idorden));
-		            resultado = pst.executeUpdate();
-		            registros = new JSONArray();
-		            registro = new JSONObject();
-		            registro.put("resp", "ERROR");
-		            System.out.println("respuesta:" + resultado);
-		            /*if (resultado == 1) {
-		               this.insertaMotivo(idorden, usuario, "", estatusanterior, estatus, idaccion, tecnico, tecnico);
-		               registro.put("resp", "OK");
-		            }*/
+                      if (idorden == null || idorden.trim().isEmpty()) {
+                         registro.put("resp", "ERROR");
+                         registro.put("mensaje", "Identificador de orden no proporcionado.");
+                         registros.put(registro);
+                         return registros;
+                      }
 
-		            registros.put(registro);
-		         }
-		      } catch (Exception var32) {
-		         var32.printStackTrace();
-		      } finally {
-		         try {
-		            if (rs != null) {
-		               ((ResultSet)rs).close();
-		               rs = null;
-		            }
-		         } catch (SQLException var31) {
-		            rs = null;
-		         }
+                      int idOrdenNumerico;
 
-		         try {
-		            if (pst != null) {
-		               pst.close();
-		               pst = null;
-		            }
-		         } catch (SQLException var30) {
-		            pst = null;
-		         }
+                      try {
+                         idOrdenNumerico = Integer.parseInt(idorden);
+                      } catch (NumberFormatException ex) {
+                         registro.put("resp", "ERROR");
+                         registro.put("mensaje", "Identificador de orden invalido.");
+                         registros.put(registro);
+                         return registros;
+                      }
 
-		         try {
-		            if (conn != null) {
-		               conn.close();
-		            }
+                      final String nuevoEstatus = "2";
 
-		            conn = null;
-		         } catch (SQLException var29) {
-		            conn = null;
-		         }
+                      try (Connection conn = conexion.getConnection();
+                           PreparedStatement pst = conn != null
+                              ? conn.prepareStatement("update csorden set IdEstatusOrden=? where idCSOrden=?")
+                              : null) {
 
-		      }
+                         if (conn == null) {
+                            registro.put("resp", "ERROR");
+                            registro.put("mensaje", "No fue posible obtener la conexion a base de datos.");
+                         } else {
+                            pst.setString(1, nuevoEstatus);
+                            pst.setInt(2, idOrdenNumerico);
+                            int resultado = pst.executeUpdate();
+                            if (resultado == 1) {
+                               registro.put("resp", "OK");
+                            } else {
+                               registro.put("resp", "ERROR");
+                               registro.put("mensaje", "No se encontro la orden especificada.");
+                            }
+                         }
+                      } catch (SQLException ex) {
+                         registro.put("resp", "ERROR");
+                         registro.put("mensaje", ex.getMessage() != null ? ex.getMessage() : "Error al actualizar la orden.");
+                      }
 
-		      return registros;
-		   }
+                      registros.put(registro);
+                      return registros;
+                   }
 
 }
