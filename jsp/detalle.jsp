@@ -156,15 +156,17 @@ $(document).ready(function() {
 		<div class="col-xs-4 col-md-4"><input disabled type="text" id="frmestatus" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("ESTATUS")%>"/></div>
 		<div class="col-xs-2" style="margin-top: 5px;">T&eacute;cnico Asignado:</div>
 		<div class="col-xs-4" style="margin-top: 5px;"><input disabled type="text" id="frmtecnicoasig" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("tecnico")%>"/></div>
-		<div class="col-xs-12" style="margin-top: 5px;">
-			<div class="col-xs-2 col-md-2">Reabrir Incidencia:</div>
-			<div class="col-xs-4 col-md-4">
-				<select id="reabrirIncidencia" class="form-control" style="width:100%;">
-					<option value="">NO</option>
-					<option value="SI">SI</option>
-				</select>
-			</div>
-		</div>				
+<%              if ("TERMINADO".equalsIgnoreCase(estatusActual)) { %>
+                <div class="col-xs-12" style="margin-top: 5px;">
+                        <div class="col-xs-2 col-md-2">Reabrir Incidencia:</div>
+                        <div class="col-xs-4 col-md-4">
+                                <select id="reabrirIncidencia" class="form-control" style="width:100%;">
+                                        <option value="">NO</option>
+                                        <option value="SI">SI</option>
+                                </select>
+                        </div>
+                </div>
+<%              } %>
 	</div>
 	
 	<div class="col-xs-12" style=" margin-bottom: 5px;">
