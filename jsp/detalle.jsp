@@ -22,22 +22,146 @@
     {
     	registro = registros.getJSONObject(0);
     }
+    String estatusActual = "";
+    if(registro.has("ESTATUS"))
+    {
+        estatusActual = registro.getString("ESTATUS");
+    }
 
     
 
 %>
+<style type="text/css">
+.reanudar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+}
+
+.reanudar-dialog {
+        background: #ffffff;
+        border-radius: 4px;
+        padding: 20px;
+        max-width: 320px;
+        width: 90%;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+        text-align: center;
+}
+
+.reanudar-dialog h4 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 18px;
+}
+
+.reanudar-dialog p {
+        margin-bottom: 20px;
+        font-size: 14px;
+}
+
+.reanudar-dialog .btn {
+        min-width: 100px;
+        margin: 0 5px;
+}
+</style>
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#container").mLoading("hide");
+
+	var $reabrirSelect = $("#reabrirIncidencia");
+	var $overlay = $("#reanudarOverlay");
+	var $btnAceptar = $("#reanudarAceptar");
+	var $btnCancelar = $("#reanudarCancelar");
+	var requestInProgress = false;
+
+	function cerrarPopup() {
+		$overlay.fadeOut(200, function() {
+			$reabrirSelect.val("");
+			$btnAceptar.prop("disabled", false);
+			requestInProgress = false;
+		});
+	}
+
+	$reabrirSelect.on("change", function() {
+		if ($(this).val() === "SI") {
+			$overlay.fadeIn(200);
+		}
+	});
+
+	$btnCancelar.on("click", function(e) {
+		e.preventDefault();
+		cerrarPopup();
+	});
+
+	$btnAceptar.on("click", function(e) {
+		e.preventDefault();
+		if (requestInProgress) {
+			return;
+		}
+		requestInProgress = true;
+		$btnAceptar.prop("disabled", true);
+
+		var data = {
+			orden: $("#detalleOrden").val(),
+			usuario: $("#detalleUsuario").val(),
+			estatus: "2",
+			actualestatus: $("#detalleActualEstatus").val(),
+			idaccion: "REANUDAR"
+		};
+
+		$.ajax({
+			url: "reanudarIncidencia.jsp",
+			method: "POST",
+			dataType: "json",
+			data: data
+		}).done(function(response) {
+			var mensajeError = "No fue posible reabrir la incidencia. Intente nuevamente.";
+			if ($.isArray(response) && response.length > 0) {
+				var resultado = response[0];
+				if (resultado.resp === "OK") {
+					alert("Incidencia reabierta correctamente.");
+					location.reload();
+					return;
+				}
+				if (resultado.mensaje) {
+					mensajeError = resultado.mensaje;
+				}
+			}
+			alert(mensajeError);
+		}).fail(function() {
+			alert("No fue posible reabrir la incidencia. Intente nuevamente.");
+		}).always(function() {
+			cerrarPopup();
+		});
+	});
 });
 </script>
 </head>
 <body>
+        <input type="hidden" id="detalleOrden" value="<%=orden%>" />
+        <input type="hidden" id="detalleUsuario" value="<%=usuario%>" />
+        <input type="hidden" id="detalleActualEstatus" value="<%=estatusActual%>" />
 	<div class="col-xs-12">
 		<div class="col-xs-2 col-md-2">Tipo Mantenimiento:</div>
 		<div class="col-xs-4 col-md-4"><input disabled type="text" id="frmtipomant" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("tipoorden")%>"/></div>
 		<div class="col-xs-2 col-md-2">Estatus:</div>
 		<div class="col-xs-4 col-md-4"><input disabled type="text" id="frmestatus" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("ESTATUS")%>"/></div>
+		<div class="col-xs-12" style="margin-top: 5px;">
+			<div class="col-xs-2 col-md-2">Reabrir Incidencia:</div>
+			<div class="col-xs-4 col-md-4">
+				<select id="reabrirIncidencia" class="form-control" style="width:100%;">
+					<option value="">NO</option>
+					<option value="SI">SI</option>
+				</select>
+			</div>
+		</div>
 		<div class="col-xs-2" style="margin-top: 5px;">T&eacute;cnico Asignado:</div>
 		<div class="col-xs-4" style="margin-top: 5px;"><input disabled type="text" id="frmtecnicoasig" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("tecnico")%>"/></div>
 
@@ -308,7 +432,7 @@ $(document).ready(function() {
 				</div>
 				<div class="col-xs-2">Temperatura Operaci&oacute;n:</div>
 				<div class="col-xs-4">
-					<input disabled type="text" id="frmpuesto" style="width:100%;" class="form-control" value="<%=registro.getString("TEMPO")%> °<%=registro.getString("TEMPOUNI")%>" >
+					<input disabled type="text" id="frmpuesto" style="width:100%;" class="form-control" value="<%=registro.getString("TEMPO")%> Â°<%=registro.getString("TEMPOUNI")%>" >
 					
 				</div>
 			</div>
@@ -421,6 +545,16 @@ $(document).ready(function() {
 	</div>
 	</div>
 	
+	<div id="reanudarOverlay" class="reanudar-overlay">
+		<div class="reanudar-dialog">
+			<h4>Reabrir Incidencia</h4>
+			<p>&#191;Desea reabrir la incidencia seleccionada?</p>
+			<div>
+				<button id="reanudarAceptar" class="btn btn-primary">Aceptar</button>
+				<button id="reanudarCancelar" class="btn btn-default">Cancelar</button>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript">
 	
 	function ocultarDetalle(value)
