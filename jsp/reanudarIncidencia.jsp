@@ -22,9 +22,9 @@
                         if (estatus == null || estatus.trim().isEmpty()) {
                                 estatus = "2";
                         }
-                        /*if (idaccion == null || idaccion.trim().isEmpty()) {
+                        if (idaccion == null || idaccion.trim().isEmpty()) {
                                 idaccion = "REANUDAR";
-                        }*/
+                        }
 
                         GestionTareasReabrirIncidencia gestion = new GestionTareasReabrirIncidencia();
                         respuesta = gestion.reanudarTarea(orden, estatus);

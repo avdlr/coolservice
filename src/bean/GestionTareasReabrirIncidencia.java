@@ -20,10 +20,10 @@ public class GestionTareasReabrirIncidencia {
                          return registros;
                       }
 
-                      int idOrdenNumerico;
+                      String idOrdenNumerico;
 
                       try {
-                         idOrdenNumerico = Integer.parseInt(idorden);
+                         idOrdenNumerico = idorden;
                       } catch (NumberFormatException ex) {
                          registro.put("resp", "ERROR");
                          registro.put("mensaje", "Identificador de orden invalido.");
@@ -35,7 +35,7 @@ public class GestionTareasReabrirIncidencia {
 
                       try (Connection conn = conexion.getConnection();
                            PreparedStatement pst = conn != null
-                              ? conn.prepareStatement("update csorden set IdEstatusOrden=? where idCSOrden=?")
+                              ? conn.prepareStatement("update csorden set IdEstatusOrden=? where FolioOrden=?")
                               : null) {
 
                          if (conn == null) {
@@ -43,7 +43,7 @@ public class GestionTareasReabrirIncidencia {
                             registro.put("mensaje", "No fue posible obtener la conexion a base de datos.");
                          } else {
                             pst.setString(1, nuevoEstatus);
-                            pst.setInt(2, idOrdenNumerico);
+                            pst.setString(2, idOrdenNumerico);
                             int resultado = pst.executeUpdate();
                             if (resultado == 1) {
                                registro.put("resp", "OK");

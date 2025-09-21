@@ -111,7 +111,7 @@ $(document).ready(function() {
 		var data = {
 			orden: $("#detalleOrden").val(),
 			//usuario: $("#detalleUsuario").val(),
-			estatus: "2",
+			estatus: 2,
 			//actualestatus: $("#detalleActualEstatus").val(),
 			//idaccion: "REANUDAR"
 		};
@@ -148,11 +148,14 @@ $(document).ready(function() {
         <input type="hidden" id="detalleOrden" value="<%=orden%>" />
         <input type="hidden" id="detalleUsuario" value="<%=usuario%>" />
         <input type="hidden" id="detalleActualEstatus" value="<%=estatusActual%>" />
+        
 	<div class="col-xs-12">
 		<div class="col-xs-2 col-md-2">Tipo Mantenimiento:</div>
 		<div class="col-xs-4 col-md-4"><input disabled type="text" id="frmtipomant" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("tipoorden")%>"/></div>
 		<div class="col-xs-2 col-md-2">Estatus:</div>
 		<div class="col-xs-4 col-md-4"><input disabled type="text" id="frmestatus" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("ESTATUS")%>"/></div>
+		<div class="col-xs-2" style="margin-top: 5px;">T&eacute;cnico Asignado:</div>
+		<div class="col-xs-4" style="margin-top: 5px;"><input disabled type="text" id="frmtecnicoasig" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("tecnico")%>"/></div>
 		<div class="col-xs-12" style="margin-top: 5px;">
 			<div class="col-xs-2 col-md-2">Reabrir Incidencia:</div>
 			<div class="col-xs-4 col-md-4">
@@ -161,14 +164,9 @@ $(document).ready(function() {
 					<option value="SI">SI</option>
 				</select>
 			</div>
-		</div>
-		<div class="col-xs-2" style="margin-top: 5px;">T&eacute;cnico Asignado:</div>
-		<div class="col-xs-4" style="margin-top: 5px;"><input disabled type="text" id="frmtecnicoasig" style="width:100%;" class="form-control"  placeholder="" value="<%=registro.getString("tecnico")%>"/></div>
-
-				
-
-		
+		</div>				
 	</div>
+	
 	<div class="col-xs-12" style=" margin-bottom: 5px;">
 	<div style="background-color: #FFF; height: 1px; width: 100%;"></div>
 	</div>
