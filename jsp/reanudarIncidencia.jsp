@@ -1,6 +1,6 @@
 <%@page import="org.json.JSONObject" %>
 <%@page import="org.json.JSONArray" %>
-<%@page import="bean.GestionTareas" %>
+<%@page import="bean.GestionTareasReabrirIncidencia" %>
 <%@ page language="java" contentType="application/json; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
@@ -22,12 +22,12 @@
                         if (estatus == null || estatus.trim().isEmpty()) {
                                 estatus = "2";
                         }
-                        if (idaccion == null || idaccion.trim().isEmpty()) {
+                        /*if (idaccion == null || idaccion.trim().isEmpty()) {
                                 idaccion = "REANUDAR";
-                        }
+                        }*/
 
-                        GestionTareas gestion = new GestionTareas();
-                        respuesta = gestion.reanudarTarea(orden, usuario, estatus, actualestatus, idaccion);
+                        GestionTareasReabrirIncidencia gestion = new GestionTareasReabrirIncidencia();
+                        respuesta = gestion.reanudarTarea(orden, estatus);
                 }
         } catch (Exception ex) {
                 JSONObject error = new JSONObject();

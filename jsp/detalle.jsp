@@ -110,10 +110,10 @@ $(document).ready(function() {
 
 		var data = {
 			orden: $("#detalleOrden").val(),
-			usuario: $("#detalleUsuario").val(),
+			//usuario: $("#detalleUsuario").val(),
 			estatus: "2",
-			actualestatus: $("#detalleActualEstatus").val(),
-			idaccion: "REANUDAR"
+			//actualestatus: $("#detalleActualEstatus").val(),
+			//idaccion: "REANUDAR"
 		};
 
 		$.ajax({
