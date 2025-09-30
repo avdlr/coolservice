@@ -35,7 +35,7 @@ public class GestionTareasReabrirIncidencia {
 
                       try (Connection conn = conexion.getConnection();
                            PreparedStatement pst = conn != null
-                              ? conn.prepareStatement("update csorden set IdEstatusOrden=? where FolioOrden=?")
+                              ? conn.prepareStatement("update csorden set IdEstatusOrden=?, ContadorReabierto = COALESCE(ContadorReabierto, 0) + 1 where FolioOrden=?")
                               : null) {
 
                          if (conn == null) {
