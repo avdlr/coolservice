@@ -1,5 +1,6 @@
 <%@page import="bean.GestionTareas"%>
 <%@page import="bean.ConsultaCatalogo"%>
+<%@page import="bean.TareasLiquidadasCounter"%>
 <%@page import="org.json.JSONObject"%>
 <%@page import="org.json.JSONArray"%>
 
@@ -18,22 +19,25 @@
 	String pagina = request.getParameter("pagina") != null ? request.getParameter("pagina"): "1";
 	String noestatus = request.getParameter("noestatus") != null ? request.getParameter("noestatus"): "";
 
-	GestionTareas llamado= new GestionTareas();
-	ConsultaCatalogo catalogos = new ConsultaCatalogo();
-	String tipousuario = catalogos.consultaTiposUsuario(usuario);
-	JSONArray acciones= catalogos.consultaAcciones();
-	if(tipousuario.equals("T"))
-	{
-		tecnico = usuario;
-	}
-	int registrosporpaginaAg = 15;
-	String mensaje ="";
-	llamado.setCantP(registrosporpaginaAg);
-	JSONArray lista = llamado.consultaTareas(tipousuario, "1,2,3,6", tecnico, orden, cliente, sucursal, fechaini, fechafin,zona,Integer.parseInt(pagina),"liq");
-	
-	JSONObject registro = new JSONObject();
-	
-	int numRegistrosAg = llamado.getNumreg();
+	 GestionTareas llamado= new GestionTareas();
+     TareasLiquidadasCounter contador = new TareasLiquidadasCounter();
+     ConsultaCatalogo catalogos = new ConsultaCatalogo();
+     String tipousuario = catalogos.consultaTiposUsuario(usuario);
+     JSONArray acciones= catalogos.consultaAcciones();
+     if(tipousuario.equals("T"))
+     {
+             tecnico = usuario;
+     }
+     int registrosporpaginaAg = 15;
+     String mensaje ="";
+     llamado.setCantP(registrosporpaginaAg);
+     String estatusExcluir = "1,2,3,6";
+     JSONArray lista = llamado.consultaTareas(tipousuario, estatusExcluir, tecnico, orden, cliente, sucursal, fechaini, fechafin,zona,Integer.parseInt(pagina),"liq");
+
+     JSONObject registro = new JSONObject();
+
+     int numRegistrosAg = contador.contar(estatusExcluir, tecnico, orden, cliente, sucursal, zona, fechaini, fechafin);
+     llamado.setNumreg(numRegistrosAg);
 	int TOTALPAGINASAg = numRegistrosAg / registrosporpaginaAg;
 	String[] accionesDet=null;
 	if (numRegistrosAg % registrosporpaginaAg>0 || TOTALPAGINASAg==0)
@@ -103,12 +107,12 @@
 		                				}
 		                			}
 		                		%>
-                                               <% if("TERMINADO".equals(registro.getString("estatus")) && "2".equals(registro.getString("tipoorden"))) { %>
+		                		 <% if("TERMINADO".equals(registro.optString("estatus")) && "PREVENTIVO".equals(registro.optString("tipoorden"))) { %>
                                                    <li class="dropdown-submenu">
                                                        <a href="#" class="btn btn-primary fa fa-print" style="width: 100%;" data-toggle="dropdown" title="IMPRESION DE ORDEN">
                                                            <label style="font-family: monospace; cursor: pointer;">IMPRESION DE ORDEN</label>
                                                        </a>
-                                                       <ul class="dropdown-menu">
+                                                       <ul class="dropdown-submenu">
                                                            <li><a href="#" onclick="realizaIMPRESION('<%=registro.getString("idorden") %>','<%=registro.getString("FolioOrden") %>','','','AIRE')" style="font-family: monospace; cursor: pointer;">AIRE CONDICIONADO</a></li>
                                                            <li><a href="#" onclick="realizaIMPRESION('<%=registro.getString("idorden") %>','<%=registro.getString("FolioOrden") %>','','','REF')" style="font-family: monospace; cursor: pointer;">REFRIGERACION</a></li>
                                                        </ul>
@@ -162,7 +166,7 @@
                                     	</span>  
                              
                                     </td>
-                                    <td align="right" width="50%"> <span>PÃ¡gina <%=pagina %> de <%=TOTALPAGINASAg %> </span></td>
+                                    <td align="right" width="50%"> <span>Página <%=pagina %> de <%=TOTALPAGINASAg %> </span></td>
                                 </tr>                                
                         </table>
 				
