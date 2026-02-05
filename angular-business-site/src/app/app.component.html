@@ -1,0 +1,43 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo">
+      <span class="badge">CoolService</span>
+      <div>
+        <strong>Business Studio</strong>
+        <small>Reliable operations & customer care</small>
+      </div>
+    </div>
+    <nav class="nav">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a routerLink="/services" routerLinkActive="active">Services</a>
+      <a routerLink="/about" routerLinkActive="active">About</a>
+      <a routerLink="/contact" routerLinkActive="active">Contact</a>
+    </nav>
+    <a class="btn btn-primary" routerLink="/contact">Get a Quote</a>
+  </div>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div>
+      <h3>CoolService</h3>
+      <p>Professional service operations aligned with modern customer experiences.</p>
+    </div>
+    <div>
+      <strong>Contact</strong>
+      <p>hello@coolservice.io<br />+1 (555) 120-9955</p>
+    </div>
+    <div>
+      <strong>Office</strong>
+      <p>1234 Meridian Avenue<br />Miami, FL 33101</p>
+    </div>
+    <div>
+      <strong>Follow</strong>
+      <p><a href="https://example.com">LinkedIn</a> · <a href="https://example.com">Instagram</a></p>
+    </div>
+  </div>
+</footer>

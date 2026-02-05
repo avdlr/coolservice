@@ -1,0 +1,35 @@
+<div class="chat-card">
+  <div class="chat-header">
+    <div>
+      <span class="badge">Chat SQL</span>
+      <h3>Asistente de orden de servicio</h3>
+      <p>Consulta en segundos el estatus de tus órdenes conectadas a tu base de datos.</p>
+    </div>
+  </div>
+
+  <div class="chat-body">
+    <div class="chat-message" *ngFor="let message of messages" [class.user]="message.from === 'user'">
+      <div class="bubble">{{ message.text }}</div>
+    </div>
+    <div class="chat-message" *ngIf="loading">
+      <div class="bubble">Buscando en SQL…</div>
+    </div>
+  </div>
+
+  <form class="chat-input" (ngSubmit)="sendMessage()">
+    <input
+      type="text"
+      placeholder="Ingresa tu orden (OS-1042)"
+      [(ngModel)]="input"
+      name="orden"
+    />
+    <button class="btn btn-primary" type="submit">Consultar</button>
+  </form>
+
+  <div class="chat-suggestions">
+    <span>Órdenes recientes:</span>
+    <button class="chip" *ngFor="let orden of featuredOrdenes" type="button" (click)="input = orden.id">
+      {{ orden.id }}
+    </button>
+  </div>
+</div>
