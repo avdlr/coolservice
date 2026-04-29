@@ -248,7 +248,7 @@
 <tbody>
 <tr style="height: 150px;">
 <td style="width: 50%; height: 150px; padding-left: 5px;"><span style="font-size: 10px;"><span style="color: #696969;"><span style="font-family: tahoma, geneva, sans-serif;"><strong>Tecnico en Servicio:   </strong></span></span></span><span style="font-size: 10px; padding-left: 10px;"><span style="color: #696969;"><span style="font-family: tahoma, geneva, sans-serif;"><xsl:value-of select="usuario"/></span></span></span></td>
-<td style="width: 50%; height: 150px;"><span style="font-size: 10px;"><span style="color: #696969;"><span style="font-family: tahoma, geneva, sans-serif;"><strong>Recibido por:   </strong></span></span></span><span style=" padding-left: 25px;"><img height="50px" width="auto">
+<td style="width: 50%; height: 150px;"><span style="font-size: 10px;"><span style="color: #696969;"><span style="font-family: tahoma, geneva, sans-serif;"><strong>Recibido por:   </strong></span></span></span><span style="font-size: 10px; padding-left: 10px;"><span style="color: #696969;"><span style="font-family: tahoma, geneva, sans-serif;"><xsl:value-of select="recibidoPorNombre"/></span></span></span><span style=" padding-left: 25px;"><img height="50px" width="auto">
 <xsl:attribute name="src">
         <xsl:value-of select="firmaElectronica"/>
     </xsl:attribute>
